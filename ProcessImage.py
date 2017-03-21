@@ -186,12 +186,13 @@ def generate_art(filename, x_size=350, y_size=350):
 
     im.save(filename)
 
+def findcenter():
+
 
 if __name__ == '__main__':
     import doctest
     #doctest.run_docstring_examples(color_map, globals(), verbose=True)
     im = Image.open("agario.png")
-
     im = ImageGrab.grab()
     im.show()
     pixels = im.load()
@@ -203,6 +204,16 @@ if __name__ == '__main__':
     y = 0
     last = 0
     x_size, y_size = im.size
+    r, g, b = pixels[x_size/2, y_size/2]
+    last = (r + g + b)/3
+    while last == (r + g + b)/3:
+        last = (r + g + b)/3
+        counter += 1
+        x += 5
+        y += 5
+        r, g, b = pixels[x_size/2 + x, y_size/2 + y]
+    me = counter * 2.5
+    print(me)
     print(x_size)
     print(y_size)
     for i in range(0,y_size-1,5):
