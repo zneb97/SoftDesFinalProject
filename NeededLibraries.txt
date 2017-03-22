@@ -1,0 +1,5 @@
+Necessary Libraries:
+
+pyautogui
+pillow
+pyscreenshot
