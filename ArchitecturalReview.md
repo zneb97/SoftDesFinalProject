@@ -30,6 +30,7 @@ This cumulated in our decision of Bomberman. We attempted to run it off an emula
 The source can be found here :  https://github.com/rickyc/bomberman-pygame
 
 **Key Topics:**
+
 **1) One Integrated Program (Game + Machine Learning)
     Vs. Two Simultaneously Running Programs(~6 minutes)**
 
