@@ -7,8 +7,9 @@ Ben, Seungin, Nick, Yichen, Alex
 Today our agenda is to spend five minutes on background and fifteen minutes on our discussion questions. Our background details our choice of game and struggles with our original choice and then subsequent change of game venue. Our discussions are our primary focus on input, machine learning, and servers related technical issues.
 
 **Background:**
+[Imgur](http://i.imgur.com/UW7IzUr.png)
 
-
+[Imgur](http://i.imgur.com/5yVOy3d.png)
 
 Our project is an attempt to use machine learning to create a bot that plays a video game. Since the start of the project we have already found some important information regarding the type of game and the approach to said game that works best. Our project was inspired  by the MarIO project, in which a machine learning algorithm learns to play Super Mario World through trial and error.
 
@@ -54,6 +55,9 @@ The source can be found here :  https://github.com/rickyc/bomberman-pygame
 **2) How should our input look like? (~6 minutes)**
 
 One large question is the implementation of Neural Networks with different categories of blocks. Since they typically act on one feature with each node, we might need to make several, such as one for placements of bombs, one for placement of bricks, one for walls, etc. One of our key questions is the proper implementation of different machine learning programs. Our current preliminary choice is that of a neural network due to its variety of learning styles. We plan to have three different computer players: one neural network that has learning based on human player&#39;s choices, one neural network that uses a system of rewards and consequences to learn, and one hard coded AI that we design.
+
+[Imgur](http://i.imgur.com/K9dYZVR.png)
+
 
 **3) Multiplayer Connection Issues (3 minutes)**
 
