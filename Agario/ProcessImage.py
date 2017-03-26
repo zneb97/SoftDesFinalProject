@@ -34,7 +34,7 @@ def findList(pixels, x_size, y_size, C, me):
                 counter = 0
             last = (r + g + b)/3
         for tup in listDangers:
-            if distance(tup, (j - counter C / 2, i)) < 30:
+            if distance(tup, (j - counter * C / 2, i)) < 30:
                 if tup[2] < counter:
                     listDangers.remove(tup)
                 else:
