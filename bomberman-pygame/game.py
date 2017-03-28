@@ -56,7 +56,10 @@ class Game:
 		if self.c.LOCALHOST:
 			self.client.connect("localhost",6317)
 		else:
-			self.client.connect("10.7.28.172",6317)
+			# server_name = sys.argv[1]
+			# server_address = (server_name, 6317)
+			# print >>sys.stderr, 'starting up on %s port %s' % server_address
+			self.client.connect('gsteelman-Latitude-E5470', 6317)
 
 		self.id = random.randint(0,1000000)		# unique player id
 		self.client.send_data(["update","user joined",str(self.id)])
