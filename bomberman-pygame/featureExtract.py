@@ -26,6 +26,7 @@ TIME_UP = 6
 """
 import config as c
 from numpy import matrix
+import featureConvert
 
 TILE_MAP = {0: 0,  # Ground -> 0()
             1: 1,  # Ground -> 0()
@@ -79,3 +80,9 @@ class grid:
                 s += str(col)
             print(s)
         print("\n")
+
+    def printPlayerView():
+        """probably doesnt work"""
+        x = self.players[0].position[0] / c.Config.TILE_SIZE
+        y = self.players[0].position[1] / c.Config.TILE_SIZE
+        featureConvert.convertGrid(matrix(self.matrix), (x,y) ,21,17)
