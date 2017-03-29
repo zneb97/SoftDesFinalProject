@@ -11,7 +11,7 @@ class Tile(pygame.sprite.Sprite):
 
 		self.setPowerup()
 		self.setAttributes()
-	
+
 	# RFCT
 	def setPowerup(self):
 		if self.type == self.c.BOMB_UP:
@@ -27,7 +27,7 @@ class Tile(pygame.sprite.Sprite):
 
 	def setAttributes(self):
 		if self.type == self.c.GROUND:
-			self.passable = True 
+			self.passable = True
 			self.destroyable = False
 		elif self.type == self.c.BRICK:
 			self.passable = False
@@ -40,7 +40,7 @@ class Tile(pygame.sprite.Sprite):
 			self.destroyable = True
 
 		self.image = pygame.image.load(self.c.IMAGE_PATH + "tiles/" + str(self.type) + ".png").convert()
-	
+
 	def destroy(self):
 		if self.powerup != None:
 			self.type = self.powerup
@@ -48,7 +48,7 @@ class Tile(pygame.sprite.Sprite):
 		else:
 			self.type = self.c.GROUND
 		self.setAttributes()
-	
+
 	# RFCT
 	def canBombPass(self):
 		if self.type == self.c.BOMB_UP or self.type == self.c.POWER_UP:
@@ -67,4 +67,7 @@ class Tile(pygame.sprite.Sprite):
 		return self.image
 
 	def __str__(self):
+		return str(self.type)
+
+	def __repr__(self):
 		return str(self.type)

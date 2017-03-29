@@ -1,5 +1,5 @@
 import sys, pygame, config, random, time
-import player, enemy, board, bomb, highscore, music
+import player, enemy, board, bomb, highscore, music, featureExtract
 from pygame.locals import *
 import os,sys
 sys.path.append(os.path.split(sys.path[0])[0])
@@ -230,7 +230,6 @@ class Game:
 
 		while self.gameIsActive:
 			clock.tick(self.c.FPS)
-
 			self.checkPlayerEnemyCollision()
 			self.checkWinConditions()
 
@@ -252,6 +251,9 @@ class Game:
 				if event.type == pygame.QUIT:
 					self.forceQuit()
 				elif event.type == pygame.KEYDOWN:
+
+
+
 					# deploy bomb
 					k = event.key
 
@@ -277,6 +279,9 @@ class Game:
 				elif event.type == pygame.USEREVENT+1: #RFCT
 					for e in self.enemies:
 						self.movementHelper(e,e.nextMove())
+					# feature extraction for machine learning
+					grid = featureExtract.grid(self)
+					grid.printMatrix()
 
 				self.updateDisplayInfo()
 				pygame.display.update()

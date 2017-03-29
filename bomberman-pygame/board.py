@@ -3,7 +3,7 @@ import sys, tile, pygame, config
 class Board:
 	def __init__(self, stage, level):
 		file = open("resources/levels/level_" + str(stage) + "-" + str(level) + ".txt","r").readlines()
-		
+
 		self.board = []
 		row = 0
 		for line in file:
@@ -19,7 +19,7 @@ class Board:
 
 	def getTile(self,point):
 		c = config.Config()
-		
+
 		col = int(point[0]/c.TILE_SIZE)
 		row = int(point[1]/c.TILE_SIZE)
 		return self.board[row][col]
