@@ -5,11 +5,10 @@ Matrix Tile Code
 0 = VALID SPACE
 1 = WALL
 2 = BRICK
-3 = SECRET BRICK (BOMB_UP)
-4 = SECRET BRICK (POWER_UP)
-6 = REVEALED BOMB_UP
-7 = REVEALED POWER_UP
+3 = SECRET BRICK
+4 = SECRET BRICK
 
+7 = ENIMIES
 8 = PLAYERS
 9 = BOMBS
 
@@ -42,6 +41,7 @@ class grid:
         self.field = game.field
         self.players = game.players
         self.bombs = game.bombs
+        self.enemies = game.enemies
         self.matrix = self.initMatrix()
 
     def initMatrix(self):
@@ -55,6 +55,7 @@ class grid:
 
         self.add_bombs(mat)
         self.add_players(mat)
+        self.add_enemies(mat)
         return mat
 
     def add_bombs(self, target_matrix):
@@ -72,6 +73,14 @@ class grid:
             x = int(player.position[0] / c.Config.TILE_SIZE)
             y = int(player.position[1] / c.Config.TILE_SIZE)
             target_matrix[y][x] = 8
+
+    def add_enemies(self, target_matrix):
+        # player.position / config.TILE_SIZE
+        # update (x,y) with 7
+        for enemy in self.enemies:
+            x = int(enemy.position[0] / c.Config.TILE_SIZE)
+            y = int(enemy.position[1] / c.Config.TILE_SIZE)
+            target_matrix[y][x] = 7
 
     def printMatrix(self):
         for row in self.matrix:
