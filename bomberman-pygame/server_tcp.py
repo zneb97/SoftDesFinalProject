@@ -67,11 +67,11 @@ class ServerHandler(TCPServer):
 
 def main():
 	server = ServerHandler()
-	# server.connect("localhost",6317)
+	server.connect("localhost",6317)
 	# # server_name = sys.argv[1]
 	# server_address = ()
 	# print >>sys.stderr, 'starting up on %s port %s' % server_address
-	server.connect('gsteelman-Latitude-E5470', 6317)
+	# server.connect('gsteelman-Latitude-E5470', 6317)
 	server.serve_forever()
 	server.quit()
 

@@ -17,4 +17,4 @@ class Config(object):
 	SINGLE = 'Single'
 	MULTI = 'Multi'
 	MAX_ENEMY_SPRITES = 9
-	LOCALHOST = False
+	LOCALHOST = True

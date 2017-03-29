@@ -1,7 +1,7 @@
 import socket,select,sys,time
 from .errors import *
 from .communicate import SendData, ReceiveData, ReceiveDataUDP
-    
+
 class TCPServer():
     def __init__(self):
         self.sending_socket = None
@@ -12,7 +12,7 @@ class TCPServer():
     def client_connect_func(self,sock,host,port,address):pass
     def client_disconnect_func(self,sock,host,port,address):pass
     def quit_func(self,host,port):pass
-        
+
     def connect(self,host,port):
         self.host = host
         self.port = port
@@ -33,6 +33,7 @@ class TCPServer():
         self.connected_sockets.remove(sock)
     def serve_forever(self):
         self.looping = True
+        print("address: %r"%self.socketaddresses)
         while self.looping:
             input_ready,output_ready,except_ready = select.select([self.unconnected_socket]+self.connected_sockets,[],[])
             for sock in input_ready:
@@ -55,7 +56,7 @@ class TCPServer():
                             continue
                         self.sending_socket = sock
                         self.handle_data(data)
-                    
+
     def handle_data(self,data):
         pass
     def send_data(self,data,compress=False):
@@ -65,7 +66,7 @@ class TCPServer():
             self.output_func(self.sending_socket,self.host,self.port,address)
         except:
             self.remove_socket(self.sending_socket)
-            
+
     def quit(self):
         for s in self.connected_sockets: s.close()
         self.quit_func(self.host,self.port)
@@ -79,7 +80,7 @@ class UDPServer():
     def output_func(self,sock,host,port,address):pass
     def connect_func(self,sock,host,port):pass
     def quit_func(self,host,port):pass
-        
+
     def connect(self,host,port):
         self.host = host
         self.port = port
@@ -104,11 +105,11 @@ class UDPServer():
         except:
             pass
             #client disconnected
-            
+
     def quit(self):
         self.socket.close()
         self.quit_func(self.host,self.port)
-        
+
 class TCPClient:
     def __init__(self):
         pass
@@ -121,7 +122,7 @@ class TCPClient:
         except:
             self.socket.close()
             raise SocketError("The connection could not be opened.  It must be created first with a server object.")
-        
+
     def send_data(self,data,compress=False):
         SendData(self.socket,data,compress,includelength=True)
     def wait_for_data(self):
@@ -131,7 +132,7 @@ class TCPClient:
         input_ready,output_ready,except_ready = select.select([self.socket],[],[],0.001)
         if len(input_ready) > 0:
             return ReceiveData(self.socket)
-    
+
     def quit(self):
         self.socket.close()
 
@@ -143,7 +144,7 @@ class UDPClient:
         self.port = port
         self.socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         self.socket.connect((self.host,self.port))
-        
+
     def send_data(self,data,compress=False):
         SendData(self.socket,data,compress)
     def wait_for_data(self):
@@ -153,6 +154,6 @@ class UDPClient:
         input_ready,output_ready,except_ready = select.select([self.socket],[],[],0.001)
         if len(input_ready) > 0:
             return ReceiveDataUDP(self.socket)[0]
-    
+
     def quit(self):
         self.socket.close()
