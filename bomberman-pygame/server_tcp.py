@@ -1,4 +1,4 @@
-print "[ Bomberman TCP Server ]" 
+print "[ Bomberman TCP Server ]"
 import os, sys
 sys.path.append(os.path.split(sys.path[0])[0])
 from Net import *
@@ -29,7 +29,7 @@ class ServerHandler(TCPServer):
 
 	def handle_data(self,data):
 		action = data[1]
-		
+
 		if action == "add message":
 			self.s_id += 1
 			self.add_message(str(self.s_id)+"|"+data[2])
@@ -55,7 +55,7 @@ class ServerHandler(TCPServer):
 			self.add_message("[SERVER]|START")
 		elif action == "reset ids":
 			self.s_id = 0
-		
+
 		self.send_data(self.data)
 
 		print len(self.data)
@@ -67,8 +67,11 @@ class ServerHandler(TCPServer):
 
 def main():
 	server = ServerHandler()
-	server.connect("localhost",6317)
-	#server.connect("67.23.28.146",6317)
+	# server.connect("localhost",6317)
+	# # server_name = sys.argv[1]
+	# server_address = ()
+	# print >>sys.stderr, 'starting up on %s port %s' % server_address
+	server.connect('gsteelman-Latitude-E5470', 6317)
 	server.serve_forever()
 	server.quit()
 

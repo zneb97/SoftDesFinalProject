@@ -3,8 +3,11 @@ sys.path.append(os.path.split(sys.path[0])[0])
 from Net import *
 
 client = TCPClient()
-client.connect("localhost", 6317)
-# client.connect("67.23.28.146",6317)
+# client.connect("localhost", 6317)
+# server_name = sys.argv[1]
+# server_address = (server_name, 6317)
+# print >>sys.stderr, 'starting up on %s port %s' % server_address
+client.connect('gsteelman-Latitude-E5470', 6317)
 
 def main():
 	#client.send_data(["update",None])
