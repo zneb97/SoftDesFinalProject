@@ -23,7 +23,7 @@ class Character(pygame.sprite.Sprite):
 		self.image = pygame.image.load(imagePath).convert()
 		
 	def update(self):
-		print "=D"
+		print("=D")
 
 	def movement(self,key):
 		c = config.Config()

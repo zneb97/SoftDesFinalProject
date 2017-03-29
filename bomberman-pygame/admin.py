@@ -11,15 +11,15 @@ client.connect('gsteelman-Latitude-E5470', 6317)
 
 def main():
 	#client.send_data(["update",None])
-	print "1) Clear Data"
-	print "2) Reset Users"
-	print "3) Add User"
-	print "8) Start Game"
-	print "9) Exit"
+	print("1) Clear Data")
+	print("2) Reset Users")
+	print("3) Add User")
+	print("8) Start Game")
+	print("9) Exit")
 
 	input = 0
 	while input != "4":
-		input = raw_input("$: ")
+		input = input("$: ")
 
 		if input == "1":
 			client.send_data(["update","clear all"])

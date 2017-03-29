@@ -1,4 +1,4 @@
-print "[ Bomberman TCP Server ]"
+print("[ Bomberman TCP Server ]")
 import os, sys
 sys.path.append(os.path.split(sys.path[0])[0])
 from Net import *
@@ -12,19 +12,19 @@ class ServerHandler(TCPServer):
 		self.startGame = False
 
 	def connect_func(self,sock,host,port):
-		print "Server successfully connected to %s on port %s!" % (host,port)
+		print("Server successfully connected to %s on port %s!" % (host,port))
 
 	def client_connect_func(self,sock,host,port,address):
-		print "A client, (ip: %s, code: %s) connected on port %s!" % (address[0],address[1],port)
+		print("A client, (ip: %s, code: %s) connected on port %s!" % (address[0],address[1],port))
 
 	def client_disconnect_func(self,sock,host,port,address):
-		print "A client, (ip: %s, code: %s) disconnected from port %s!" % (address[0],address[1],port)
+		print("A client, (ip: %s, code: %s) disconnected from port %s!" % (address[0],address[1],port))
 
 	def add_message(self,message):
-		print "data =>" + message
+		print("data =>" + message)
 		self.data.append(message)
 		if len(self.data) >= 60:
-			print 'larger?'
+			print('larger?')
 			self.data = self.data[1:]
 
 	def handle_data(self,data):
@@ -49,7 +49,7 @@ class ServerHandler(TCPServer):
 			self.s_id += 1
 			self.add_message(str(self.s_id)+"|BOMB|"+str(data[3]) + "|" + str(data[2]))
 		elif action == "clear all":
-			print "cleared all data"
+			print("cleared all data")
 			self.clearData()
 		elif action == "start game":
 			self.add_message("[SERVER]|START")
@@ -58,7 +58,7 @@ class ServerHandler(TCPServer):
 
 		self.send_data(self.data)
 
-		print len(self.data)
+		print(len(self.data))
 		if len(self.data) > 35:
 			self.data = self.data[10:]
 

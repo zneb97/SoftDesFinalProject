@@ -1,5 +1,5 @@
-from errors import *
-try:    import cPickle as pickle
+from .errors import *
+try:    import pickle as pickle
 except: import pickle as pickle
 import zlib
 
@@ -17,7 +17,7 @@ def DecodeData(data):
 def SendData(sock,data,compress,includelength=False,address=None):
     length,data = EncodeData(data,compress)
     if includelength: data = length + data
-    if len(data) > 1024: print "Warning: packets are big."
+    if len(data) > 1024: print("Warning: packets are big.")
     try:
         if address != None:
             sock.sendto(data,address)

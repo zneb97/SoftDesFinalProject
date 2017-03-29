@@ -12,7 +12,7 @@ class Board:
 				sys.stdout.write(line[col])
 				self.board[row].append(tile.Tile(int(line[col])))
 			row += 1
-			print ""
+			print("")
 
 		self.height = row
 		self.width = len(line)

@@ -63,7 +63,7 @@ class Highscore:
 	def printScores(self):
 		indx = 1
 		for score in self.scores:
-			print "%d) %d" % (indx,score)
+			print("%d) %d" % (indx,score))
 			indx += 1
 
 # DEBUG Purposes
@@ -73,4 +73,4 @@ if __name__ == "__main__":
 	#h.reloadScoreData()
 	#h.printScores()
 	h.displayScore()
-	raw_input("quit")
+	input("quit")

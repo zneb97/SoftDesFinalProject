@@ -1,6 +1,6 @@
 import socket,select,sys,time
-from errors import *
-from communicate import SendData, ReceiveData, ReceiveDataUDP
+from .errors import *
+from .communicate import SendData, ReceiveData, ReceiveDataUDP
     
 class TCPServer():
     def __init__(self):

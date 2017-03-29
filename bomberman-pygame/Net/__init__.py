@@ -1,1 +1,1 @@
-from netbase import *
+from .netbase import *

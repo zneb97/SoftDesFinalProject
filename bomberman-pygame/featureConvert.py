@@ -31,8 +31,8 @@ def convertGrid(grid, pPos, viewX, viewY):
 
 	for i in range(0, mymat.shape[1]):
 		for j in range(0, mymat.shape[0]):
-			print mymat.item((j,i)),
-		print "    "
+			print(mymat.item((j,i)), end=' ')
+		print("    ")
 
 
 

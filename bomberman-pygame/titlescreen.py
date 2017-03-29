@@ -65,7 +65,7 @@ class Titlescreen():
 		g = game.Game(self.c.MULTI)
 
 	def instructions(self):
-		print "Instructions clicked!"
+		print("Instructions clicked!")
 
 	def highScores(self):
 		h = highscore.Highscore()

@@ -67,7 +67,7 @@ class Game:
 		while True:
 			self.tcpData = self.client.wait_for_data()
 			self.client.send_data(["update",None])
-			print self.tcpData
+			print(self.tcpData)
 			self.initMultiUsers()
 			if self.tcpData[-1] == "[SERVER]|START":
 				break
@@ -115,9 +115,9 @@ class Game:
 		for d in self.tcpData:
 			ary = d.split("|")
 			try:
-				print ary[0] + " " + str(self.lastTcpCall)
+				print(ary[0] + " " + str(self.lastTcpCall))
 				if int(ary[0]) > int(self.lastTcpCall):
- 					if str(ary[2]) != str(self.id):
+					if str(ary[2]) != str(self.id):
 						if ary[1] == "MOVE":
 							point = self.pHash[ary[2]].movement(int(ary[3]))
 							self.movementHelper(self.pHash[ary[2]],point)
@@ -125,7 +125,7 @@ class Game:
 							self.deployBomb(self.pHash[ary[2]])
 					self.lastTcpCall = ary[0]
 			except ValueError:
-				print 'skip'
+				print('skip')
 
 	def resetGame(self):
 		self.field = None
@@ -434,7 +434,7 @@ class Game:
 
 	def gameover(self, player):
 		if self.mode == self.c.SINGLE:
-			print 'gameover - lost all lives | or time ran out'
+			print('gameover - lost all lives | or time ran out')
 			self.highscores.addScore(player.score)
 			self.gameIsActive = False
 			self.exitGame = True
