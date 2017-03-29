@@ -83,15 +83,16 @@ class grid:
             target_matrix[y][x] = 7
 
     def printMatrix(self):
-        for row in self.matrix:
-            s = ''
-            for col in row:
-                s += str(col)
-            print(s)
-        print("\n")
+        self.printPlayerView()
+        # for row in self.matrix:
+        #     s = ''
+        #     for col in row:
+        #         s += str(col)
+        #     print(s)
+        # print("\n")
 
-    def printPlayerView():
+    def printPlayerView(self):
         """probably doesnt work"""
         x = self.players[0].position[0] / c.Config.TILE_SIZE
         y = self.players[0].position[1] / c.Config.TILE_SIZE
-        featureConvert.convertGrid(matrix(self.matrix), (x,y) ,21,17)
+        featureConvert.convertGrid(matrix(self.matrix).transpose(), (x,y) ,21,17)

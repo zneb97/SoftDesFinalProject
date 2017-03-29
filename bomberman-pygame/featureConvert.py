@@ -17,21 +17,23 @@ def convertGrid(grid, pPos, viewX, viewY):
 	resultGridY = 2 * viewY - 1
 	buckets = [ [0] * resultGridY ] * resultGridX
 	mymat = matrix(buckets)
+	print(mymat.shape)
+	print(grid.shape)
 	x = 0
 	y = 0
-	for i in range(grid.shape[0] - pPos[0] - 1, 2 * grid.shape[0] - pPos[0] - 1):
-		for j in range(grid.shape[1] - pPos[1] - 1, 2 * grid.shape[1] - pPos[1] - 1):
-			mymat.itemset( (j, i) , grid.item((x, y)) )
+	for i in range(int(grid.shape[1] - pPos[1] - 1), int(2 * grid.shape[1] - pPos[1] - 1)):
+		for j in range(int(grid.shape[0] - pPos[0] - 1), int(2 * grid.shape[0] - pPos[0] - 1)):
+			mymat.itemset( (j,i) , grid.item((x, y)) )
+			print('j:' + str(j))
+			print(i)
 			# print(str(i) + str(j))
-			y += 1
-		x += 1
-		y = 0
-
-	mymat.itemset((resultGridX/2, resultGridY/2), 8)
+			x += 1
+		y += 1
+		x = 0
 
 	for i in range(0, mymat.shape[1]):
 		for j in range(0, mymat.shape[0]):
-			print(mymat.item((j,i)), end=' ')
+			print(mymat.item((j,i)), end='')
 		print("    ")
 
 
@@ -39,4 +41,5 @@ def convertGrid(grid, pPos, viewX, viewY):
 if __name__ == '__main__':
 	viewX = 21
 	viewY = 17
-	convertGrid(matrix(mygrid), (0,9), viewX, ViewY)
+	mygrid = [[1] * viewY] * viewX
+	convertGrid(matrix(mygrid), (0,9), viewX, viewY)
