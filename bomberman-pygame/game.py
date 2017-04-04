@@ -256,7 +256,6 @@ class Game:
 				elif event.type == pygame.KEYDOWN:
 
 
-
 					# deploy bomb
 					k = event.key
 
@@ -348,6 +347,7 @@ class Game:
 			self.bombHelper(bomb,'right')
 			self.bombHelper(bomb,'up')
 			self.bombHelper(bomb,'down')
+			self.checkPlayerEnemyBombCollision(bomb.position)
 
 	# ALGO NEEDS RFCT!!!
 	def bombHelper(self, bomb, direction):
@@ -367,7 +367,6 @@ class Game:
 
 			nPoint = bomb.position.move((x,y))
 			t = self.field.getTile(nPoint)
-
 			# hit a block or indestructible object
 			if not t.canBombPass():
 				# trigger new bomb explosion
@@ -409,7 +408,8 @@ class Game:
 				if player.loseLifeAndGameOver():
 					self.gameover(player)
 				else:
-					# if the player gets hit by a blast, reset it's position to the starting position
+					# if the player gets hit by a blast, reset it's position to the starting position and reduce the score
+					player.setScore(-100)
 					self.resetPlayerPosition(player,True)
 
 		# check if enemy was hit by bomb
