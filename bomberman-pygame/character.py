@@ -3,6 +3,7 @@ import config as c
 from numpy import matrix
 import featureExtract
 import featureConvert
+import prepSave
 
 # RFCT NEEDED
 class Character(pygame.sprite.Sprite):
@@ -44,7 +45,7 @@ class Character(pygame.sprite.Sprite):
 		right = (21,16)
 		up = (20,15)
 		down = (20,17)
-
+		surroundings = []
 		#Hardcoded AI
 		#Character check, enemies also use this same method
 		if H == 1:
@@ -69,26 +70,33 @@ class Character(pygame.sprite.Sprite):
 			if((myMat.item(down)==1) or (myMat.item(down)==2) or (myMat.item(down)==7) or (myMat.item(down)==9)):
 				valid[1] = False
 
+			surroundings = [myMat.item(up),myMat.item(left),myMat.item(right),myMat.item(down)]
+
 		validMoves = []
 		for i in range(len(moves)):
 			if valid[i] == True:
 				validMoves.append(moves[i])
 
 		key = validMoves[int(random.randrange(len(validMoves)))]
-
+		'''im gonna index these in order, adding bomb for option 6'''
 		if key == pygame.K_UP:
 			self.getImage('up')
+			prepSave.saveFiles(surroundings,0)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
+			prepSave.saveFiles(surroundings,1)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
+			prepSave.saveFiles(surroundings,2)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
+			prepSave.saveFiles(surroundings,3)
 			return [c.TILE_SIZE, 0]
 		else:
+			prepSave.saveFiles(surroundings,4)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):
