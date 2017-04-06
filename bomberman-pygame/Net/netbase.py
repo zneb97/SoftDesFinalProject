@@ -33,8 +33,8 @@ class TCPServer():
         self.connected_sockets.remove(sock)
     def serve_forever(self):
         self.looping = True
-        print("address: %r"%self.socketaddresses)
         while self.looping:
+            print("addresslist: %r"%self.socketaddresses)
             input_ready,output_ready,except_ready = select.select([self.unconnected_socket]+self.connected_sockets,[],[])
             for sock in input_ready:
                 if sock == self.unconnected_socket:
@@ -45,6 +45,7 @@ class TCPServer():
                     self.client_connect_func(connected_socket,self.host,self.port,address)
                 else:
                     try:
+                        print("sock%r"%sock)
                         data = ReceiveData(sock)
                         address = self.socketaddresses[sock]
                         self.input_func(sock,self.host,self.port,address)
@@ -52,6 +53,7 @@ class TCPServer():
                         data = "client quit"
                     if data != None:
                         if data == "client quit":
+                            print(address)
                             self.remove_socket(sock)
                             continue
                         self.sending_socket = sock
@@ -63,6 +65,7 @@ class TCPServer():
         try:
             SendData(self.sending_socket,data,compress,includelength=True)
             address = self.socketaddresses[self.sending_socket]
+            print(address)
             self.output_func(self.sending_socket,self.host,self.port,address)
         except:
             self.remove_socket(self.sending_socket)
