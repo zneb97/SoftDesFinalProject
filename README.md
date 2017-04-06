@@ -8,10 +8,10 @@ Base game code written by Github user <a href="https://github.com/rickyc/bomberm
 <br>
 ## Getting Started<br>
 **Dependencies**<br>
-Before starting, ensure you have the following installed:
-*Pygame
-*Numpy
-*TensorFlow
+Before starting, ensure you have the following installed:<br>
+* Pygame <br>
+* Numpy <br>
+* TensorFlow
 <br>
 ## Usage<br>
 
