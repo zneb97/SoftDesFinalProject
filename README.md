@@ -25,8 +25,9 @@ Before starting, ensure you have the following installed:<br>
 To download just download as a zip file or clone the repository.
 
 ## Usage<br>
-Once downloaded, navigate to SoftDesFinalProject/bomberman-pygame and use 
+Once downloaded, in the termianl use the commands 
 ```shell
+SoftDesFinalProject/bomberman-pygame
 python3 main.py
 ``` 
 to begin the game.
