@@ -236,6 +236,10 @@ class Game:
 			self.checkPlayerEnemyCollision()
 			self.checkWinConditions()
 
+			# feature extraction for machine learning
+			grid = featureExtract.grid(self)
+		#	grid.printMatrix()
+
 			# MULTIPLAYER
 			if self.mode == self.c.MULTI:
 				self.tcpUpdate()
@@ -267,12 +271,13 @@ class Game:
 					elif k == pygame.K_ESCAPE:
 						self.fQuit()
 					elif k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT:
-						if self.mode == self.c.MULTI:
-							self.sendingData = ["update","movement",k,self.id]
-
-						# player's move method
-						point = self.user.movement(k) # next point
-						self.movementHelper(self.user, point)
+						# if self.mode == self.c.MULTI:
+						# 	self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
+						#
+						# # player's move method
+						# point = self.user.movement(pygame.K_BACKSPACE, grid=grid) # next point
+						# self.movementHelper(self.user, point)
+						continue
 					elif k == pygame.K_g: # god mode, cheat ;)
 						self.user.gainPower(self.c.BOMB_UP)
 						self.user.gainPower(self.c.POWER_UP)
@@ -281,10 +286,13 @@ class Game:
 					self.updateBombs()
 				elif event.type == pygame.USEREVENT+1: #RFCT
 					for e in self.enemies:
-						self.movementHelper(e,e.nextMove())
-					# feature extraction for machine learning
-					grid = featureExtract.grid(self)
-					grid.printMatrix()
+						self.movementHelper(e,e.nextMove(grid))
+					if self.mode == self.c.MULTI:
+						self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
+
+					# player's move method
+					point = self.user.movement(pygame.K_BACKSPACE, grid=grid) # next point
+					self.movementHelper(self.user, point)
 
 				self.updateDisplayInfo()
 				pygame.display.update()

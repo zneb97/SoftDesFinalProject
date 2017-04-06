@@ -1,9 +1,13 @@
-import pygame, config
+import pygame, config, pyautogui, random
+import config as c
+from numpy import matrix
+import featureExtract
+import featureConvert
 
 # RFCT NEEDED
 class Character(pygame.sprite.Sprite):
 	lives = 1
-	speed = 1
+	speed = 2
 
 	def __init__(self, name, imageName, point):
 		pygame.sprite.Sprite.__init__(self)
@@ -21,12 +25,56 @@ class Character(pygame.sprite.Sprite):
 	def getImage(self, direction):
 		imagePath = self.c.IMAGE_PATH + self.imageName + direction + ".png"
 		self.image = pygame.image.load(imagePath).convert()
-		
+
 	def update(self):
 		print("=D")
 
-	def movement(self,key):
+	def movement(self,key, grid,H=1):
+		#	Character is located at 20, 16 in shifting matrix
 		c = config.Config()
+		self.map = grid
+
+		#List of moves and validity. Note n does nothing i.e. stay in place
+		moves = [pygame.K_UP,pygame.K_DOWN,pygame.K_LEFT,pygame.K_RIGHT, pygame.K_SPACE, pygame.K_BACKSPACE]
+		valid = [True, True, True, True, True, True]
+
+
+		position = (20,16)
+		left = (19,16)
+		right = (21,16)
+		up = (20,15)
+		down = (20,17)
+
+		#Hardcoded AI
+		#Character check, enemies also use this same method
+		if H == 1:
+			print()
+			#Check to see player position is correct
+			x = self.map.players[0].position[0] / self.c.TILE_SIZE
+			y = self.map.players[0].position[1] / self.c.TILE_SIZE
+			myMat = featureConvert.convertGrid(matrix(self.map.matrix).transpose(), (x,y) ,21,17)
+			# print(myMat.item((20,16)))
+
+			#Check optionsor (myMat.item(19,16)==9)
+			#Left
+			if((myMat.item(left)==1) or (myMat.item(left)==2) or (myMat.item(left)==7) or (myMat.item(left)==9)):
+				valid[2] = False
+			#Right
+			if((myMat.item(right)==1) or (myMat.item(right)==2) or (myMat.item(right)==7) or (myMat.item(right)==9)):
+				valid[3] = False
+			#Up
+			if((myMat.item(up)==1) or (myMat.item(up)==2) or (myMat.item(up)==7) or (myMat.item(up)==9)):
+				valid[0] = False
+			#Down
+			if((myMat.item(down)==1) or (myMat.item(down)==2) or (myMat.item(down)==7) or (myMat.item(down)==9)):
+				valid[1] = False
+
+		validMoves = []
+		for i in range(len(moves)):
+			if valid[i] == True:
+				validMoves.append(moves[i])
+
+		key = validMoves[int(random.randrange(len(validMoves)))]
 
 		if key == pygame.K_UP:
 			self.getImage('up')
@@ -40,6 +88,8 @@ class Character(pygame.sprite.Sprite):
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
 			return [c.TILE_SIZE, 0]
+		else:
+			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):
 		self.old = self.position
