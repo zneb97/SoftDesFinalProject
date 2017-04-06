@@ -3,7 +3,12 @@
 A bomberman bot that learns through machine learning. Using a combination of hardcoded AI, playing against humans, and Tensor Flow, the computer learns to better clear levels the more it plays. A final project Franklin W. Olin College of Engineering's Software Design Spring 2017 class.<br>
 
 ## Authors<br>
-Benjamin Ziemann, Seungin Lyu, Nick Steelman, Alex Core, Yichen Jiang<br>
+<a href="https://github.com/Ryofashadewalk">Alex Core</a>
+<a href="https://github.com/zneb97">Benjamin Ziemann</a>
+<a href="https://github.com/CleanestMink126">Nick Steelman</a>
+<a href="https://github.com/SeunginLyud">Seungin Lyu</a>
+<a href="https://github.com/yjiang0929">Yichen Jiang</a>
+
 
 Base game code written by Github user <a href="https://github.com/rickyc/bomberman-pygame">rickyc.</a><br>
 <br>
@@ -16,7 +21,15 @@ Before starting, ensure you have the following installed:<br>
 * TensorFlow
 <br>
 
+**Download**<br>
+To download just download as a zip file or clone the repository.
+
 ## Usage<br>
+Once downloaded, navigate to SoftDesFinalProject/bomberman-pygame and use 
+```shell
+python3 main.py
+``` 
+to begin the game.
 
 ## License<br>
 
