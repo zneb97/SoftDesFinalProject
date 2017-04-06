@@ -262,7 +262,7 @@ class Game:
 
 					# deploy bomb
 					k = event.key
-					if k == pygame.K_BACKSPACE:
+					if k == pygame.K_RSHIFT:
 						self.auto = not self.auto
 					elif k == pygame.K_SPACE and not self.auto:
 						if self.mode == self.c.MULTI:
@@ -281,8 +281,6 @@ class Game:
 					elif k == pygame.K_g and not self.auto: # god mode, cheat ;)
 						self.user.gainPower(self.c.BOMB_UP)
 						self.user.gainPower(self.c.POWER_UP)
-				elif self.auto:
-					self.movementHelper(self.user, [0,40])
 				elif event.type == pygame.USEREVENT: # RFCT - change definition
 					self.updateBombs()
 				elif event.type == pygame.USEREVENT+1: #RFCT
@@ -293,8 +291,9 @@ class Game:
 						self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
 
 					# player's move method
-					point = self.user.movement(pygame.K_BACKSPACE, grid=grid) # next point
-					self.movementHelper(self.user, point)
+					if self.auto:
+						point = self.user.movement(pygame.K_BACKSPACE, grid=grid) # next point
+						self.movementHelper(self.user, point)
 
 				self.updateDisplayInfo()
 				pygame.display.update()
