@@ -230,6 +230,7 @@ class Game:
 		pygame.time.set_timer(pygame.USEREVENT+1,500)
 		cyclicCounter = 0
 		self.gameIsActive = True
+		self.auto = False
 
 		while self.gameIsActive:
 			clock.tick(self.c.FPS)
@@ -249,34 +250,34 @@ class Game:
 
 			if cyclicCounter%5 == 1:
 				self.clearExplosion()
-
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					self.forceQuit()
 				elif event.type == pygame.KEYDOWN:
 
 
-
 					# deploy bomb
 					k = event.key
-
-					if k == pygame.K_SPACE:
+					if k == pygame.K_BACKSPACE:
+						self.auto = not self.auto
+					elif k == pygame.K_SPACE and not self.auto:
 						if self.mode == self.c.MULTI:
 							self.sendingData = ["update","bomb",k,self.id]
 						self.deployBomb(self.user)
-					elif k == pygame.K_ESCAPE:
+					elif k == pygame.K_ESCAPE and not self.auto:
 						self.fQuit()
-					elif k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT:
+					elif (k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
 						if self.mode == self.c.MULTI:
 							self.sendingData = ["update","movement",k,self.id]
 
 						# player's move method
 						point = self.user.movement(k) # next point
 						self.movementHelper(self.user, point)
-					elif k == pygame.K_g: # god mode, cheat ;)
+					elif k == pygame.K_g and not self.auto: # god mode, cheat ;)
 						self.user.gainPower(self.c.BOMB_UP)
 						self.user.gainPower(self.c.POWER_UP)
-
+				elif self.auto:
+					self.movementHelper(self.user, [0,40])
 				elif event.type == pygame.USEREVENT: # RFCT - change definition
 					self.updateBombs()
 				elif event.type == pygame.USEREVENT+1: #RFCT
@@ -348,6 +349,7 @@ class Game:
 			self.bombHelper(bomb,'right')
 			self.bombHelper(bomb,'up')
 			self.bombHelper(bomb,'down')
+			self.checkPlayerEnemyBombCollision(bomb.position)
 
 	# ALGO NEEDS RFCT!!!
 	def bombHelper(self, bomb, direction):
@@ -367,7 +369,6 @@ class Game:
 
 			nPoint = bomb.position.move((x,y))
 			t = self.field.getTile(nPoint)
-
 			# hit a block or indestructible object
 			if not t.canBombPass():
 				# trigger new bomb explosion
@@ -409,7 +410,8 @@ class Game:
 				if player.loseLifeAndGameOver():
 					self.gameover(player)
 				else:
-					# if the player gets hit by a blast, reset it's position to the starting position
+					# if the player gets hit by a blast, reset it's position to the starting position and reduce the score
+					player.setScore(-100)
 					self.resetPlayerPosition(player,True)
 
 		# check if enemy was hit by bomb
