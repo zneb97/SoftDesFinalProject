@@ -1,3 +1,4 @@
+<H1>Bomberman Bot</H1><br><br>
 Benjamin Ziemann, Seungin Lyu, Nick Steelman, Alex Core, Yichen Jiang<br>
 <br>
 Franklin W. Olin College of Engineering<br>
