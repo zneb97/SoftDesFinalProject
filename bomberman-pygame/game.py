@@ -278,7 +278,7 @@ class Game:
 						# player's move method
 						# print(k)
 						print('player shouldve moved')
-						point = self.user.movement(k,grid=grid, H=0) # next point
+						point = self.user.movement(k,grid,0) # next point
 						self.movementHelper(self.user, point)
 					elif k == pygame.K_g and not self.auto: # god mode, cheat ;)
 						self.user.gainPower(self.c.BOMB_UP)
@@ -294,7 +294,7 @@ class Game:
 
 					# player's move method
 					if self.auto:
-						point = self.user.movement(pygame.K_BACKSPACE, grid=grid) # next point
+						point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
 						self.movementHelper(self.user, point)
 
 				self.updateDisplayInfo()

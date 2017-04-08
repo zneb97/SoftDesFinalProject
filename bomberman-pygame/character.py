@@ -30,7 +30,7 @@ class Character(pygame.sprite.Sprite):
 	def update(self):
 		print("=D")
 
-	def movement(self,key, grid,H=1):
+	def movement(self,key, grid,humanAuto=1):
 		#	Character is located at 20, 16 in shifting matrix
 		c = config.Config()
 		self.map = grid
@@ -52,7 +52,7 @@ class Character(pygame.sprite.Sprite):
 
 		#Hardcoded AI
 		#Character check, enemies also use this same method
-		if H == 1:
+		if humanAuto == 1:
 			#Check to see player position is correct
 
 			# print(myMat.item((20,16)))
@@ -80,30 +80,30 @@ class Character(pygame.sprite.Sprite):
 		'''im gonna index these in order, adding bomb for option 5'''
 		if key == pygame.K_UP:
 			self.getImage('up')
-			if H == 0:
+			if humanAuto == 0:
 				prepSave.saveFiles(surroundings,1)
 				featureConvert.printGrid(myMat)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
-			if H == 0:
+			if humanAuto == 0:
 				prepSave.saveFiles(surroundings,2)
 				featureConvert.printGrid(myMat)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
-			if H == 0:
+			if humanAuto == 0:
 				prepSave.saveFiles(surroundings,3)
 				featureConvert.printGrid(myMat)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
-			if H == 0:
+			if humanAuto == 0:
 				prepSave.saveFiles(surroundings,4)
 				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, 0]
 		else:
-			if H == 0:
+			if humanAuto == 0:
 				prepSave.saveFiles(surroundings,0)
 				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, c.TILE_SIZE]
