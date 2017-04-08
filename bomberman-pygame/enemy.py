@@ -9,4 +9,4 @@ class Enemy(character.Character):
 	def nextMove(self, grid):
 		self.map = grid
 		ary = [pygame.K_UP,pygame.K_DOWN,pygame.K_LEFT,pygame.K_RIGHT]
-		return self.movement(ary[int(random.randrange(0,4))], grid, 0)
+		return self.movement(ary[int(random.randrange(0,4))], grid, humanAuto=2)
