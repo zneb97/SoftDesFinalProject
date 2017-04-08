@@ -30,14 +30,14 @@ def convertGrid(grid, pPos, viewX, viewY):
 			x += 1
 		y += 1
 		x = 0
+	return mymat
 
+
+def printGrid(mymat):
 	for i in range(0, mymat.shape[1]):
 		for j in range(0, mymat.shape[0]):
 			print(mymat.item((j,i)), end='')
 		print("    ")
-
-
-	return mymat
 
 if __name__ == '__main__':
 	viewX = 21

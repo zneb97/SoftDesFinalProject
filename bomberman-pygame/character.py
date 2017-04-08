@@ -46,14 +46,15 @@ class Character(pygame.sprite.Sprite):
 		up = (20,15)
 		down = (20,17)
 		surroundings = []
+		x = self.map.players[0].position[0] / self.c.TILE_SIZE
+		y = self.map.players[0].position[1] / self.c.TILE_SIZE
+		myMat = featureConvert.convertGrid(matrix(self.map.matrix).transpose(), (x,y) ,21,17)
+
 		#Hardcoded AI
 		#Character check, enemies also use this same method
 		if H == 1:
-			print()
 			#Check to see player position is correct
-			x = self.map.players[0].position[0] / self.c.TILE_SIZE
-			y = self.map.players[0].position[1] / self.c.TILE_SIZE
-			myMat = featureConvert.convertGrid(matrix(self.map.matrix).transpose(), (x,y) ,21,17)
+
 			# print(myMat.item((20,16)))
 
 			#Check optionsor (myMat.item(19,16)==9)
@@ -70,33 +71,41 @@ class Character(pygame.sprite.Sprite):
 			if((myMat.item(down)==1) or (myMat.item(down)==2) or (myMat.item(down)==7) or (myMat.item(down)==9)):
 				valid[1] = False
 
-			surroundings = [myMat.item(up),myMat.item(left),myMat.item(right),myMat.item(down)]
-
-		validMoves = []
-		for i in range(len(moves)):
-			if valid[i] == True:
-				validMoves.append(moves[i])
-
-		key = validMoves[int(random.randrange(len(validMoves)))]
-		'''im gonna index these in order, adding bomb for option 6'''
+			validMoves = []
+			for i in range(len(moves)):
+				if valid[i] == True:
+					validMoves.append(moves[i])
+			key = validMoves[int(random.randrange(len(validMoves)))]
+		surroundings = [myMat.item(up),myMat.item(left),myMat.item(right),myMat.item(down)]
+		'''im gonna index these in order, adding bomb for option 5'''
 		if key == pygame.K_UP:
 			self.getImage('up')
-			prepSave.saveFiles(surroundings,0)
+			if H == 0:
+				prepSave.saveFiles(surroundings,1)
+				featureConvert.printGrid(myMat)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
-			prepSave.saveFiles(surroundings,1)
+			if H == 0:
+				prepSave.saveFiles(surroundings,2)
+				featureConvert.printGrid(myMat)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
-			prepSave.saveFiles(surroundings,2)
+			if H == 0:
+				prepSave.saveFiles(surroundings,3)
+				featureConvert.printGrid(myMat)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
-			prepSave.saveFiles(surroundings,3)
+			if H == 0:
+				prepSave.saveFiles(surroundings,4)
+				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, 0]
 		else:
-			prepSave.saveFiles(surroundings,4)
+			if H == 0:
+				prepSave.saveFiles(surroundings,0)
+				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):

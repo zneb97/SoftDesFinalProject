@@ -276,7 +276,9 @@ class Game:
 							self.sendingData = ["update","movement",k,self.id]
 
 						# player's move method
-						point = self.user.movement(k) # next point
+						# print(k)
+						print('player shouldve moved')
+						point = self.user.movement(k,grid=grid, H=0) # next point
 						self.movementHelper(self.user, point)
 					elif k == pygame.K_g and not self.auto: # god mode, cheat ;)
 						self.user.gainPower(self.c.BOMB_UP)

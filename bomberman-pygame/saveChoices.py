@@ -19,3 +19,7 @@ def readCSV(fileName):
          spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
          for row in spamreader:
              print(', '.join(row))
+#
+# writeHead('bricks.csv')
+# writeHead('walls.csv')
+# writeHead('bombs.csv')
