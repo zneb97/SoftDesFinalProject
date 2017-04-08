@@ -1,5 +1,6 @@
 import sys, pygame, config, random, time
-import player, enemy, board, bomb, highscore, music, featureExtract
+import player, enemy, board, bomb, highscore, music, featureExtract, featureConvert,prepSave
+from numpy import matrix
 from pygame.locals import *
 import os,sys
 sys.path.append(os.path.split(sys.path[0])[0])
@@ -302,10 +303,22 @@ class Game:
 
 	def deployBomb(self,player):
 		b = player.deployBomb() # returns a bomb if available
+		position = (20,16)
+		left = (19,16)
+		right = (21,16)
+		up = (20,15)
+		down = (20,17)
+		x = player.position[0] / self.c.TILE_SIZE
+		y = player.position[1] / self.c.TILE_SIZE
+		myMat = featureConvert.convertGrid(matrix(player.map.matrix).transpose(), (x,y) ,21,17)
+		surroundings = [myMat.item(up),myMat.item(left),myMat.item(right),myMat.item(down)]
+		prepSave.saveFiles(surroundings,5)
+		featureConvert.printGrid(myMat)
 		if b != None:
 			tile = self.field.getTile(player.position)
 			tile.bomb = b
 			self.bombs.append(b)
+
 
 	def blit(self,obj,pos):
 		self.screen.blit(obj,pos)

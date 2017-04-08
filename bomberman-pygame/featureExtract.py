@@ -52,10 +52,9 @@ class grid:
             for tile in row:
                 mat_row.append(TILE_MAP[tile.type])
             mat.append(mat_row)
-
-        self.add_bombs(mat)
         self.add_players(mat)
         self.add_enemies(mat)
+        self.add_bombs(mat)
         return mat
 
     def add_bombs(self, target_matrix):
