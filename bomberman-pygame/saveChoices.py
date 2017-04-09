@@ -1,5 +1,5 @@
 import csv
-fieldnames = ['above','left', 'right', 'below','response']
+fieldnames = ['above','left', 'center', 'right', 'below','response']
 
 def writeHead(fileName):
     with open(fileName, 'w') as csvfile:
@@ -19,7 +19,7 @@ def readCSV(fileName):
          spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
          for row in spamreader:
              print(', '.join(row))
-# 
+#
 # writeHead('bricks.csv')
 # writeHead('walls.csv')
 # writeHead('bombs.csv')

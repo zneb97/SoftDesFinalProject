@@ -311,7 +311,7 @@ class Game:
 		x = player.position[0] / self.c.TILE_SIZE
 		y = player.position[1] / self.c.TILE_SIZE
 		myMat = featureConvert.convertGrid(matrix(player.map.matrix).transpose(), (x,y) ,21,17)
-		surroundings = [myMat.item(up),myMat.item(left),myMat.item(right),myMat.item(down)]
+		surroundings = [myMat.item(up),myMat.item(left),myMat.item(position),myMat.item(right),myMat.item(down)]
 		prepSave.saveFiles(surroundings,5)
 		featureConvert.printGrid(myMat)
 		if b != None:

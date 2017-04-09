@@ -76,7 +76,7 @@ class Character(pygame.sprite.Sprite):
 				if valid[i] == True:
 					validMoves.append(moves[i])
 			key = validMoves[int(random.randrange(len(validMoves)))]
-		surroundings = [myMat.item(up),myMat.item(left),myMat.item(right),myMat.item(down)]
+		surroundings = [myMat.item(up),myMat.item(left),myMat.item(position),myMat.item(right),myMat.item(down)]
 		'''im gonna index these in order, adding bomb for option 5'''
 		if key == pygame.K_UP:
 			self.getImage('up')
