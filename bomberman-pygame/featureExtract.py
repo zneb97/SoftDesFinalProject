@@ -5,9 +5,12 @@ import featureConvert
 
 class grid:
     """
-    This class represents the current game status with follwing mapping keys:
+<<<<<<< HEAD
+    Identifies player, enemy, object positons from board
 
-    0 = VALID SPACE (Movement allowed)
+    Matrix Tile Code
+
+    0 = VALID SPACE
     1 = WALL
     2 = BRICK
     3 = SECRET BRICK
@@ -26,6 +29,7 @@ class grid:
         self.players = game.players
         self.bombs = game.bombs
         self.enemies = game.enemies
+
 
     @property
     def matrix(self):
@@ -46,6 +50,7 @@ class grid:
 
     def add_bombs(self, target_matrix):
         """
+
         Adds bombs(represented as 9) to the target_matrix
         """
         # bomb.position (x,y) / config.TILE_SIZE
@@ -74,9 +79,6 @@ class grid:
             target_matrix[y][x] = 7
 
     def printMatrix(self):
-        return self.printPlayerView()
-
-    def printPlayerView(self):
         """
         This function calls the convert grid function,
         converts the list into a numpy matrix"
