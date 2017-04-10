@@ -7,6 +7,10 @@ sys.path.append(os.path.split(sys.path[0])[0])
 from Net import *
 
 class Game:
+	"""
+	Store, update, and maintain all data important to running game
+	"""
+	#Stored board data
 	players = []
 	enemies = []
 	bombs = []
@@ -16,13 +20,16 @@ class Game:
 	firstRun = True
 	exitGame = False
 
-	# multiplayer data
+	# Multiplayer data
 	tcpData = []
 	sendingData = []
 	lastTcpCall = 0
 	pHash = {}
 
 	def __init__(self, mode):
+		"""
+		Initialize new game
+		"""
 		self.c = config.Config()
 		self.highscores = highscore.Highscore()
 		self.forceQuit = False
@@ -51,6 +58,9 @@ class Game:
 			self.highscores.displayScore()
 
 	def joinGame(self):
+		"""
+		Identify game to connect to
+		"""
 		self.client = TCPClient()
 
 		# choose server connection
@@ -129,6 +139,11 @@ class Game:
 				print('skip')
 
 	def resetGame(self):
+		"""
+		Clear board data
+
+		Called on death or level clear
+		"""
 		self.field = None
 		self.enemies = []
 		self.bombs = []
@@ -141,6 +156,9 @@ class Game:
 		self.blit(bg,(0,0))
 
 	def initGame(self):
+		"""
+		Begin game mode with correct stats for board
+		"""
 		if self.mode == self.c.SINGLE:
 			self.printText("Level %d-%d" % (self.stage,self.level),(40,15))
 			self.field = board.Board(self.stage, self.level)
@@ -154,18 +172,18 @@ class Game:
 		self.drawInterface()
 		self.updateTimer()
 
-		# players do not have to be reinitialized in single player after the first time
+		# Players do not have to be reinitialized in single player after the first time
 		if self.firstRun:
 			self.firstRun = False
 			self.initPlayers()
 		else:
 			self.resetPlayerPosition(self.user,False)
 
-		# no enemies in multiplayer
+		# No enemies in multiplayer
 		if self.mode == self.c.SINGLE:
-			self.initEnemies()
+			self.initEnemies(self.level*2 + 1)
 
-		# music player
+		# Music player
 		mp = music.Music()
 		mp.playMusic(self.mode)
 
@@ -173,20 +191,30 @@ class Game:
 
 	# draws the board onto the screen
 	def drawBoard(self):
+		"""
+		Build board
+
+		Note: each level has a predefined layout
+		"""
 		for row in range(1,len(self.field.board)-1):
 			for col in range(1,len(self.field.board[row])-1):
 				image = self.field.board[row][col].image
-				# RFCT - fix the mess \/
 				position = self.field.board[row][col].image.get_rect().move((col*self.c.TILE_SIZE,row*self.c.TILE_SIZE))
 				self.blit(image, position)
 
 	def updateDisplayInfo(self):
+		"""
+		Display charater stats
+		"""
 		self.printText(self.user.score,(65,653))
 		self.printText(self.user.lives,(775,653))
 		self.printText(self.user.maxBombs,(630,653))
 		self.printText(self.user.power,(700,653))
 
 	def drawInterface(self):
+		"""
+		Build border stats graphics
+		"""
 		player  = pygame.image.load(self.c.IMAGE_PATH + "screen/player.png").convert()
 		life = pygame.image.load(self.c.IMAGE_PATH + "screen/life.png").convert()
 		bomb = pygame.image.load(self.c.IMAGE_PATH + "screen/bomb.png").convert()
@@ -201,6 +229,9 @@ class Game:
 		self.blit(life,(740,652))
 
 	def initPlayers(self):
+		"""
+		Place players
+		"""
 		if self.mode == self.c.SINGLE:
 			self.user = player.Player("Player 1","p_1_",0,(40,40))
 			self.players.append(self.user)
@@ -211,11 +242,14 @@ class Game:
 					self.user = p
 				self.blit(p.image,p.position)
 
-	def initEnemies(self):
-		# generates 5 enemies
-		for i in range(0,5):
+	def initEnemies(self, num):
+		"""
+		Generate enemies in semi-random positions around board
+		Will not spawn near player
+		"""
+		for i in range(0,num):
 			while True:
-				x = random.randint(6,self.field.width-2)*40			# randint(1,X) changed to 6 so enemies do not start near player
+				x = random.randint(6,self.field.width-2)*40
 				y = random.randint(6,self.field.height-2)*40
 
 				if self.field.getTile((x,y)).canPass() == True:
