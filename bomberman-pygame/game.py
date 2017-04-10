@@ -260,10 +260,15 @@ class Game:
 			self.blit(e.image, e.position)
 
 	def runGame(self):
+		"""
+		Cycling and updating of all the game states and variables
+		"""
 		clock = pygame.time.Clock()
 		pygame.time.set_timer(pygame.USEREVENT,1000)
 		pygame.time.set_timer(pygame.USEREVENT+1,500)
 		cyclicCounter = 0
+
+		#Begin game
 		self.gameIsActive = True
 		self.auto = False
 
@@ -272,9 +277,8 @@ class Game:
 			self.checkPlayerEnemyCollision()
 			self.checkWinConditions()
 
-			# feature extraction for machine learning
+			#Feature extraction for machine learning
 			grid = featureExtract.grid(self)
-		#	grid.printMatrix()
 
 			# MULTIPLAYER
 			if self.mode == self.c.MULTI:
@@ -295,8 +299,10 @@ class Game:
 				elif event.type == pygame.KEYDOWN:
 
 
-					# deploy bomb
+					#On button press
 					k = event.key
+
+					#Switch to computer controlled human
 					if k == pygame.K_RSHIFT:
 						self.auto = not self.auto
 					elif k == pygame.K_SPACE and not self.auto:
@@ -306,18 +312,19 @@ class Game:
 					elif k == pygame.K_ESCAPE and not self.auto:
 						self.fQuit()
 
+					#Player movement - key based
 					elif (k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
 						if self.mode == self.c.MULTI:
 							self.sendingData = ["update","movement",k,self.id]
-
-						# player's move method
-						# print(k)
 						print('player shouldve moved')
-						point = self.user.movement(k,grid,0) # next point
+						point = self.user.movement(k,grid,0)
 						self.movementHelper(self.user, point)
-					elif k == pygame.K_g and not self.auto: # god mode, cheat ;)
+
+					#Cheat mode, get powerups
+					elif k == pygame.K_g and not self.auto:
 						self.user.gainPower(self.c.BOMB_UP)
 						self.user.gainPower(self.c.POWER_UP)
+
 				elif event.type == pygame.USEREVENT: # RFCT - change definition
 					self.updateBombs()
 				elif event.type == pygame.USEREVENT+1: #RFCT
@@ -327,7 +334,7 @@ class Game:
 					if self.mode == self.c.MULTI:
 						self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
 
-					# player's move method
+					# Auto player movement - validity of move
 					if self.auto:
 						point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
 						self.movementHelper(self.user, point)
@@ -336,7 +343,14 @@ class Game:
 				pygame.display.update()
 
 	def deployBomb(self,player):
-		b = player.deployBomb() # returns a bomb if available
+		"""
+		Placing of bombs based
+
+		Additional code written so machine learning can
+		recognize if it is standing on a bomb as usually player
+		overwrites bomb
+		"""
+		b = player.deployBomb() # Returns a bomb if available
 		position = (20,16)
 		left = (19,16)
 		right = (21,16)
@@ -359,11 +373,14 @@ class Game:
 	#	pygame.display.flip()
 
 	def movementHelper(self, char, point):
+		"""
+		Moves player in code
+		"""
 		nPoint = char.position.move(point)
 
 		tile = self.field.getTile(nPoint)
 
-		# also check for bomb / special power ups here
+		# Check for bomb / special power ups here
 		if tile.canPass():
 			if char.instance_of == 'player' and tile.isPowerUp():
 				char.setScore(50) # RFCT | BUG - VARIES DEPENDING ON POWER UP
@@ -380,11 +397,17 @@ class Game:
 			self.blit(t.getImage(), char.old)
 
 	def updateBombs(self):
+		"""
+		Countdown bombs, explode if needed
+		"""
 		for bomb in self.bombs:
 			if bomb.tick() == 0:
 				self.activateBomb(bomb)
 
 	def activateBomb(self,bomb):
+		"""
+		Remove bomb, kill surroundings
+		"""
 		if not bomb.triggered:
 			bomb.explode()
 			self.triggerBombChain(bomb)
@@ -398,6 +421,9 @@ class Game:
 			self.blit(explosion,bomb.position)
 
 	def triggerBombChain(self, bomb):
+		"""
+		Allow for bombs to activate other bombs
+		"""
 		if bomb == None:
 			return
 		else:
@@ -408,8 +434,8 @@ class Game:
 			self.bombHelper(bomb,'down')
 			self.checkPlayerEnemyBombCollision(bomb.position)
 
-	# ALGO NEEDS RFCT!!!
 	def bombHelper(self, bomb, direction):
+		#Runs the code behind bomb explosions
 		if direction == 'right':
 			point = (40,0)
 		elif direction == 'left':
@@ -451,17 +477,26 @@ class Game:
 				break
 
 	def clearExplosion(self):
+		"""
+		Update board accordingly to bomb's effect
+		"""
 		for point in self.resetTiles:
 			t = self.field.getTile(point)
 			self.blit(t.getImage(),point)
 			self.resetTiles.remove(point)
 
 	def resetPlayerPosition(self, player, death):
+		"""
+		Put player back in top left on death or level clear
+		"""
 		player.reset(death)
 		self.blit(player.image,player.position)
 
 	def checkPlayerEnemyBombCollision(self, position):
-		# check if player was hit by bomb
+		"""
+		Check bomb's effects against player and enemy positions and clear
+		if need be
+		"""
 		for player in self.players:
 			if player.position == position:
 				if player.loseLifeAndGameOver():
@@ -478,6 +513,9 @@ class Game:
 				self.user.setScore(100)
 
 	def checkPlayerEnemyCollision(self):
+		"""
+		Check if enemy has killed player
+		"""
 		for enemy in self.enemies:
 			if enemy.position == self.user.position:
 				# RFCT - code repetition

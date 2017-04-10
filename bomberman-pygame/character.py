@@ -7,7 +7,9 @@ import prepSave
 
 # RFCT NEEDED
 class Character(pygame.sprite.Sprite):
-
+	lives = 1
+	speed = 1
+	
 	def __init__(self, name, imageName, point):
 		"""
 		Intialize a character object, can be either human or monster
