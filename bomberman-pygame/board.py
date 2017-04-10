@@ -2,6 +2,9 @@ import sys, tile, pygame, config
 
 class Board:
 	def __init__(self, stage, level):
+		"""
+		Intialize board object
+		"""
 		file = open("resources/levels/level_" + str(stage) + "-" + str(level) + ".txt","r").readlines()
 
 		self.board = []
@@ -18,6 +21,9 @@ class Board:
 		self.width = len(line)
 
 	def getTile(self,point):
+		"""
+		Return what is located tile of the board
+		"""
 		c = config.Config()
 
 		col = int(point[0]/c.TILE_SIZE)

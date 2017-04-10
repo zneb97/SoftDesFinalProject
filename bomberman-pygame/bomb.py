@@ -2,8 +2,14 @@ import config, pygame, character
 
 class Bomb(pygame.sprite.Sprite):
 	fuse = 3
-	
+
 	def __init__(self,player):
+		"""
+		Intialize a bomb object
+
+		Takes in player to evantually return bomb to them
+		as well as get positions for when placing bomb.
+		"""
 		pygame.sprite.Sprite.__init__(self)
 		self.c = config.Config()
 
@@ -13,11 +19,18 @@ class Bomb(pygame.sprite.Sprite):
 		self.range = player.power
 		self.player = player
 		self.triggered = False
-	
+
 	def tick(self):
+		"""
+		Countdown until explosion
+
+		Note: explosion hadnled in game
+		"""
 		self.fuse -= 1
 		return self.fuse
-	
+
 	def explode(self):
-		# RFCT - add to player class instead? suggestions?
+		"""
+		Bomb returns to player
+		"""
 		self.player.currentBomb += 1
