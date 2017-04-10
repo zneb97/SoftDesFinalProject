@@ -6,8 +6,8 @@ A bomberman bot that learns through machine learning. Using a combination of har
 ## Authors<br>
 <a href="https://github.com/Ryofashadewalk">Alex Core</a><br>
 <a href="https://github.com/zneb97">Benjamin Ziemann</a><br>
-<a href="https://github.com/CleanestMink126">Nick Steelman</a><br> 
-<a href="https://github.com/SeunginLyud">Seungin Lyu</a><br> 
+<a href="https://github.com/CleanestMink126">Nick Steelman</a><br>
+<a href="https://github.com/SeunginLyu">Seungin Lyu</a><br> 
 <a href="https://github.com/yjiang0929">Yichen Jiang</a><br>
 
 
@@ -26,11 +26,11 @@ Before starting, ensure you have the following installed:<br>
 To download just download as a zip file or clone the repository.
 
 ## Usage<br>
-Once downloaded, in the terminal use the commands 
+Once downloaded, in the terminal use the commands
 ```shell
 $ SoftDesFinalProject/bomberman-pygame
 $ python3 main.py
-``` 
+```
 to run the game.
 
 ## License<br>

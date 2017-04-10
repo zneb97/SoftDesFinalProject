@@ -149,6 +149,7 @@ class Game:
 		self.bombs = []
 		self.resetTiles = []
 
+
 	def clearBackground(self):
 		bg = pygame.Surface(self.screen.get_size())
 		bg = bg.convert()
@@ -297,11 +298,8 @@ class Game:
 				if event.type == pygame.QUIT:
 					self.forceQuit()
 				elif event.type == pygame.KEYDOWN:
-
-
 					#On button press
 					k = event.key
-
 					#Switch to computer controlled human
 					if k == pygame.K_RSHIFT:
 						self.auto = not self.auto
@@ -310,9 +308,12 @@ class Game:
 							self.sendingData = ["update","bomb",k,self.id]
 						self.deployBomb(self.user)
 					elif k == pygame.K_ESCAPE and not self.auto:
-						self.fQuit()
 
-					#Player movement - key based
+						# Restart the game when you are running on manual mode
+						# by pressing esc"
+						print("game restarts in 1 second")
+						time.sleep(1)
+						self.restart()
 					elif (k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
 						if self.mode == self.c.MULTI:
 							self.sendingData = ["update","movement",k,self.id]
@@ -536,10 +537,28 @@ class Game:
 			self.gameIsActive = False
 			self.exitGame = True
 
+			print("restarting in 3 second")
+			time.sleep(1)
+			print("restarting in 2 second")
+			time.sleep(1)
+			print("restarting in 1 second")
+			time.sleep(1)
+			self.restart()
+
 	def fQuit(self):
 		self.gameIsActive = False
 		self.exitGame = True
 		self.forceQuit = True
+
+
+	def restart(self):
+		"""
+		This function forces the game to go back to its initial state
+		"""
+		self.firstRun = True
+		self.resetGame()
+		self.clearBackground()
+		self.initGame()
 
 	def printText(self,text,point):
 		font = pygame.font.Font("lucida.ttf",20)
