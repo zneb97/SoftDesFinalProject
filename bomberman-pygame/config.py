@@ -1,5 +1,7 @@
 class Config(object):
-	# RFCT - Design flaw, didn't think of it earlier, but only 9 tiles possible with current configuration =/
+	"""
+	Number markers to know what tile contains what
+	"""
 	GROUND = 0
 	WALL = 1
 	BRICK = 2
