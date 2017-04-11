@@ -38,6 +38,7 @@ def printGrid(mymat):
 		for j in range(0, mymat.shape[0]):
 			print(mymat.item((j,i)), end='')
 		print("    ")
+	print(" ")
 
 if __name__ == '__main__':
 	viewX = 21

@@ -278,7 +278,6 @@ class Game:
 
 						# player's move method
 						# print(k)
-						print('player shouldve moved')
 						point = self.user.movement(k,grid,0) # next point
 						self.movementHelper(self.user, point)
 					elif k == pygame.K_g and not self.auto: # god mode, cheat ;)
