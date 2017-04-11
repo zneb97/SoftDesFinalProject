@@ -70,7 +70,7 @@ class Game:
 			self.client.send_data(["update",None])
 			print(self.tcpData)
 			self.initMultiUsers()
-			if self.tcpData[-1] == "[SERVER]|START":
+			if len(self.tcpData) > 0 and self.tcpData[-1] == "[SERVER]|START":
 				break
 
 	def getMultiStartPosition(self,id):

@@ -8,13 +8,15 @@ def EncodeData(data,compress):
     data = pickle.dumps(data)
     if compress != False:
         data = zlib.compress(data,compress)
-    print(data)
+    print(str(data) + "sending data")
     length = str(len(data))
     length = ("0"*(8-len(length)))+length
     return length,data
 def DecodeData(data):
-    try:data = pickle.loads(data)
-    except:data = pickle.loads(zlib.decompress(data))
+    try:
+        data = data.decode("utf-8")
+    except:
+        data = pickle.loads(zlib.decompress(data))
     return data
 def SendData(sock,data,compress,includelength=False,address=None):
     length,data = EncodeData(data,compress)
@@ -36,13 +38,15 @@ def SendData(sock,data,compress,includelength=False,address=None):
 def ReceiveData(sock):
     try:
         print(sock.recv(8))
-        #length = int(sock.recv(8).decode())
-        data = pickle.loads(sock.recv(1000))
+        # length = int(sock.recv(8).decode())
+        # data = pickle.loads(sock.recv(1000))
+        data = sock.recv(1000)
         print(data)
     except:
         sock.close()
         raise SocketError("Connection is broken; data could not be received!")
     data = DecodeData(data)
+    print(str(data) + "after decode")
     return data
 def ReceiveDataUDP(sock,size=1024):
     try:
