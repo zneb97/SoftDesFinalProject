@@ -7,6 +7,10 @@ sys.path.append(os.path.split(sys.path[0])[0])
 from Net import *
 
 class Game:
+	"""
+	Store, update, and maintain all data important to running game
+	"""
+	#Stored board data
 	players = []
 	enemies = []
 	bombs = []
@@ -16,13 +20,16 @@ class Game:
 	firstRun = True
 	exitGame = False
 
-	# multiplayer data
+	# Multiplayer data
 	tcpData = []
 	sendingData = []
 	lastTcpCall = 0
 	pHash = {}
 
 	def __init__(self, mode):
+		"""
+		Initialize new game
+		"""
 		self.c = config.Config()
 		self.highscores = highscore.Highscore()
 		self.forceQuit = False
@@ -51,6 +58,9 @@ class Game:
 			self.highscores.displayScore()
 
 	def joinGame(self):
+		"""
+		Identify game to connect to
+		"""
 		self.client = TCPClient()
 
 		# choose server connection
@@ -129,10 +139,16 @@ class Game:
 				print('skip')
 
 	def resetGame(self):
+		"""
+		Clear board data
+
+		Called on death or level clear
+		"""
 		self.field = None
 		self.enemies = []
 		self.bombs = []
 		self.resetTiles = []
+
 
 	def clearBackground(self):
 		bg = pygame.Surface(self.screen.get_size())
@@ -141,6 +157,9 @@ class Game:
 		self.blit(bg,(0,0))
 
 	def initGame(self):
+		"""
+		Begin game mode with correct stats for board
+		"""
 		if self.mode == self.c.SINGLE:
 			self.printText("Level %d-%d" % (self.stage,self.level),(40,15))
 			self.field = board.Board(self.stage, self.level)
@@ -154,18 +173,18 @@ class Game:
 		self.drawInterface()
 		self.updateTimer()
 
-		# players do not have to be reinitialized in single player after the first time
+		# Players do not have to be reinitialized in single player after the first time
 		if self.firstRun:
 			self.firstRun = False
 			self.initPlayers()
 		else:
 			self.resetPlayerPosition(self.user,False)
 
-		# no enemies in multiplayer
+		# No enemies in multiplayer
 		if self.mode == self.c.SINGLE:
-			self.initEnemies()
+			self.initEnemies(self.level*2 + 1)
 
-		# music player
+		# Music player
 		mp = music.Music()
 		mp.playMusic(self.mode)
 
@@ -173,20 +192,30 @@ class Game:
 
 	# draws the board onto the screen
 	def drawBoard(self):
+		"""
+		Build board
+
+		Note: each level has a predefined layout
+		"""
 		for row in range(1,len(self.field.board)-1):
 			for col in range(1,len(self.field.board[row])-1):
 				image = self.field.board[row][col].image
-				# RFCT - fix the mess \/
 				position = self.field.board[row][col].image.get_rect().move((col*self.c.TILE_SIZE,row*self.c.TILE_SIZE))
 				self.blit(image, position)
 
 	def updateDisplayInfo(self):
+		"""
+		Display charater stats
+		"""
 		self.printText(self.user.score,(65,653))
 		self.printText(self.user.lives,(775,653))
 		self.printText(self.user.maxBombs,(630,653))
 		self.printText(self.user.power,(700,653))
 
 	def drawInterface(self):
+		"""
+		Build border stats graphics
+		"""
 		player  = pygame.image.load(self.c.IMAGE_PATH + "screen/player.png").convert()
 		life = pygame.image.load(self.c.IMAGE_PATH + "screen/life.png").convert()
 		bomb = pygame.image.load(self.c.IMAGE_PATH + "screen/bomb.png").convert()
@@ -201,6 +230,9 @@ class Game:
 		self.blit(life,(740,652))
 
 	def initPlayers(self):
+		"""
+		Place players
+		"""
 		if self.mode == self.c.SINGLE:
 			self.user = player.Player("Player 1","p_1_",0,(40,40))
 			self.players.append(self.user)
@@ -211,11 +243,14 @@ class Game:
 					self.user = p
 				self.blit(p.image,p.position)
 
-	def initEnemies(self):
-		# generates 5 enemies
-		for i in range(0,5):
+	def initEnemies(self, num):
+		"""
+		Generate enemies in semi-random positions around board
+		Will not spawn near player
+		"""
+		for i in range(0,num):
 			while True:
-				x = random.randint(6,self.field.width-2)*40			# randint(1,X) changed to 6 so enemies do not start near player
+				x = random.randint(6,self.field.width-2)*40
 				y = random.randint(6,self.field.height-2)*40
 
 				if self.field.getTile((x,y)).canPass() == True:
@@ -226,10 +261,15 @@ class Game:
 			self.blit(e.image, e.position)
 
 	def runGame(self):
+		"""
+		Cycling and updating of all the game states and variables
+		"""
 		clock = pygame.time.Clock()
 		pygame.time.set_timer(pygame.USEREVENT,1000)
 		pygame.time.set_timer(pygame.USEREVENT+1,500)
 		cyclicCounter = 0
+
+		#Begin game
 		self.gameIsActive = True
 		self.auto = False
 
@@ -238,9 +278,8 @@ class Game:
 			self.checkPlayerEnemyCollision()
 			self.checkWinConditions()
 
-			# feature extraction for machine learning
+			#Feature extraction for machine learning
 			grid = featureExtract.grid(self)
-		#	grid.printMatrix()
 
 			# MULTIPLAYER
 			if self.mode == self.c.MULTI:
@@ -259,10 +298,9 @@ class Game:
 				if event.type == pygame.QUIT:
 					self.forceQuit()
 				elif event.type == pygame.KEYDOWN:
-
-
-					# deploy bomb
+					#On button press
 					k = event.key
+					#Switch to computer controlled human
 					if k == pygame.K_RSHIFT:
 						self.auto = not self.auto
 					elif k == pygame.K_SPACE and not self.auto:
@@ -270,19 +308,25 @@ class Game:
 							self.sendingData = ["update","bomb",k,self.id]
 						self.deployBomb(self.user)
 					elif k == pygame.K_ESCAPE and not self.auto:
-						self.fQuit()
 
+						# Restart the game when you are running on manual mode
+						# by pressing esc"
+						print("game restarts in 1 second")
+						time.sleep(1)
+						self.restart()
 					elif (k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
 						if self.mode == self.c.MULTI:
 							self.sendingData = ["update","movement",k,self.id]
-
 						# player's move method
 						# print(k)
 						point = self.user.movement(k,grid,0) # next point
 						self.movementHelper(self.user, point)
-					elif k == pygame.K_g and not self.auto: # god mode, cheat ;)
+
+					#Cheat mode, get powerups
+					elif k == pygame.K_g and not self.auto:
 						self.user.gainPower(self.c.BOMB_UP)
 						self.user.gainPower(self.c.POWER_UP)
+
 				elif event.type == pygame.USEREVENT: # RFCT - change definition
 					self.updateBombs()
 				elif event.type == pygame.USEREVENT+1: #RFCT
@@ -292,7 +336,7 @@ class Game:
 					if self.mode == self.c.MULTI:
 						self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
 
-					# player's move method
+					# Auto player movement - validity of move
 					if self.auto:
 						point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
 						self.movementHelper(self.user, point)
@@ -301,7 +345,14 @@ class Game:
 				pygame.display.update()
 
 	def deployBomb(self,player):
-		b = player.deployBomb() # returns a bomb if available
+		"""
+		Placing of bombs based
+
+		Additional code written so machine learning can
+		recognize if it is standing on a bomb as usually player
+		overwrites bomb
+		"""
+		b = player.deployBomb() # Returns a bomb if available
 		position = (20,16)
 		left = (19,16)
 		right = (21,16)
@@ -324,11 +375,14 @@ class Game:
 	#	pygame.display.flip()
 
 	def movementHelper(self, char, point):
+		"""
+		Moves player in code
+		"""
 		nPoint = char.position.move(point)
 
 		tile = self.field.getTile(nPoint)
 
-		# also check for bomb / special power ups here
+		# Check for bomb / special power ups here
 		if tile.canPass():
 			if char.instance_of == 'player' and tile.isPowerUp():
 				char.setScore(50) # RFCT | BUG - VARIES DEPENDING ON POWER UP
@@ -345,11 +399,17 @@ class Game:
 			self.blit(t.getImage(), char.old)
 
 	def updateBombs(self):
+		"""
+		Countdown bombs, explode if needed
+		"""
 		for bomb in self.bombs:
 			if bomb.tick() == 0:
 				self.activateBomb(bomb)
 
 	def activateBomb(self,bomb):
+		"""
+		Remove bomb, kill surroundings
+		"""
 		if not bomb.triggered:
 			bomb.explode()
 			self.triggerBombChain(bomb)
@@ -363,6 +423,9 @@ class Game:
 			self.blit(explosion,bomb.position)
 
 	def triggerBombChain(self, bomb):
+		"""
+		Allow for bombs to activate other bombs
+		"""
 		if bomb == None:
 			return
 		else:
@@ -373,8 +436,8 @@ class Game:
 			self.bombHelper(bomb,'down')
 			self.checkPlayerEnemyBombCollision(bomb.position)
 
-	# ALGO NEEDS RFCT!!!
 	def bombHelper(self, bomb, direction):
+		#Runs the code behind bomb explosions
 		if direction == 'right':
 			point = (40,0)
 		elif direction == 'left':
@@ -416,17 +479,26 @@ class Game:
 				break
 
 	def clearExplosion(self):
+		"""
+		Update board accordingly to bomb's effect
+		"""
 		for point in self.resetTiles:
 			t = self.field.getTile(point)
 			self.blit(t.getImage(),point)
 			self.resetTiles.remove(point)
 
 	def resetPlayerPosition(self, player, death):
+		"""
+		Put player back in top left on death or level clear
+		"""
 		player.reset(death)
 		self.blit(player.image,player.position)
 
 	def checkPlayerEnemyBombCollision(self, position):
-		# check if player was hit by bomb
+		"""
+		Check bomb's effects against player and enemy positions and clear
+		if need be
+		"""
 		for player in self.players:
 			if player.position == position:
 				if player.loseLifeAndGameOver():
@@ -443,6 +515,9 @@ class Game:
 				self.user.setScore(100)
 
 	def checkPlayerEnemyCollision(self):
+		"""
+		Check if enemy has killed player
+		"""
 		for enemy in self.enemies:
 			if enemy.position == self.user.position:
 				# RFCT - code repetition
@@ -463,10 +538,28 @@ class Game:
 			self.gameIsActive = False
 			self.exitGame = True
 
+			print("restarting in 3 second")
+			time.sleep(1)
+			print("restarting in 2 second")
+			time.sleep(1)
+			print("restarting in 1 second")
+			time.sleep(1)
+			self.restart()
+
 	def fQuit(self):
 		self.gameIsActive = False
 		self.exitGame = True
 		self.forceQuit = True
+
+
+	def restart(self):
+		"""
+		This function forces the game to go back to its initial state
+		"""
+		self.firstRun = True
+		self.resetGame()
+		self.clearBackground()
+		self.initGame()
 
 	def printText(self,text,point):
 		font = pygame.font.Font("lucida.ttf",20)

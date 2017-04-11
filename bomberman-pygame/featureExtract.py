@@ -1,56 +1,47 @@
-"""takes in the grid and player positions
-
-Matrix Tile Code
-
-0 = VALID SPACE
-1 = WALL
-2 = BRICK
-3 = SECRET BRICK
-4 = SECRET BRICK
-
-7 = ENIMIES
-8 = PLAYERS
-9 = BOMBS
-
-
-Original Game Tile Code
-GROUND = 0
-WALL = 1
-BRICK = 2
-BOMB_UP = 3
-POWER_UP = 4
-LIFE_UP = 5
-TIME_UP = 6
-
-"""
 import config as c
 from numpy import matrix
 import featureConvert
 
-TILE_MAP = {0: 0,  # Ground -> 0()
-            1: 1,  # Ground -> 0()
-            2: 2,  # Ground -> 0()
-            3: 3,  # Ground -> 0()
-            4: 4}  # Ground -> 0()
-
 
 class grid:
+    """
+<<<<<<< HEAD
+    Identifies player, enemy, object positons from board
 
+    Matrix Tile Code
+
+    0 = VALID SPACE
+    1 = WALL
+    2 = BRICK
+    3 = SECRET BRICK
+    4 = SECRET BRICK
+    7 = ENIMIES
+    8 = PLAYERS
+    9 = BOMBS
+    """
     def __init__(self, game):
+        """
+        Thie function initlizes the attributes that represent the grid
+        from the current game instance
+        """
         self.g = game
         self.field = game.field
         self.players = game.players
         self.bombs = game.bombs
         self.enemies = game.enemies
-        self.matrix = self.initMatrix()
 
-    def initMatrix(self):
-        global TILE_MAP
+
+    @property
+    def matrix(self):
+        """
+        This property function returns the grid,
+        with all players, enimies, and bombs added
+        """
         mat = []
         for row in self.field.board:
             mat_row = []
             for tile in row:
-                mat_row.append(TILE_MAP[tile.type])
+                mat_row.append(tile.type)
             mat.append(mat_row)
         self.add_players(mat)
         self.add_enemies(mat)
@@ -58,6 +49,10 @@ class grid:
         return mat
 
     def add_bombs(self, target_matrix):
+        """
+
+        Adds bombs(represented as 9) to the target_matrix
+        """
         # bomb.position (x,y) / config.TILE_SIZE
         # update (x,y) with 9
         for bomb in self.bombs:
@@ -66,31 +61,28 @@ class grid:
             target_matrix[y][x] = 9
 
     def add_players(self, target_matrix):
-        # player.position / config.TILE_SIZE
-        # update (x,y) with 8
+        """
+        Adds players(represented as 8) to the target_matrix
+        """
         for player in self.players:
             x = int(player.position[0] / c.Config.TILE_SIZE)
             y = int(player.position[1] / c.Config.TILE_SIZE)
             target_matrix[y][x] = 8
 
     def add_enemies(self, target_matrix):
-        # player.position / config.TILE_SIZE
-        # update (x,y) with 7
+        """
+        Adds enimies(represented as 7) to the target_matrix
+        """
         for enemy in self.enemies:
             x = int(enemy.position[0] / c.Config.TILE_SIZE)
             y = int(enemy.position[1] / c.Config.TILE_SIZE)
             target_matrix[y][x] = 7
 
     def printMatrix(self):
-        return self.printPlayerView()
-        # for row in self.matrix:
-        #     s = ''
-        #     for col in row:
-        #         s += str(col)
-        #     print(s)
-        # print("\n")
-
-    def printPlayerView(self):
+        """
+        This function calls the convert grid function,
+        converts the list into a numpy matrix"
+        """
         x = self.players[0].position[0] / c.Config.TILE_SIZE
         y = self.players[0].position[1] / c.Config.TILE_SIZE
         featureConvert.convertGrid(matrix(self.matrix).transpose(), (x,y) ,21,17)
