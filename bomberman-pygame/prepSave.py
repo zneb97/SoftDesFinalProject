@@ -1,10 +1,21 @@
 import saveChoices
+from numpy import matrix
 fileNames = ['walls.csv','bricks.csv','bombs.csv']
 fieldnames = ['above','left', 'right', 'below','response']
 fileDict = {'walls.csv' : 1,'bricks.csv' : 2,'bombs.csv' : 9}
 
-def saveFiles(listPlaces, move):
-    '''this is gonna take the list of places and the move and save them to csv files for later use'''
+def saveFiles(myMat, move):
+    '''this is gonna take the array of places and the move and save them to csv files for later use'''
+    listPlaces = []
+    starty=14
+    endy=19#mymat.shape[1]
+    startx=18
+    endx=23#mymat.shape[0]
+    for i in range(starty,endy):
+	       for j in range(startx,endx):
+	              listPlaces.append(myMat.item((j,i)))
+
+
     if(len(listPlaces) == 0):
         return
     for i in range(len(fileNames)):

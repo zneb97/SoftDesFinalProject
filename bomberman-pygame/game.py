@@ -353,16 +353,10 @@ class Game:
 		overwrites bomb
 		"""
 		b = player.deployBomb() # Returns a bomb if available
-		position = (20,16)
-		left = (19,16)
-		right = (21,16)
-		up = (20,15)
-		down = (20,17)
 		x = player.position[0] / self.c.TILE_SIZE
 		y = player.position[1] / self.c.TILE_SIZE
 		myMat = featureConvert.convertGrid(matrix(player.map.matrix).transpose(), (x,y) ,21,17)
-		surroundings = [myMat.item(up),myMat.item(left),myMat.item(position),myMat.item(right),myMat.item(down)]
-		prepSave.saveFiles(surroundings,5)
+		prepSave.saveFiles(myMat,5)
 		featureConvert.printGrid(myMat)
 		if b != None:
 			tile = self.field.getTile(player.position)

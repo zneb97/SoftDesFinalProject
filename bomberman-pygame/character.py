@@ -9,7 +9,7 @@ import prepSave
 class Character(pygame.sprite.Sprite):
 	lives = 1
 	speed = 1
-	
+
 	def __init__(self, name, imageName, point):
 		"""
 		Intialize a character object, can be either human or monster
@@ -106,7 +106,6 @@ class Character(pygame.sprite.Sprite):
 					validMoves.append(moves[i])
 			key = validMoves[int(random.randrange(len(validMoves)))]
 
-		surroundings = [myMat.item(up),myMat.item(left),myMat.item(position),myMat.item(right),myMat.item(down)]
 
 		#Finalize choice
 		#Update sprite, return tile to move to to be used by movementHelper
@@ -115,30 +114,30 @@ class Character(pygame.sprite.Sprite):
 		if key == pygame.K_UP:
 			self.getImage('up')
 			if humanAuto == 0:
-				prepSave.saveFiles(surroundings,1)
+				prepSave.saveFiles(myMat,1)
 				featureConvert.printGrid(myMat)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
 			if humanAuto == 0:
-				prepSave.saveFiles(surroundings,2)
+				prepSave.saveFiles(myMat,2)
 				featureConvert.printGrid(myMat)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
 			if humanAuto == 0:
-				prepSave.saveFiles(surroundings,3)
+				prepSave.saveFiles(myMat,3)
 				featureConvert.printGrid(myMat)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
 			if humanAuto == 0:
-				prepSave.saveFiles(surroundings,4)
+				prepSave.saveFiles(myMat,4)
 				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, 0]
 		else:
 			if humanAuto == 0:
-				prepSave.saveFiles(surroundings,0)
+				prepSave.saveFiles(myMat,0)
 				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
