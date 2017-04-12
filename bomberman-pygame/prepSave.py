@@ -1,3 +1,5 @@
+# This file is unused now and can be deleted from the repository
+
 import saveChoices
 from numpy import matrix
 fileNames = ['walls.csv','bricks.csv','bombs.csv']

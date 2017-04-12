@@ -1,6 +1,7 @@
 import sys, pygame, config, random, time
-import player, enemy, board, bomb, highscore, music, featureExtract, featureConvert,prepSave
-from numpy import matrix
+import player, enemy, board, bomb, highscore, music
+import featureExtract, featureConvert, saveChoices, predictResponse
+import numpy as np
 from pygame.locals import *
 import os,sys
 sys.path.append(os.path.split(sys.path[0])[0])
@@ -172,6 +173,12 @@ class Game:
 		self.drawBoard()
 		self.drawInterface()
 		self.updateTimer()
+		self.move_dict = {0:pygame.K_BACKSPACE,
+					1:pygame.K_UP,
+					2:pygame.K_DOWN,
+					3:pygame.K_LEFT,
+					4:pygame.K_RIGHT,
+					5:pygame.K_SPACE}
 
 		# Players do not have to be reinitialized in single player after the first time
 		if self.firstRun:
@@ -338,8 +345,23 @@ class Game:
 
 					# Auto player movement - validity of move
 					if self.auto:
-						point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
-						self.movementHelper(self.user, point)
+						# point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
+						# self.movementHelper(self.user, point)
+						x = self.user.position[0] / self.c.TILE_SIZE
+						y = self.user.position[1] / self.c.TILE_SIZE
+						myMat = featureConvert.convertGrid(np.matrix(self.user.map.matrix).transpose(), (x,y) ,21,17)
+						small_mat = featureConvert.condense_matrix(myMat)
+						action_number = predictResponse.predict(small_mat)
+						print(action_number)
+						if random.randint(1,2) == 1 and action_number != 5:
+							action_number = random.randint(1,4)
+						# featureConvert.printGrid(myMat)
+						if action_number in [1,2,3,4]:
+							pred_move = self.move_dict[action_number]
+							point = self.user.movement(pred_move,grid,0)
+							self.movementHelper(self.user,point)
+						elif action_number == 5:
+							self.deployBomb(self.user)
 
 				self.updateDisplayInfo()
 				pygame.display.update()
@@ -355,8 +377,11 @@ class Game:
 		b = player.deployBomb() # Returns a bomb if available
 		x = player.position[0] / self.c.TILE_SIZE
 		y = player.position[1] / self.c.TILE_SIZE
-		myMat = featureConvert.convertGrid(matrix(player.map.matrix).transpose(), (x,y) ,21,17)
-		prepSave.saveFiles(myMat,5)
+		myMat = featureConvert.convertGrid(np.matrix(player.map.matrix).transpose(), (x,y) ,21,17)
+		small_mat = featureConvert.condense_matrix(myMat)
+		small_mat = np.concatenate((small_mat,np.array([5])))
+		print(small_mat)
+		saveChoices.addRow('surroundings.csv',small_mat)
 		featureConvert.printGrid(myMat)
 		if b != None:
 			tile = self.field.getTile(player.position)

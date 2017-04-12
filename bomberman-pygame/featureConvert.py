@@ -1,5 +1,5 @@
 
-from numpy import matrix
+import numpy as np
 
 """
 Takes in all player and objects places to create a grid. This grid is padded
@@ -18,7 +18,7 @@ def convertGrid(grid, pPos, viewX, viewY):
 	resultGridX = 2 * viewX - 1
 	resultGridY = 2 * viewY - 1
 	buckets = [ [1] * resultGridY ] * resultGridX
-	mymat = matrix(buckets)
+	mymat = np.array(buckets)
 	x = 0
 	y = 0
 	for i in range(int(grid.shape[1] - pPos[1] - 1), int(2 * grid.shape[1] - pPos[1] - 1)):
@@ -29,15 +29,21 @@ def convertGrid(grid, pPos, viewX, viewY):
 		x = 0
 	return mymat
 
+def condense_matrix(mymat):
+	# Hardcoded matrix condense algorithm, can improve in the future
+	return np.concatenate((mymat[18][14:19],mymat[19][14:19],mymat[20][14:19],mymat[21][14:19],mymat[22][14:19]), axis=0)
 
 def printGrid(mymat):
 	"""
 	Print out padded grid
 	"""
-	for i in range(0, mymat.shape[1]):
-		for j in range(0, mymat.shape[0]):
-			print(mymat.item((j,i)), end='')
-		print("    ")
+	# Print the entire matrix
+	# for i in range(0, mymat.shape[1]):
+	# 	for j in range(0, mymat.shape[0]):
+	# 		print(mymat.item((j,i)), end='')
+	# 	print("    ")
+	mat = np.concatenate(([mymat[18][14:19]],[mymat[19][14:19]],[mymat[20][14:19]],[mymat[21][14:19]],[mymat[22][14:19]]), axis=0)
+	print(mat)
 	print(" ")
 
 if __name__ == '__main__':
