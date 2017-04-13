@@ -1,6 +1,6 @@
 import sys, pygame, config, random, time
 import player, enemy, board, bomb, highscore, music
-import featureExtract, featureConvert, saveChoices, predictResponse
+import featureExtract, featureConvert, predictResponse, prepSave
 import numpy as np
 from pygame.locals import *
 import os,sys
@@ -351,7 +351,10 @@ class Game:
 						y = self.user.position[1] / self.c.TILE_SIZE
 						myMat = featureConvert.convertGrid(np.matrix(self.user.map.matrix).transpose(), (x,y) ,21,17)
 						small_mat = featureConvert.condense_matrix(myMat)
-						action_number = predictResponse.predict(small_mat)
+						bomb_mat = prepSave.convertFeature(small_mat, 9)
+						brick_mat = prepSave.convertFeature(small_mat, 2)
+						wall_mat = prepSave.convertFeature(small_mat, 1)
+						action_number = predictResponse.predict(bomb_mat, brick_mat, wall_mat)
 						print(action_number)
 						if random.randint(1,2) == 1 and action_number != 5:
 							action_number = random.randint(1,4)
@@ -379,9 +382,9 @@ class Game:
 		y = player.position[1] / self.c.TILE_SIZE
 		myMat = featureConvert.convertGrid(np.matrix(player.map.matrix).transpose(), (x,y) ,21,17)
 		small_mat = featureConvert.condense_matrix(myMat)
-		small_mat = np.concatenate((small_mat,np.array([5])))
+		# small_mat = np.concatenate((small_mat,np.array([5])))
 		print(small_mat)
-		saveChoices.addRow('surroundings.csv',small_mat)
+		prepSave.saveFiles(small_mat,5)
 		featureConvert.printGrid(myMat)
 		if b != None:
 			tile = self.field.getTile(player.position)

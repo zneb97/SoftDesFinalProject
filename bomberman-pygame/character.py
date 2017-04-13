@@ -1,7 +1,7 @@
 import pygame, config, pyautogui, random
 import config as c
 import numpy as np
-import featureExtract, featureConvert, saveChoices
+import featureExtract, featureConvert, prepSave
 
 # RFCT NEEDED
 class Character(pygame.sprite.Sprite):
@@ -113,44 +113,44 @@ class Character(pygame.sprite.Sprite):
 			self.getImage('up')
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([1])))
+				# small_mat = np.concatenate((small_mat,np.array([1])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				prepSave.saveFiles(small_mat,1)
 				featureConvert.printGrid(myMat)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([2])))
+				# small_mat = np.concatenate((small_mat,np.array([2])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				prepSave.saveFiles(small_mat,2)
 				featureConvert.printGrid(myMat)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([3])))
+				# small_mat = np.concatenate((small_mat,np.array([3])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				prepSave.saveFiles(small_mat,3)
 				featureConvert.printGrid(myMat)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([4])))
+				# small_mat = np.concatenate((small_mat,np.array([4])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				prepSave.saveFiles(small_mat,4)
 				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, 0]
 		else:
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([0])))
+				# small_mat = np.concatenate((small_mat,np.array([0])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				prepSave.saveFiles(small_mat,0)
 				featureConvert.printGrid(myMat)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
