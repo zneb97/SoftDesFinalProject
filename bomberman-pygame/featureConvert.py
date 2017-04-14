@@ -43,7 +43,7 @@ def printGrid(mymat):
 	# 		print(mymat.item((j,i)), end='')
 	# 	print("    ")
 	mat = np.concatenate(([mymat[18][14:19]],[mymat[19][14:19]],[mymat[20][14:19]],[mymat[21][14:19]],[mymat[22][14:19]]), axis=0)
-	print(mat)
+	print(mat.T)
 	print(" ")
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 import pygame, config, pyautogui, random
 import config as c
 import numpy as np
-import featureExtract, featureConvert, saveChoices
+import featureExtract, featureConvert, saveChoices, prepSave
 
 # RFCT NEEDED
 class Character(pygame.sprite.Sprite):
@@ -41,7 +41,7 @@ class Character(pygame.sprite.Sprite):
 	def update(self):
 		print("=D")
 
-	def movement(self,key, grid,humanAuto=1):
+	def movement(self,key, grid,humanAuto=1,classifier = None):
 		"""
 		Changes the sprite and issues command to movementHelper
 
@@ -62,7 +62,8 @@ class Character(pygame.sprite.Sprite):
 		#List of moves and validity. Note backspace is a placeholder for do nothing
 		moves = [pygame.K_UP,pygame.K_DOWN,pygame.K_LEFT,pygame.K_RIGHT, pygame.K_SPACE, pygame.K_BACKSPACE]
 		valid = [True, True, True, True, True, True]
-
+		if(humanAuto == 3):
+			key = moves[key-1]
 
 		#Create shifting grid
 		x = self.map.players[0].position[0] / self.c.TILE_SIZE
@@ -117,6 +118,8 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				for i in range(3):
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i),1,i)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
@@ -126,6 +129,8 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				for i in range(3):
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i),2,i)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
@@ -135,6 +140,8 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				for i in range(3):
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i),3,i)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
@@ -144,6 +151,8 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				for i in range(3):
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i),2,i)
 			return [c.TILE_SIZE, 0]
 		else:
 			if humanAuto == 0:
@@ -152,6 +161,8 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				for i in range(3):
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i),0,i)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):

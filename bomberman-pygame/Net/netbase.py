@@ -34,9 +34,11 @@ class TCPServer():
     def serve_forever(self):
         self.looping = True
         while self.looping:
+            print("THIS SHOULD KEEP GOING")
             print("addresslist: %r"%self.socketaddresses)
             input_ready,output_ready,except_ready = select.select([self.unconnected_socket]+self.connected_sockets,[],[])
             for sock in input_ready:
+                print("maybe the socket is keeping")
                 if sock == self.unconnected_socket:
                     #init socket
                     connected_socket, address = sock.accept()
@@ -47,6 +49,7 @@ class TCPServer():
                     try:
                         print("sock%r"%sock)
                         data = ReceiveData(sock)
+                        print("THIS IS THE DATA: " + str(data))
                         address = self.socketaddresses[sock]
                         self.input_func(sock,self.host,self.port,address)
                     except:
@@ -58,6 +61,7 @@ class TCPServer():
                             continue
                         self.sending_socket = sock
                         self.handle_data(data)
+        print("got out of loop?")
 
     def handle_data(self,data):
         pass

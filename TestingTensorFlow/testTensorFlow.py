@@ -9,42 +9,32 @@ import numpy as np
 import tensorflow as tf
 
 # Data sets
-IRIS_TRAINING = "walls.csv"
-# IRIS_TRAINING_URL = "http://download.tensorflow.org/data/iris_training.csv"
+WALLS_TRAINING = "walls.csv"
 
-IRIS_TEST = "wallsTest.csv"
-# IRIS_TEST_URL = "http://download.tensorflow.org/data/iris_test.csv"
+
+WALLS_TEST = "wallsTest.csv"
 
 def main():
-  # If the training and test sets aren't stored locally, download them.
-  # if not os.path.exists(IRIS_TRAINING):
-  #   raw = urllib.urlopen(IRIS_TRAINING_URL).read()
-  #   with open(IRIS_TRAINING, "w") as f:
-  #     f.write(raw)
-  #
-  # if not os.path.exists(IRIS_TEST):
-  #   raw = urllib.urlopen(IRIS_TEST_URL).read()
-  #   with open(IRIS_TEST, "w") as f:
-  #     f.write(raw)
+
 
   # Load datasets.
   training_set = tf.contrib.learn.datasets.base.load_csv_with_header(
-      filename=IRIS_TRAINING,
+      filename=WALLS_TRAINING,
       target_dtype=np.int,
       features_dtype=np.int)
   test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
-      filename=IRIS_TEST,
+      filename=WALLS_TEST,
       target_dtype=np.int,
       features_dtype=np.int)
 
   # Specify that all features have real-value data
-  feature_columns = [tf.contrib.layers.real_valued_column("", dimension=5)]
+  feature_columns = [tf.contrib.layers.real_valued_column("", dimension=25)]
 
   # Build 3 layer DNN with 10, 20, 10 units respectively.
   classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                               hidden_units=[10, 20, 10],
                                               n_classes=6,
-                                              model_dir="/tmp/iris_model")
+                                              model_dir="./MODEL")
   # Define the training inputs
   def get_train_inputs():
     x = tf.constant(training_set.data)
@@ -61,24 +51,25 @@ def main():
     y = tf.constant(test_set.target)
 
     return x, y
-
   # Evaluate accuracy.
   accuracy_score = classifier.evaluate(input_fn=get_test_inputs,
                                        steps=1)["accuracy"]
-
   print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 
   # Classify two new flower samples.
-  # def new_samples():
-  #   return np.array(
-  #     [[6.4, 3.2, 4.5, 1.5],
-  #      [5.8, 3.1, 5.0, 1.7]], dtype=np.float32)
-  #
-  # predictions = list(classifier.predict(input_fn=new_samples))
+  def new_samples():
 
-  # print(
-  #     "New Samples, Class Predictions:    {}\n"
-  #     .format(predictions))
+    return np.array(
+      [[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1],
+      [1,1,1,1,1,1,1,0,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1],
+      [1,1,1,1,1,1,1,1,1,1,0,1,0,0,1,0,1,1,1,1,0,0,1,0,1],
+      [1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,0,1,0,1,1,0,0,1,0,1]], dtype=np.float32)
+
+  predictions = list(classifier.predict(input_fn=new_samples))
+
+  print(
+      "New Samples, Class Predictions:    {}\n"
+      .format(predictions))
 
 if __name__ == "__main__":
     main()

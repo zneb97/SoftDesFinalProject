@@ -72,6 +72,7 @@ def main():
 	# server_address = ()
 	# print >>sys.stderr, 'starting up on %s port %s' % server_address
 	# server.connect('gsteelman-Latitude-E5470', 6317)
+	print("before serve forever")
 	server.serve_forever()
 	server.quit()
 
