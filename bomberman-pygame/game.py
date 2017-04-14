@@ -1,6 +1,6 @@
 import sys, pygame, config, random, time
 import player, enemy, board, bomb, highscore, music
-import featureExtract, featureConvert, saveChoices, predictResponse
+import featureExtract, featureConvert, saveChoices, predictResponse, prepSave
 import numpy as np
 from pygame.locals import *
 import os,sys
@@ -383,6 +383,7 @@ class Game:
 		print(small_mat)
 		saveChoices.addRow('surroundings.csv',small_mat)
 		featureConvert.printGrid(myMat)
+		prepSave.saveFiles(myMat,5)
 		if b != None:
 			tile = self.field.getTile(player.position)
 			tile.bomb = b

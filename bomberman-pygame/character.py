@@ -1,7 +1,7 @@
 import pygame, config, pyautogui, random
 import config as c
 import numpy as np
-import featureExtract, featureConvert, saveChoices
+import featureExtract, featureConvert, saveChoices, prepSave
 
 # RFCT NEEDED
 class Character(pygame.sprite.Sprite):
@@ -117,6 +117,7 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				prepSave.saveFiles(myMat,1)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
@@ -126,6 +127,7 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				prepSave.saveFiles(myMat,2)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
@@ -135,6 +137,7 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				prepSave.saveFiles(myMat,3)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
@@ -144,6 +147,7 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				prepSave.saveFiles(myMat,4)
 			return [c.TILE_SIZE, 0]
 		else:
 			if humanAuto == 0:
@@ -152,6 +156,7 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
+				prepSave.saveFiles(myMat,4)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):

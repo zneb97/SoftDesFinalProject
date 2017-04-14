@@ -16,7 +16,7 @@ def predict(input_mat):
     sess = tf.InteractiveSession()
 
     # Load saved training model
-    new_saver = tf.train.import_meta_graph('./surroundings.meta')
+    new_saver = tf.train.import_meta_graph('./walls.meta')
     new_saver.restore(sess,tf.train.latest_checkpoint('./'))
 
     # Load variables from trained model
@@ -31,4 +31,4 @@ def predict(input_mat):
     print(action)
     return action
 if __name__ == "__main__":
-    predict([1,1,1,1,1,1,1,1,1,1,0,0,9,2,2,0,1,0,1,2,0,9,2,0,2])
+    predict([1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,0,1,1,0,0,1,0,1])

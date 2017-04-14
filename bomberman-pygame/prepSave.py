@@ -2,6 +2,7 @@
 
 import saveChoices
 from numpy import matrix
+import NNTest.predictSplit as predictSplit
 fileNames = ['walls.csv','bricks.csv','bombs.csv']
 fieldnames = ['above','left', 'right', 'below','response']
 fileDict = {'walls.csv' : 1,'bricks.csv' : 2,'bombs.csv' : 9}
@@ -18,6 +19,7 @@ def saveFiles(myMat, move):
 	              listPlaces.append(myMat.item((j,i)))
 
 
+
     if(len(listPlaces) == 0):
         return
     for i in range(len(fileNames)):
@@ -26,7 +28,11 @@ def saveFiles(myMat, move):
         for j in range(len(listPlaces)):
             if(listPlaces[j] == fileDict[fileNames[i]]):
                 tempList.append(1)
+            elif(fileNames[i]=='walls.csv' and listPlaces[j] == 2):
+                tempList.append(1)
             else:
                 tempList.append(0)
+        if(fileNames[i]=='walls.csv'):
+            predictSplit.predict(tempList)
         tempList.append(move)
         saveChoices.addRow(fileNames[i],tempList)
