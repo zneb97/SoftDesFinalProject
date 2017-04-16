@@ -282,9 +282,9 @@ class Game:
 		self.auto = False
 		classx = NNClass.myClassifier('realFakeWalls.csv', "./WALLSCONFIG")
 		classx.trainModel(0)
-		classy = NNClass.myClassifier('realFakeBombs.csv', "./BOMBSCONFIG")
+		classy = NNClass.myClassifier('realFakeBricks.csv', "./BRICKSCONFIG")
 		classy.trainModel(0)
-		classz = NNClass.myClassifier('realFakeBricks.csv', "./BRICKSCONFIG")
+		classz = NNClass.myClassifier('realFakeBombs.csv', "./BOMBSCONFIG")
 		classz.trainModel(0)
 		while self.gameIsActive:
 			clock.tick(self.c.FPS)
@@ -361,13 +361,21 @@ class Game:
 						# small_mat = featureConvert.condense_matrix(myMat)
 						# action_number = predictResponse.predict(small_mat)
 						# # print(action_number)
-
-						action_number1 = classx.predict([prepSave.convertFiles(myMat,1)])
-						action_number2 = classy.predict([prepSave.convertFiles(myMat,1)])
-						action_number3 = classz.predict([prepSave.convertFiles(myMat,1)])
 						action_tot = []
-						for i in range(len(action_number1)):
-							action_tot.append((action_number1[i] + action_number2[i] + action_number3[i])/3)
+						converted, info = prepSave.convertFiles(myMat,0)
+						action_number1 = classx.predict([converted])
+						converted, info = prepSave.convertFiles(myMat,1)
+						action_number2 = classy.predict([converted])
+						converted, info = prepSave.convertFiles(myMat,2)
+						if(info[0] == 1):
+							action_number3 = classz.predict([converted])
+							for i in range(len(action_number1)):
+								action_tot.append((action_number1[i] + action_number3[i])/2)
+							print("BOMB---------------------")
+						else:
+							for i in range(len(action_number1)):
+								action_tot.append((action_number1[i] + action_number2[i])/2)
+
 						action_tot[0] += 1 - sum(action_tot)
 						print(action_tot)
 						action_number = np.random.choice(np.arange(0, 6), p=action_tot)
@@ -403,7 +411,7 @@ class Game:
 		saveChoices.addRow('surroundings.csv',small_mat)
 		featureConvert.printGrid(myMat)
 		for i in range(3):
-			prepSave.saveFiles(prepSave.convertFiles(myMat,i),5,i)
+			prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],5,i)
 		if b != None:
 			tile = self.field.getTile(player.position)
 			tile.bomb = b

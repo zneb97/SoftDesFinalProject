@@ -14,9 +14,12 @@ def convertFiles(myMat, x):
     endy=19#mymat.shape[1]
     startx=18
     endx=23#mymat.shape[0]
+    info = [0]
     for i in range(starty,endy):
-	       for j in range(startx,endx):
-	              listPlaces.append(myMat.item((j,i)))
+        for j in range(startx,endx):
+            listPlaces.append(myMat.item((j,i)))
+            if myMat.item((j,i)) == 9:
+                info[0] = 1
 
 
 
@@ -34,7 +37,7 @@ def convertFiles(myMat, x):
             tempList.append(0)
     # if(fileNames[i]=='walls.csv'):
     #     classifier.predict([tempList])
-    return tempList
+    return tempList,info
 
 def saveFiles(tempList, move, i):
     tempList.append(move)

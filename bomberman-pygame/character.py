@@ -119,7 +119,7 @@ class Character(pygame.sprite.Sprite):
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i),1,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],1,i)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
@@ -130,7 +130,7 @@ class Character(pygame.sprite.Sprite):
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i),2,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],2,i)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
@@ -141,7 +141,7 @@ class Character(pygame.sprite.Sprite):
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i),3,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],3,i)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
@@ -152,7 +152,7 @@ class Character(pygame.sprite.Sprite):
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i),2,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],2,i)
 			return [c.TILE_SIZE, 0]
 		else:
 			if humanAuto == 0:
@@ -162,7 +162,7 @@ class Character(pygame.sprite.Sprite):
 				saveChoices.addRow('surroundings.csv',small_mat)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i),0,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],0,i)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):
