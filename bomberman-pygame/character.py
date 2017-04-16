@@ -41,7 +41,7 @@ class Character(pygame.sprite.Sprite):
 	def update(self):
 		print("=D")
 
-	def movement(self,key, grid,humanAuto=1,classifier = None):
+	def movement(self,key, grid,humanAuto=1):
 		"""
 		Changes the sprite and issues command to movementHelper
 

@@ -49,14 +49,19 @@ class myClassifier:
         print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 
     def predict(self, myInput):
-        prediction = list(self.classifier.predict(input_fn=lambda: my_input_fn(myInput)))
-        print(
-              "New Samples, Class Predictions:    {}\n"
-              .format(prediction))
-        return prediction
+        prediction = list(self.classifier.predict_proba(input_fn=lambda: my_input_fn(myInput)))
+        # print(
+        #       "New Samples, Class Predictions:    {}\n"
+        #       .format(prediction))
+        # return np.random.choice(np.arange(0, 6), p=prediction[0])
+        return prediction[0]
 
 if __name__ == "__main__":
-    classx = myClassifier('walls.csv', "./WALLSCONFIG")
-    classx.trainModel(2000)
+    # classx = myClassifier('walls.csv', "./WALLSCONFIG")
+    # classx.trainModel(2000)
+    # classy = myClassifier('bombs.csv', "./BOMBSCONFIG")
+    # classy.trainModel(2000)
+    classz = myClassifier('bricks.csv', "./BRICKSCONFIG")
+    classz.trainModel(2000)
     # classx.testAccuracy('wallsTest.csv')
-    classx.predict([[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1]])
+    # classx.predict([[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1]])

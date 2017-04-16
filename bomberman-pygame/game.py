@@ -280,8 +280,12 @@ class Game:
 		#Begin game
 		self.gameIsActive = True
 		self.auto = False
-		classx = NNClass.myClassifier('walls.csv', "./WALLSCONFIG")
+		classx = NNClass.myClassifier('realFakeWalls.csv', "./WALLSCONFIG")
 		classx.trainModel(0)
+		classy = NNClass.myClassifier('realFakeBombs.csv', "./BOMBSCONFIG")
+		classy.trainModel(0)
+		classz = NNClass.myClassifier('realFakeBricks.csv', "./BRICKSCONFIG")
+		classz.trainModel(0)
 		while self.gameIsActive:
 			clock.tick(self.c.FPS)
 			self.checkPlayerEnemyCollision()
@@ -328,7 +332,7 @@ class Game:
 							self.sendingData = ["update","movement",k,self.id]
 						# player's move method
 						# print(k)
-						point = self.user.movement(k,grid,0,classx) # next point
+						point = self.user.movement(k,grid,0) # next point
 						self.movementHelper(self.user, point)
 
 					#Cheat mode, get powerups
@@ -358,14 +362,22 @@ class Game:
 						# action_number = predictResponse.predict(small_mat)
 						# # print(action_number)
 
-						action_number = classx.predict([prepSave.convertFiles(myMat,1)])[0]
+						action_number1 = classx.predict([prepSave.convertFiles(myMat,1)])
+						action_number2 = classy.predict([prepSave.convertFiles(myMat,1)])
+						action_number3 = classz.predict([prepSave.convertFiles(myMat,1)])
+						action_tot = []
+						for i in range(len(action_number1)):
+							action_tot.append((action_number1[i] + action_number2[i] + action_number3[i])/3)
+						action_tot[0] += 1 - sum(action_tot)
+						print(action_tot)
+						action_number = np.random.choice(np.arange(0, 6), p=action_tot)
 						print(action_number)
 						# if random.randint(1,2) == 1 and action_number != 5:
 						# 	action_number = random.randint(1,4)
 						# featureConvert.printGrid(myMat)
 						if action_number in [1,2,3,4]:
 							pred_move = self.move_dict[action_number]
-							point = self.user.movement(pred_move,grid,0)
+							point = self.user.movement(pred_move,grid,2)
 							self.movementHelper(self.user,point)
 						elif action_number == 5:
 							self.deployBomb(self.user)
