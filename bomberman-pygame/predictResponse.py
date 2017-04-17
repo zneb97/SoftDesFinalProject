@@ -34,6 +34,7 @@ def predict(bomb_mat, brick_mat, wall_mat):
     # Find and return the action to take
     response_list = sess.run(y,feed_dict={x1: [bomb_mat], x2: [brick_mat], x3: [wall_mat]})
     action = np.argmax(response_list[0])
+    print(action)
     return action
 if __name__ == "__main__":
     print("Hello")

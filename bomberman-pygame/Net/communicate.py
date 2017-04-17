@@ -5,9 +5,9 @@ import zlib
 
 def EncodeData(data,compress):
     print(data)
-    data = pickle.dumps(data)
-    if compress != False:
-        data = zlib.compress(data,compress)
+    data = data.encode("utf-8")
+    # if compress != False:
+    #     data = zlib.compress(data,compress)
     print(str(data) + "sending data")
     length = str(len(data))
     length = ("0"*(8-len(length)))+length
