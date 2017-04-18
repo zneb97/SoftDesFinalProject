@@ -19,7 +19,6 @@ We took this project on as we all love video games and all took an interest in m
 
 
 Base game code written by Github user <a href="https://github.com/rickyc/bomberman-pygame">rickyc.</a><br>
-<br>
 
 ## License<br>
 MIT License
