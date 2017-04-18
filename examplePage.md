@@ -2,15 +2,15 @@
 title: Example
 layout: template
 filename: examplePage
---- 
+---
 # The Bot in Use
 
 ## Progress
-The bot was able to...
+Currently the bot's primary directive is to survive and increase its score through destroying bricks. While it always has the potential to place a bomb, this becomes much more likely the more bricks there are around it. Once placed, it will actively avoid its own bombs. It currently has no recognition of nor directive to kill enemies.
 
 
 ## Video
-
-<center>
+Coming soon!
+<!-- <center>
   <iframe width="420" height="315" src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-</center>
+</center> -->
