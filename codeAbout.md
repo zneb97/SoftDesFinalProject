@@ -9,7 +9,7 @@ Our code is broken up into two main components, the feature extraction code and 
 ## Feature Extraction
 Using the pygame's board object which uses a more basic numbering system for each kind of tile, we created our own grid object with better values for distinguishing all possible tiles and what may be located on the title.
 
-In addition to this, we pad the newly created grid with zeros while shifting it relative to the player's movement, allowing us to always keep the player (designated by the number 8 in our grid), in the same spot in the matrix. This greatly cuts down on the computation needed. Rather the spend O(n^2^) searching the entire matrix for the only 8, it only takes O(1). This allows us to get the surrounding tiles just as fast, which are the features we feed into the neural net.
+In addition to this, we pad the newly created grid with zeros while shifting it relative to the player's movement, allowing us to always keep the player (designated by the number 8 in our grid), in the same spot in the matrix. This greatly cuts down on the computation needed. Rather the spend O(n<sup>2</sup>) searching the entire matrix for the only 8, it only takes O(1). This allows us to get the surrounding tiles just as fast, which are the features we feed into the neural net.
 
 ## Neural Net
 To implement the neural net, we used the open source and widely used TensorFlow library, allowing us to pass in the extracted features, which are then considered and combined to weight the six possible commands and ultimately chose one for the Bomberman to perform.
