@@ -2,15 +2,23 @@
 title: The Code
 layout: template
 filename: codeAbout
---- 
+---
 # Code Architecture
-Our code is broken up into two main components, the feature extraction code, implemented directly into the base pygame code, and the neural net, which reads from and makes decisions outside of the game.
+Our code is broken up into two main components, the feature extraction code and the neural net, which reads from and makes decisions from the data of the feature extraction. Both of these are implemented directly into the base pygame code, allowing us to avoid the problem threading and quickly interact with features.
 
 ## Feature Extraction
-Shifti
+Using the pygame's board object which uses a more basic numbering system for each kind of tile, we created our own grid object with better values for distinguishing all possible tiles and what may be located on the title.
+
+In addition to this
 
 ## Neural Net
-To implement the neural net, we used the open source and widely used TensorFlow library, allowing us to pass in the extracted features, which are then considered and combined to weight the six possible commands and ultimately chose one for the bomberman to perform.
+To implement the neural net, we used the open source and widely used TensorFlow library, allowing us to pass in the extracted features, which are then considered and combined to weight the six possible commands and ultimately chose one for the Bomberman to perform.
+
+Based on the way we implemented the neural net, the computer currently
+has the primary objective of surviving. In the future we hope to change this instead
+to clear levels.
+
+Based on the titles around it, the Net always keeps track of what decisions in can make, whose probabilities are influenced by three categories: bricks, bombs, and enemies. The weight, or how much influence each of these categories has on the final decision varies based on the scenario. For example. when a bomb is nearby, movements to protect the Bomberman become more important than destroying bricks.
 
 
 ![UML Diagram](https://raw.githubusercontent.com/ "UML Diagram")
