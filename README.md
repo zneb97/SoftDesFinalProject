@@ -3,7 +3,7 @@
 ## Project Description<br>
 A bomberman bot that learns through machine learning. Using a combination of hardcoded AI, playing against humans, and Tensor Flow, the computer learns to better clear levels the more it plays. <br>
 
-To learn more, visit the <a href="https://zneb97.github.io/SoftDesFinalProject/">Bomberman Bot</a><br>
+To learn more, visit the <a href="https://zneb97.github.io/SoftDesFinalProject/">project website</a>.<br>
 
 A final project Franklin W. Olin College of Engineering's Software Design Spring 2017 class.<br>
 
