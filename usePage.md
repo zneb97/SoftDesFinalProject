@@ -2,18 +2,31 @@
 title: Use
 layout: template
 filename: usePage
---- 
+---
 # Getting Started
 
 ## Dependencies
-Install
+Before starting, ensure you have the follow installed:
+* Pygame
+* Numpy
+* TensorFlow
 
 ## Setup
 Install
 
 ## Run
-Use command
+In terminal, use the commands
 
-## Primary Functions
+```shell
+$ SoftDesFinalProject/bomberman-pygame
+$ python3 main.py
+```
 
--Movement (character.py)
+to run the game. Click on single player to begin the game. You will start off controlling the bomberman. To switch into the bot controlled version, press RIGHT-SHIFT. Press it again to switch back.
+
+## Primary Functions and Classes
+Grid
+Feature Extraction
+Feature Converter
+
+movement() (character.py)
