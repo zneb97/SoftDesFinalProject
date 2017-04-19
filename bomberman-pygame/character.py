@@ -113,11 +113,11 @@ class Character(pygame.sprite.Sprite):
 		if key == pygame.K_UP:
 			self.getImage('up')
 			if humanAuto == 0:
-				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([1])))
-				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
-				featureConvert.printGrid(myMat)
+				# small_mat = featureConvert.condense_matrix(myMat)
+				# small_mat = np.concatenate((small_mat,np.array([1])))
+				# print(small_mat)
+				# saveChoices.addRow('surroundings.csv',small_mat)
+				# featureConvert.printGrid(myMat)
 				for i in range(3):
 					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],1,i)
 			return [0, -1*c.TILE_SIZE]

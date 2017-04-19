@@ -3,17 +3,17 @@
 import saveChoices
 from numpy import matrix
 import NNTest.predictSplit as predictSplit
-fileNames = ['walls.csv','bricks.csv','bombs.csv']
+fileNames = ['wallsFULL.csv','bricksFULL.csv','bombsFULL.csv']
 fieldnames = ['above','left', 'right', 'below','response']
-fileDict = {'walls.csv' : 1,'bricks.csv' : 2,'bombs.csv' : 9}
+fileDict = {'wallsFULL.csv' : 1,'bricksFULL.csv' : 2,'bombsFULL.csv' : 9}
 
 def convertFiles(myMat, x):
     '''this is gonna take the array of places and the move and save them to csv files for later use'''
     listPlaces = []
-    starty=14
-    endy=19#mymat.shape[1]
-    startx=18
-    endx=23#mymat.shape[0]
+    starty=0
+    endy=myMat.shape[1]
+    startx=0
+    endx=myMat.shape[0]
     info = [0]
     for i in range(starty,endy):
         for j in range(startx,endx):
@@ -31,7 +31,7 @@ def convertFiles(myMat, x):
     for j in range(len(listPlaces)):
         if(listPlaces[j] == fileDict[fileNames[x]]):
             tempList.append(1)
-        elif(fileNames[x]=='walls.csv' and listPlaces[j] == 2):
+        elif(fileNames[x]=='wallsFULL.csv' and listPlaces[j] == 2):
             tempList.append(1)
         else:
             tempList.append(0)

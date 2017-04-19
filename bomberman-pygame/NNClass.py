@@ -57,11 +57,11 @@ class myClassifier:
         return prediction[0]
 
 if __name__ == "__main__":
-    # classx = myClassifier('walls.csv', "./WALLSCONFIG")
-    # classx.trainModel(2000)
-    # classy = myClassifier('bombs.csv', "./BOMBSCONFIG")
-    # classy.trainModel(2000)
-    classz = myClassifier('bricks.csv', "./BRICKSCONFIG")
-    classz.trainModel(2000)
+    classx = myClassifier('wallsFULL.csv', "./WALLSCONFIGFULL")
+    classx.trainModel(2000)
+    classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
+    classy.trainModel(2000)
+    classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
+    # classz.trainModel(2000)
     # classx.testAccuracy('wallsTest.csv')
     # classx.predict([[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1]])
