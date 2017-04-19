@@ -12,7 +12,7 @@ Before starting, ensure you have the follow installed:
 * TensorFlow
 
 ## Setup
-Install
+Download the game by either
 
 ## Run
 In terminal, use the commands
@@ -26,7 +26,9 @@ to run the game. Click on single player to begin the game. You will start off co
 
 ## Primary Functions and Classes
 Grid
+
 Feature Extraction
+
 Feature Converter
 
 movement() (character.py)
