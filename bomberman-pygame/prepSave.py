@@ -1,5 +1,3 @@
-# This file is unused now and can be deleted from the repository
-
 import saveChoices
 from numpy import matrix
 import NNTest.predictSplit as predictSplit

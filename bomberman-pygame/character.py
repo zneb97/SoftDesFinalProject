@@ -1,7 +1,7 @@
 import pygame, config, pyautogui, random
 import config as c
 import numpy as np
-import featureExtract, featureConvert, saveChoices, prepSave
+import featureExtract, featureConvert, prepSave
 
 # RFCT NEEDED
 class Character(pygame.sprite.Sprite):
@@ -118,6 +118,11 @@ class Character(pygame.sprite.Sprite):
 				# print(small_mat)
 				# saveChoices.addRow('surroundings.csv',small_mat)
 				# featureConvert.printGrid(myMat)
+				small_mat = featureConvert.condense_matrix(myMat)
+				# small_mat = np.concatenate((small_mat,np.array([1])))
+				print(small_mat)
+				# prepSave.saveFiles(small_mat,1)
+				featureConvert.printGrid(myMat)
 				for i in range(3):
 					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],1,i)
 			return [0, -1*c.TILE_SIZE]
@@ -125,9 +130,9 @@ class Character(pygame.sprite.Sprite):
 			self.getImage('down')
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([2])))
+				# small_mat = np.concatenate((small_mat,np.array([2])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				# prepSave.saveFiles(small_mat,2)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
 					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],2,i)
@@ -136,9 +141,9 @@ class Character(pygame.sprite.Sprite):
 			self.getImage('left')
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([3])))
+				# small_mat = np.concatenate((small_mat,np.array([3])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				# prepSave.saveFiles(small_mat,3)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
 					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],3,i)
@@ -147,9 +152,9 @@ class Character(pygame.sprite.Sprite):
 			self.getImage('right')
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([4])))
+				# small_mat = np.concatenate((small_mat,np.array([4])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				# prepSave.saveFiles(small_mat,4)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
 					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],2,i)
@@ -157,9 +162,9 @@ class Character(pygame.sprite.Sprite):
 		else:
 			if humanAuto == 0:
 				small_mat = featureConvert.condense_matrix(myMat)
-				small_mat = np.concatenate((small_mat,np.array([0])))
+				# small_mat = np.concatenate((small_mat,np.array([0])))
 				print(small_mat)
-				saveChoices.addRow('surroundings.csv',small_mat)
+				# prepSave.saveFiles(small_mat,0)
 				featureConvert.printGrid(myMat)
 				for i in range(3):
 					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],0,i)

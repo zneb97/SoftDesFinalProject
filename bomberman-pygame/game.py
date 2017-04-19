@@ -1,6 +1,6 @@
 import sys, pygame, config, random, time
 import player, enemy, board, bomb, highscore, music
-import featureExtract, featureConvert, saveChoices, predictResponse, prepSave
+import featureExtract, featureConvert, predictResponse, prepSave
 import numpy as np
 from pygame.locals import *
 import os,sys
@@ -406,9 +406,9 @@ class Game:
 		y = player.position[1] / self.c.TILE_SIZE
 		myMat = featureConvert.convertGrid(np.matrix(player.map.matrix).transpose(), (x,y) ,21,17)
 		small_mat = featureConvert.condense_matrix(myMat)
-		small_mat = np.concatenate((small_mat,np.array([5])))
+		# small_mat = np.concatenate((small_mat,np.array([5])))
 		print(small_mat)
-		saveChoices.addRow('surroundings.csv',small_mat)
+		# prepSave.saveFiles(small_mat,5)
 		featureConvert.printGrid(myMat)
 		for i in range(3):
 			prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],5,i)
