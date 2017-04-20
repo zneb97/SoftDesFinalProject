@@ -17,6 +17,7 @@ We took this project on as we all love video games and all took an interest in m
 <a href="https://github.com/CleanestMink126">Nick Steelman</a><br>
 <a href="https://github.com/SeunginLyu">Seungin Lyu</a><br>
 <a href="https://github.com/yjiang0929">Yichen Jiang</a><br>
+All of us were first years at Franklin W. Olin College of Engineering at the time of this project's start and end.
 
 
 Base game code written by Github user <a href="https://github.com/rickyc/bomberman-pygame">rickyc.</a><br>
