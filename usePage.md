@@ -12,7 +12,7 @@ Before starting, ensure you have the follow installed:
 * TensorFlow
 
 ## Setup
-Download the game by either
+Download the game by either cloning the repo or downloading the ZIP file.
 
 ## Run
 In terminal, use the commands
