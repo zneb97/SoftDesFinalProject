@@ -14,7 +14,7 @@ class Player(character.Character):
 		self.c = config.Config()
 		self.id = id
 		self.instance_of = 'player'
-	
+
 	# reset all stats if death is true
 	def reset(self,death):
 		character.Character.reset(self,True)
@@ -36,7 +36,7 @@ class Player(character.Character):
 			self.maxBombs += 1
 		elif power == self.c.POWER_UP:
 			self.power += 1
-	
+
 	def setScore(self,score):
 		self.score += score
 		if self.score < 0:
