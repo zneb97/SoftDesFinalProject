@@ -280,11 +280,17 @@ class Game:
 		#Begin game
 		self.gameIsActive = True
 		self.auto = False
-		classx = NNClass.myClassifier('realFakeWalls.csv', "./WALLSCONFIG")
+		# classx = NNClass.myClassifier('realFakeWalls.csv', "./WALLSCONFIG")
+		# classx.trainModel(0)
+		# classy = NNClass.myClassifier('realFakeBricks.csv', "./BRICKSCONFIG")
+		# classy.trainModel(0)
+		# classz = NNClass.myClassifier('realFakeBombs.csv', "./BOMBSCONFIG")
+		# classz.trainModel(0)
+		classx = NNClass.myClassifier('fakeWallsFull.csv', "./WALLSCONFIGFULL")
 		classx.trainModel(0)
-		classy = NNClass.myClassifier('realFakeBricks.csv', "./BRICKSCONFIG")
+		classy = NNClass.myClassifier('fakeBricksFull.csv', "./BRICKSCONFIGFULL")
 		classy.trainModel(0)
-		classz = NNClass.myClassifier('realFakeBombs.csv', "./BOMBSCONFIG")
+		classz = NNClass.myClassifier('fakeBombsFull.csv', "./BOMBSCONFIGFULL")
 		classz.trainModel(0)
 		while self.gameIsActive:
 			clock.tick(self.c.FPS)
@@ -376,7 +382,7 @@ class Game:
 							for i in range(len(action_number1)):
 								action_tot.append((action_number1[i] + action_number2[i])/2)
 
-						action_tot[0] += 1 - sum(action_tot)
+						action_tot[1] += 1 - sum(action_tot)
 						print(action_tot)
 						action_number = np.random.choice(np.arange(0, 6), p=action_tot)
 						print(action_number)
