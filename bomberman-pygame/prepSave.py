@@ -2,16 +2,17 @@ import saveChoices
 from numpy import matrix
 import NNTest.predictSplit as predictSplit
 fileNames = ['wallsFULL.csv','bricksFULL.csv','bombsFULL.csv']
-fieldnames = ['above','left', 'right', 'below','response']
+# fieldnames = ['above','left', 'right', 'below','response']
 fileDict = {'wallsFULL.csv' : 1,'bricksFULL.csv' : 2,'bombsFULL.csv' : 9}
 
 def convertFiles(myMat, x):
     '''this is gonna take the array of places and the move and save them to csv files for later use'''
     listPlaces = []
-    starty=0
-    endy=myMat.shape[1]
-    startx=0
-    endx=myMat.shape[0]
+    position = (20,16)
+    starty=12
+    endy= 21#myMat.shape[1]
+    startx=16
+    endx=25#myMat.shape[0]
     info = [0]
     for i in range(starty,endy):
         for j in range(startx,endx):
