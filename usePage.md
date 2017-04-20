@@ -10,6 +10,7 @@ Before starting, ensure you have the follow installed:
 * Pygame
 * Numpy
 * TensorFlow
+Follow this link to install tensorflow:https://www.tensorflow.org/install/
 
 ## Setup
 Download the game by either cloning the repo or downloading the ZIP file.
