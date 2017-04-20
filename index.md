@@ -8,7 +8,7 @@ Our Bomberman Bot is a neural net taught program that plays the classic arcade g
 
 We took this project on as we all love video games and all took an interest in machine learning. Being most of our team members' first venture into machine learning, we wanted to tackle a project we all knew we'd be invested in.
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+<img src="bm.png" alt="Bomber" style="width:600px;height:600px;">
 
 
 ## Authors<br>
@@ -17,6 +17,7 @@ We took this project on as we all love video games and all took an interest in m
 <a href="https://github.com/CleanestMink126">Nick Steelman</a><br>
 <a href="https://github.com/SeunginLyu">Seungin Lyu</a><br>
 <a href="https://github.com/yjiang0929">Yichen Jiang</a><br>
+All of us were first years at Franklin W. Olin College of Engineering at the time of this project's start and end.
 
 
 Base game code written by Github user <a href="https://github.com/rickyc/bomberman-pygame">rickyc.</a><br>
