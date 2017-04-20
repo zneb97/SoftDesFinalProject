@@ -21,7 +21,7 @@ We took this project on as we all love video games and all took an interest in m
 
 Base game code written by Github user <a href="https://github.com/rickyc/bomberman-pygame">rickyc.</a><br>
 
-##Project Reviews and Work<br>
+## Project Reviews and Work<br>
 
 Project proposal can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/ProjectProposal.md">here.</a><br>
 Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/ArchitecturalReview.md">here.</a>
