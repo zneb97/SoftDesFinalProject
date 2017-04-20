@@ -25,11 +25,9 @@ $ python3 main.py
 
 to run the game. Click on single player to begin the game. You will start off controlling the bomberman. To switch into the bot controlled version, press RIGHT-SHIFT. Press it again to switch back.
 
-## Primary Functions and Classes
-Grid
+## Primary Code Modules
+Game Loop (Display and Controls)
 
 Feature Extraction
 
-Feature Converter
-
-movement() (character.py)
+Neural Network Training and Prediction
