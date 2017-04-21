@@ -1,6 +1,6 @@
 import sys, pygame, config, random, time
 import player, enemy, board, bomb, highscore, music
-import featureExtract, featureConvert, predictResponse, prepSave
+import featureExtract, featureConvert, prepSave
 import numpy as np
 from pygame.locals import *
 import os,sys

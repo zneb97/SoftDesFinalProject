@@ -6,15 +6,15 @@ class Player(character.Character):
 	score = 0
 	currentBomb = 1
 	maxBombs = 1
-	power = 1			# bomb power
-	speed = 1			# player movement speed
+	power = 1		# bomb power
+	speed = 1		# player movement speed
 
 	def __init__(self, name, imageName, id, point):
 		character.Character.__init__(self, name, "players/"+imageName, point)
 		self.c = config.Config()
 		self.id = id
 		self.instance_of = 'player'
-	
+
 	# reset all stats if death is true
 	def reset(self,death):
 		character.Character.reset(self,True)
@@ -36,7 +36,7 @@ class Player(character.Character):
 			self.maxBombs += 1
 		elif power == self.c.POWER_UP:
 			self.power += 1
-	
+
 	def setScore(self,score):
 		self.score += score
 		if self.score < 0:
