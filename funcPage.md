@@ -7,7 +7,8 @@ filename: funcPage
 
 ## Grid Class (featureExtract.py)
 
-## convertGrid(grid, pPos, viewX, viewY)
+## convertGrid(grid, pPos, viewX, viewY) (featureConvert.py)
 
+## movement() (character.py)
 
-movement() (character.py)
+## runGame(self) (game.py)
