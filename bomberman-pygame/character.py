@@ -4,6 +4,7 @@ import numpy as np
 import featureExtract, featureConvert, prepSave
 
 # RFCT NEEDED
+
 class Character(pygame.sprite.Sprite):
 	lives = 1
 	speed = 1
@@ -118,61 +119,46 @@ class Character(pygame.sprite.Sprite):
 				# print(small_mat)
 				# saveChoices.addRow('surroundings.csv',small_mat)
 				# featureConvert.printGrid(myMat)
-				small_mat = featureConvert.condense_matrix(myMat)
-				# small_mat = np.concatenate((small_mat,np.array([1])))
-				print(small_mat)
+				# small_mat = featureConvert.condense_matrix(myMat)
+				# # small_mat = np.concatenate((small_mat,np.array([1])))
+				# print(small_mat)
 				# prepSave.saveFiles(small_mat,1)
-				featureConvert.printGrid(myMat)
-				info = [self.currentBomb]
-				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,1,i)
+				self.saveChoice(1,myMat)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
 			if humanAuto == 0:
-				small_mat = featureConvert.condense_matrix(myMat)
-				# small_mat = np.concatenate((small_mat,np.array([2])))
-				print(small_mat)
+				# small_mat = featureConvert.condense_matrix(myMat)
+				# # small_mat = np.concatenate((small_mat,np.array([2])))
+				# print(small_mat)
 				# prepSave.saveFiles(small_mat,2)
-				featureConvert.printGrid(myMat)
-				info = [self.currentBomb]
-				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,2,i)
+				self.saveChoice(2,myMat)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
 			if humanAuto == 0:
-				small_mat = featureConvert.condense_matrix(myMat)
-				# small_mat = np.concatenate((small_mat,np.array([3])))
-				print(small_mat)
+				# small_mat = featureConvert.condense_matrix(myMat)
+				# # small_mat = np.concatenate((small_mat,np.array([3])))
+				# print(small_mat)
 				# prepSave.saveFiles(small_mat,3)
-				featureConvert.printGrid(myMat)
-				info = [self.currentBomb]
-				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,3,i)
+				self.saveChoice(3,myMat)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
 			if humanAuto == 0:
-				small_mat = featureConvert.condense_matrix(myMat)
-				# small_mat = np.concatenate((small_mat,np.array([4])))
-				print(small_mat)
+				# small_mat = featureConvert.condense_matrix(myMat)
+				# # small_mat = np.concatenate((small_mat,np.array([4])))
+				# print(small_mat)
 				# prepSave.saveFiles(small_mat,4)
-				featureConvert.printGrid(myMat)
-				info = [self.currentBomb]
-				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,2,i)
+				self.saveChoice(4,myMat)
 			return [c.TILE_SIZE, 0]
 		else:
 			if humanAuto == 0:
-				small_mat = featureConvert.condense_matrix(myMat)
-				# small_mat = np.concatenate((small_mat,np.array([0])))
-				print(small_mat)
+				# small_mat = featureConvert.condense_matrix(myMat)
+				# # small_mat = np.concatenate((small_mat,np.array([0])))
+				# print(small_mat)
 				# prepSave.saveFiles(small_mat,0)
-				featureConvert.printGrid(myMat)
-				info = [self.currentBomb]
-				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,0,i)
+				self.saveChoice(0,myMat)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):
@@ -181,3 +167,14 @@ class Character(pygame.sprite.Sprite):
 		"""
 		self.old = self.position
 		self.position = self.position.move(point)
+
+	def saveChoice(self,choice,myMat):
+		# featureConvert.printGrid(myMat)
+		added = [self.currentBomb,choice]
+		tempGrid, info = prepSave.convertFiles(myMat,0)
+		prepSave.saveFiles(tempGrid,added,0)
+		prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
+		if(info[0]==1):
+			prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,2)
+		if(info[1]==1):
+			prepSave.saveFiles(prepSave.convertFiles(myMat,3)[0],added,3)

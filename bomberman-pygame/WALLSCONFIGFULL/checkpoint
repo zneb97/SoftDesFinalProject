@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-model_checkpoint_path: "model.ckpt-4043"
-all_model_checkpoint_paths: "model.ckpt-4039"
-all_model_checkpoint_paths: "model.ckpt-4040"
-all_model_checkpoint_paths: "model.ckpt-4041"
-all_model_checkpoint_paths: "model.ckpt-4042"
-all_model_checkpoint_paths: "model.ckpt-4043"
-=======
-model_checkpoint_path: "model.ckpt-2040"
-all_model_checkpoint_paths: "model.ckpt-2036"
-all_model_checkpoint_paths: "model.ckpt-2037"
-all_model_checkpoint_paths: "model.ckpt-2038"
-all_model_checkpoint_paths: "model.ckpt-2039"
-all_model_checkpoint_paths: "model.ckpt-2040"
->>>>>>> 22fcd4d0dfc7db51de16dac3539217b659fdfd9b
+model_checkpoint_path: "model.ckpt-6012"
+all_model_checkpoint_paths: "model.ckpt-6008"
+all_model_checkpoint_paths: "model.ckpt-6009"
+all_model_checkpoint_paths: "model.ckpt-6010"
+all_model_checkpoint_paths: "model.ckpt-6011"
+all_model_checkpoint_paths: "model.ckpt-6012"

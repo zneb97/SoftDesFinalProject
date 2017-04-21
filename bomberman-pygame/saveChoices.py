@@ -35,3 +35,4 @@ def rewrite(fileName):
 # rewrite('bricksFULL.csv')
 # rewrite('wallsFULL.csv')
 # rewrite('bombsFULL.csv')
+# rewrite('enemysFULL.csv')

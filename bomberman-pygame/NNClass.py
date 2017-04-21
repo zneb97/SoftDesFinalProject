@@ -20,7 +20,7 @@ class myClassifier:
              filename=trainName,
              target_dtype=np.int,
              features_dtype=np.int)
-         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=81)]
+         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=82)]
          self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                                      hidden_units=[10, 20, 10],
                                                      n_classes=6,
@@ -63,5 +63,8 @@ if __name__ == "__main__":
     classy.trainModel(2000)
     classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
     classz.trainModel(2000)
+    classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
+    classw.trainModel(2000)
+
     classx.testAccuracy('wallsFULL.csv')
     # classx.predict([[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1]])

@@ -286,6 +286,8 @@ class Game:
 		# classy.trainModel(0)
 		# classz = NNClass.myClassifier('realFakeBombs.csv', "./BOMBSCONFIG")
 		# classz.trainModel(0)
+		classw = NNClass.myClassifier('fakeEnemysFull.csv', "./ENEMYSCONFIGFULL")
+		classw.trainModel(0)
 		classx = NNClass.myClassifier('fakeWallsFull.csv', "./WALLSCONFIGFULL")
 		classx.trainModel(0)
 		classy = NNClass.myClassifier('fakeBricksFull.csv', "./BRICKSCONFIGFULL")
@@ -314,6 +316,56 @@ class Game:
 			if cyclicCounter%5 == 1:
 				self.clearExplosion()
 			for event in pygame.event.get():
+				if self.auto:
+					# point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
+					# self.movementHelper(self.user, point)
+
+
+					x = self.user.position[0] / self.c.TILE_SIZE
+					y = self.user.position[1] / self.c.TILE_SIZE
+					myMat = featureConvert.convertGrid(np.matrix(self.user.map.matrix).transpose(), (x,y) ,21,17)
+					# small_mat = featureConvert.condense_matrix(myMat)
+					# action_number = predictResponse.predict(small_mat)
+					# # print(action_number)
+					action_tot = []
+					action_list = []
+					converted, info = prepSave.convertFiles(myMat,0)
+					action_number1 = classx.predict([converted + [self.user.currentBomb]])
+					action_list.append(action_number1)
+					if(info[0] != 0):
+						converted, info = prepSave.convertFiles(myMat,2)
+						action_number3 = classz.predict([converted + [self.user.currentBomb]])
+						action_list.append(action_number3)
+					elif(info[1] != 0):
+						converted, info = prepSave.convertFiles(myMat,3)
+						action_number4 = classw.predict([converted + [self.user.currentBomb]])
+						action_list.append(action_number4)
+					if(info[0] == 0 and info[1] == 0):
+						converted, info = prepSave.convertFiles(myMat,1)
+						action_number2 = classy.predict([converted + [self.user.currentBomb]])
+						action_list.append(action_number2)
+
+						# print("BOMB---------------------")
+					for i in range(len(action_number1)):
+						tot = 0
+						for j in range(len(action_list)):
+							tot += action_list[j][i]
+
+						action_tot.append(tot/len(action_list))
+
+					action_tot[1] += 1 - sum(action_tot)
+					print(action_tot)
+					action_number = np.random.choice(np.arange(0, 6), p=action_tot)
+					print(action_number)
+					# if random.randint(1,2) == 1 and action_number != 5:
+					# 	action_number = random.randint(1,4)
+					# featureConvert.printGrid(myMat)
+					if action_number in [1,2,3,4]:
+						pred_move = self.move_dict[action_number]
+						point = self.user.movement(pred_move,grid,2)
+						self.movementHelper(self.user,point)
+					elif action_number == 5:
+						self.deployBomb(self.user)
 				if event.type == pygame.QUIT:
 					self.forceQuit()
 				elif event.type == pygame.KEYDOWN:
@@ -356,45 +408,7 @@ class Game:
 						self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
 
 					# Auto player movement - validity of move
-					if self.auto:
-						# point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
-						# self.movementHelper(self.user, point)
 
-
-						x = self.user.position[0] / self.c.TILE_SIZE
-						y = self.user.position[1] / self.c.TILE_SIZE
-						myMat = featureConvert.convertGrid(np.matrix(self.user.map.matrix).transpose(), (x,y) ,21,17)
-						# small_mat = featureConvert.condense_matrix(myMat)
-						# action_number = predictResponse.predict(small_mat)
-						# # print(action_number)
-						action_tot = []
-						converted, info = prepSave.convertFiles(myMat,0)
-						action_number1 = classx.predict([converted])
-						converted, info = prepSave.convertFiles(myMat,1)
-						action_number2 = classy.predict([converted])
-						converted, info = prepSave.convertFiles(myMat,2)
-						if(info[0] == 1):
-							action_number3 = classz.predict([converted])
-							for i in range(len(action_number1)):
-								action_tot.append((action_number1[i] + action_number3[i])/2)
-							print("BOMB---------------------")
-						else:
-							for i in range(len(action_number1)):
-								action_tot.append((action_number1[i] + action_number2[i])/2)
-
-						action_tot[1] += 1 - sum(action_tot)
-						print(action_tot)
-						action_number = np.random.choice(np.arange(0, 6), p=action_tot)
-						print(action_number)
-						# if random.randint(1,2) == 1 and action_number != 5:
-						# 	action_number = random.randint(1,4)
-						# featureConvert.printGrid(myMat)
-						if action_number in [1,2,3,4]:
-							pred_move = self.move_dict[action_number]
-							point = self.user.movement(pred_move,grid,2)
-							self.movementHelper(self.user,point)
-						elif action_number == 5:
-							self.deployBomb(self.user)
 
 				self.updateDisplayInfo()
 				pygame.display.update()
@@ -411,14 +425,18 @@ class Game:
 		x = player.position[0] / self.c.TILE_SIZE
 		y = player.position[1] / self.c.TILE_SIZE
 		myMat = featureConvert.convertGrid(np.matrix(player.map.matrix).transpose(), (x,y) ,21,17)
-		small_mat = featureConvert.condense_matrix(myMat)
-		# small_mat = np.concatenate((small_mat,np.array([5])))
-		print(small_mat)
+		# small_mat = featureConvert.condense_matrix(myMat)
+		# # small_mat = np.concatenate((small_mat,np.array([5])))
+		# print(small_mat)
 		# prepSave.saveFiles(small_mat,5)
-		featureConvert.printGrid(myMat)
-		info = [player.currentBomb]
-		for i in range(3):
-			prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,5,i)
+		added = [player.currentBomb,5]
+		tempGrid, info = prepSave.convertFiles(myMat,0)
+		prepSave.saveFiles(tempGrid,added,0)
+		prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
+		if(info[0]==1):
+			prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,1)
+		if(info[1]==1):
+			prepSave.saveFiles(prepSave.convertFiles(myMat,3)[0],added,1)
 		if b != None:
 			tile = self.field.getTile(player.position)
 			tile.bomb = b
