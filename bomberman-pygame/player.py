@@ -5,9 +5,9 @@ class Player(character.Character):
 	lives = 3
 	score = 0
 	currentBomb = 1
-	maxBombs = 10
-	power = 10			# bomb power
-	speed = 10			# player movement speed
+	maxBombs = 1
+	power = 1		# bomb power
+	speed = 1		# player movement speed
 
 	def __init__(self, name, imageName, id, point):
 		character.Character.__init__(self, name, "players/"+imageName, point)
@@ -19,9 +19,9 @@ class Player(character.Character):
 	def reset(self,death):
 		character.Character.reset(self,True)
 		if death:
-			self.currentBomb = self.maxBombs = 10
-			self.power = 10
-			self.speed = 10
+			self.currentBomb = self.maxBombs = 1
+			self.power = 1
+			self.speed = 1
 
 	def deployBomb(self):
 		if self.currentBomb > 0:
