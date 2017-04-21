@@ -38,6 +38,7 @@ def convertFiles(myMat, x):
     #     classifier.predict([tempList])
     return tempList,info
 
-def saveFiles(tempList, move, i):
+def saveFiles(tempList, info,move, i):
+    tempList = tempList + info
     tempList.append(move)
     saveChoices.addRow(fileNames[i],tempList)

@@ -123,8 +123,9 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				# prepSave.saveFiles(small_mat,1)
 				featureConvert.printGrid(myMat)
+				info = [self.currentBomb]
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],1,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,1,i)
 			return [0, -1*c.TILE_SIZE]
 		elif key == pygame.K_DOWN:
 			self.getImage('down')
@@ -134,8 +135,9 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				# prepSave.saveFiles(small_mat,2)
 				featureConvert.printGrid(myMat)
+				info = [self.currentBomb]
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],2,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,2,i)
 			return [0, c.TILE_SIZE]
 		elif key == pygame.K_LEFT:
 			self.getImage('left')
@@ -145,8 +147,9 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				# prepSave.saveFiles(small_mat,3)
 				featureConvert.printGrid(myMat)
+				info = [self.currentBomb]
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],3,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,3,i)
 			return [-1*c.TILE_SIZE, 0]
 		elif key == pygame.K_RIGHT:
 			self.getImage('right')
@@ -156,8 +159,9 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				# prepSave.saveFiles(small_mat,4)
 				featureConvert.printGrid(myMat)
+				info = [self.currentBomb]
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],2,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,2,i)
 			return [c.TILE_SIZE, 0]
 		else:
 			if humanAuto == 0:
@@ -166,8 +170,9 @@ class Character(pygame.sprite.Sprite):
 				print(small_mat)
 				# prepSave.saveFiles(small_mat,0)
 				featureConvert.printGrid(myMat)
+				info = [self.currentBomb]
 				for i in range(3):
-					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],0,i)
+					prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,0,i)
 			return [c.TILE_SIZE, c.TILE_SIZE]
 
 	def move(self,point):

@@ -18,7 +18,7 @@ class Game:
 	bombs = []
 	resetTiles = []
 	stage = 1
-	level = 1
+	level = 2
 	firstRun = True
 	exitGame = False
 
@@ -416,8 +416,9 @@ class Game:
 		print(small_mat)
 		# prepSave.saveFiles(small_mat,5)
 		featureConvert.printGrid(myMat)
+		info = [player.currentBomb]
 		for i in range(3):
-			prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],5,i)
+			prepSave.saveFiles(prepSave.convertFiles(myMat,i)[0],info,5,i)
 		if b != None:
 			tile = self.field.getTile(player.position)
 			tile.bomb = b
