@@ -1,5 +1,4 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
 model_checkpoint_path: "model.ckpt-2018"
 all_model_checkpoint_paths: "model.ckpt-2014"
 all_model_checkpoint_paths: "model.ckpt-2015"
@@ -14,11 +13,3 @@ all_model_checkpoint_paths: "model.ckpt-2030"
 all_model_checkpoint_paths: "model.ckpt-2031"
 all_model_checkpoint_paths: "model.ckpt-2032"
 >>>>>>> 32f2efd47068688f9ad7cbda87179551516b0518
-=======
-model_checkpoint_path: "model.ckpt-2013"
-all_model_checkpoint_paths: "model.ckpt-2009"
-all_model_checkpoint_paths: "model.ckpt-2010"
-all_model_checkpoint_paths: "model.ckpt-2011"
-all_model_checkpoint_paths: "model.ckpt-2012"
-all_model_checkpoint_paths: "model.ckpt-2013"
->>>>>>> parent of 98f8929... modified title screen
