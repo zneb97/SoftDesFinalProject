@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-model_checkpoint_path: "model.ckpt-2018"
-all_model_checkpoint_paths: "model.ckpt-2014"
-all_model_checkpoint_paths: "model.ckpt-2015"
-all_model_checkpoint_paths: "model.ckpt-2016"
-all_model_checkpoint_paths: "model.ckpt-2017"
-all_model_checkpoint_paths: "model.ckpt-2018"
-=======
 model_checkpoint_path: "model.ckpt-2032"
 all_model_checkpoint_paths: "model.ckpt-2028"
 all_model_checkpoint_paths: "model.ckpt-2029"
 all_model_checkpoint_paths: "model.ckpt-2030"
 all_model_checkpoint_paths: "model.ckpt-2031"
 all_model_checkpoint_paths: "model.ckpt-2032"
->>>>>>> 32f2efd47068688f9ad7cbda87179551516b0518

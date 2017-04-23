@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-model_checkpoint_path: "model.ckpt-6016"
-all_model_checkpoint_paths: "model.ckpt-6012"
-all_model_checkpoint_paths: "model.ckpt-6013"
-all_model_checkpoint_paths: "model.ckpt-6014"
-all_model_checkpoint_paths: "model.ckpt-6015"
-all_model_checkpoint_paths: "model.ckpt-6016"
-=======
 model_checkpoint_path: "model.ckpt-6030"
 all_model_checkpoint_paths: "model.ckpt-6026"
 all_model_checkpoint_paths: "model.ckpt-6027"
 all_model_checkpoint_paths: "model.ckpt-6028"
 all_model_checkpoint_paths: "model.ckpt-6029"
 all_model_checkpoint_paths: "model.ckpt-6030"
->>>>>>> 32f2efd47068688f9ad7cbda87179551516b0518

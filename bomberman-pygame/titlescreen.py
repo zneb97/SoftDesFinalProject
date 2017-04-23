@@ -41,8 +41,14 @@ class Titlescreen():
 							self.singlePlayer() # Single Player game clicked
 						elif self.withinBoundary(25, 250, 550, 600):
 							userInteracted = True
-							self.highScores() # High Score clicked
+							self.multiplayer() # Multiplayer game clicked
 						elif self.withinBoundary(25, 240, 605, 645):
+							userInteracted = True
+							self.instructions() # Instructions clicked
+						elif self.withinBoundary(25, 240, 655, 700):
+							userInteracted = True
+							self.highScores() # High Scores clicked
+						elif self.withinBoundary(25, 105, 705, 745):
 							userInteracted = True
 							exitMain = True
 							pygame.quit() # Exit clicked
