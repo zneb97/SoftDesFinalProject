@@ -19,7 +19,7 @@ class Game:
 	bombs = []
 	resetTiles = []
 	stage = 1
-	level = 2
+	level = 1
 	firstRun = True
 	exitGame = False
 

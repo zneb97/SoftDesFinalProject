@@ -27,6 +27,7 @@ def convertGrid(grid, pPos, viewX, viewY):
 			x += 1
 		y += 1
 		x = 0
+	printGrid(mymat)
 	return mymat
 
 def condense_matrix(mymat):
