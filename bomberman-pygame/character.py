@@ -58,6 +58,8 @@ class Character(pygame.sprite.Sprite):
 		"""
 		#	Character is located at 20, 16 in shifting matrix
 		c = config.Config()
+		# if(grid == None):
+		# 	grid = featureExtract.grid(self)
 		self.map = grid
 
 		#List of moves and validity. Note backspace is a placeholder for do nothing
@@ -159,7 +161,7 @@ class Character(pygame.sprite.Sprite):
 				# print(small_mat)
 				# prepSave.saveFiles(small_mat,0)
 				self.saveChoice(0,myMat)
-			return [c.TILE_SIZE, c.TILE_SIZE]
+			return [0, 0]
 
 	def move(self,point):
 		"""
@@ -174,7 +176,7 @@ class Character(pygame.sprite.Sprite):
 		tempGrid, info = prepSave.convertFiles(myMat,0)
 		prepSave.saveFiles(tempGrid,added,0)
 		prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
-		if(info[0]==1):
+		if(info[0]!=10):
 			prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,2)
-		if(info[1]==1):
+		if(info[1]!=10):
 			prepSave.saveFiles(prepSave.convertFiles(myMat,3)[0],added,3)

@@ -13,14 +13,29 @@ def convertFiles(myMat, x):
     endy= 21#myMat.shape[1]
     startx=16
     endx=25#myMat.shape[0]
-    info = [0,0]
+    info = [10,10,10]
     for i in range(starty,endy):
         for j in range(startx,endx):
             listPlaces.append(myMat.item((j,i)))
             if myMat.item((j,i)) == 9:
-                info[0] = 1
+                dist = abs(20-j)+abs(16-i)
+                if(info[0] == 10):
+                    info[0] = dist
+                elif(info[0]>dist):
+                    info[0] = dist
             elif(myMat.item((j,i)) == 7):
-                info[1] = 1
+                dist = abs(20-j)+abs(16-i)
+                if(info[1] == 10):
+                    info[1] = dist
+                elif(info[1]>dist):
+                    info[1] = dist
+            elif(myMat.item((j,i)) == 2):
+                dist = abs(20-j)+abs(16-i)
+                if(info[2] == 10):
+                    info[2] = dist
+                elif(info[2]>dist):
+                    info[2]= dist
+
 
 
     if(len(listPlaces) == 0):
