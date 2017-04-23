@@ -58,8 +58,6 @@ class Character(pygame.sprite.Sprite):
 		"""
 		#	Character is located at 20, 16 in shifting matrix
 		c = config.Config()
-		# if(grid == None):
-		# 	grid = featureExtract.grid(self)
 		self.map = grid
 
 		#List of moves and validity. Note backspace is a placeholder for do nothing
