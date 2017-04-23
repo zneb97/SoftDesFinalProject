@@ -7,6 +7,7 @@ import os,sys
 sys.path.append(os.path.split(sys.path[0])[0])
 from Net import *
 import NNClass
+# num2Key = {1:pygame.K_UP, 2:pygame.K_DOWN,3: pygame.K_LEFT,4: pygame.K_RIGHT}
 
 class Game:
 	"""
@@ -81,9 +82,9 @@ class Game:
 			self.tcpData = self.client.wait_for_data()
 			self.client.send_data(["update",None])
 			print(self.tcpData)
-			self.initMultiUsers()
 			if len(self.tcpData) > 0 and self.tcpData[-1] == "[SERVER]|START":
 				break
+			self.initMultiUsers()
 
 	def getMultiStartPosition(self,id):
 		if id == "1":
@@ -101,9 +102,10 @@ class Game:
 		self.players.append(self.user)
 
 	def initMultiUsers(self):
+
 		for element in self.tcpData:
 			ary = element.split("|")
-			if ary[0] > self.lastTcpCall:
+			if int(ary[0]) > int(self.lastTcpCall):
 				# manipulate
 				if ary[1] == 'JOIN':
 					p = player.Player("Player "+ary[0] ,"p_"+ary[0]+"_" , ary[2], self.getMultiStartPosition(ary[0]))
@@ -125,6 +127,7 @@ class Game:
 	# RFCT
 	# ary[3] = key 			ary[2] = user
 	def manipulateTcpData(self):
+		grid = featureExtract.grid(self)
 		for d in self.tcpData:
 			ary = d.split("|")
 			try:
@@ -132,7 +135,7 @@ class Game:
 				if int(ary[0]) > int(self.lastTcpCall):
 					if str(ary[2]) != str(self.id):
 						if ary[1] == "MOVE":
-							point = self.pHash[ary[2]].movement(int(ary[3]))
+							point = self.pHash[ary[2]].movement(int(ary[3]),grid,2)
 							self.movementHelper(self.pHash[ary[2]],point)
 						elif ary[1] == "BOMB":
 							self.deployBomb(self.pHash[ary[2]])
@@ -329,29 +332,50 @@ class Game:
 					# # print(action_number)
 					action_tot = []
 					action_list = []
+
 					converted, info = prepSave.convertFiles(myMat,0)
 					action_number1 = classx.predict([converted + [self.user.currentBomb]])
 					action_list.append(action_number1)
-					if(info[0] != 0):
+					if(info[0] < 10):
 						converted, info = prepSave.convertFiles(myMat,2)
-						action_number3 = classz.predict([converted + [self.user.currentBomb]])
-						action_list.append(action_number3)
-					elif(info[1] != 0):
-						converted, info = prepSave.convertFiles(myMat,3)
-						action_number4 = classw.predict([converted + [self.user.currentBomb]])
-						action_list.append(action_number4)
-					if(info[0] == 0 and info[1] == 0):
-						converted, info = prepSave.convertFiles(myMat,1)
-						action_number2 = classy.predict([converted + [self.user.currentBomb]])
+						action_number2 = classz.predict([converted + [self.user.currentBomb]])
 						action_list.append(action_number2)
-
-						# print("BOMB---------------------")
+					else:
+						action_list.append([0,0,0,0,0,0])
+					if(info[1] < 10):
+						converted, info = prepSave.convertFiles(myMat,3)
+						action_number3 = classw.predict([converted + [self.user.currentBomb]])
+						action_list.append(action_number3)
+					else:
+						action_list.append([0,0,0,0,0,0])
+					if(info[0] >= 10 and info[1] >= 10):
+						converted, info = prepSave.convertFiles(myMat,1)
+						action_number4 = classy.predict([converted + [self.user.currentBomb]])
+						action_list.append(action_number4)
+					else:
+						info[2] = 10
+						action_list.append([0,0,0,0,0,0])
+					info = [2] + info
+					for i in range(len(info)):
+						info[i] = 10 - info[i]
+					sumInfo = sum(info)
+					for i in range(len(info)):
+						info[i] = info[i]/sumInfo
 					for i in range(len(action_number1)):
 						tot = 0
 						for j in range(len(action_list)):
-							tot += action_list[j][i]
-
-						action_tot.append(tot/len(action_list))
+								tot += action_list[j][i]*info[j]
+						action_tot.append(tot)
+					print(info)
+					# 	for j in range(len(action_list)):
+					# 		tot += action_list[j][i]
+						# print("BOMB---------------------")
+					# for i in range(len(action_number1)):
+					# 	tot = 0
+					# 	for j in range(len(action_list)):
+					# 		tot += action_list[j][i]
+					#
+					# 	action_tot.append(tot/len(action_list))
 
 					action_tot[1] += 1 - sum(action_tot)
 					print(action_tot)
@@ -362,9 +386,13 @@ class Game:
 					# featureConvert.printGrid(myMat)
 					if action_number in [1,2,3,4]:
 						pred_move = self.move_dict[action_number]
+						# if self.mode == self.c.MULTI:
+						# 	self.sendingData = ["update","movement",pred_move,self.id]
 						point = self.user.movement(pred_move,grid,2)
 						self.movementHelper(self.user,point)
 					elif action_number == 5:
+						# if self.mode == self.c.MULTI:
+						# 	self.sendingData = ["update","bomb",pygame.K_SPACE,self.id]
 						self.deployBomb(self.user)
 				if event.type == pygame.QUIT:
 					self.forceQuit()

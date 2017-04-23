@@ -5,7 +5,8 @@ import zlib
 
 def EncodeData(data,compress):
     print(data)
-    data = data.encode("utf-8")
+    print(pickle.dumps(data))
+    data = pickle.dumps(data)
     # if compress != False:
     #     data = zlib.compress(data,compress)
     print(str(data) + "sending data")
@@ -14,7 +15,8 @@ def EncodeData(data,compress):
     return length,data
 def DecodeData(data):
     try:
-        data = data.decode("utf-8")
+        data = pickle.loads(data)
+        print("successfully loaded")
     except:
         data = pickle.loads(zlib.decompress(data))
     return data
@@ -22,26 +24,33 @@ def SendData(sock,data,compress,includelength=False,address=None):
     length,data = EncodeData(data,compress)
     '''data = pickle.loads(data)
     print("decoded: %r"%data)
-    if includelength: data = length + data
     print("withlength: %r"%data)
     data = data.encode("utf-8")
     print("encoded: %r"%data)'''
+    # if includelength: data = length + data
     if len(data) > 1024: print("Warning: packets are big.")
     try:
         if address != None:
             sock.sendto(data,address)
+            print("data sent I think")
         else:
             sock.send(data)
+            print("data sent I think")
     except:
         sock.close()
         raise SocketError("Connection is broken; data could not be sent!")
 def ReceiveData(sock):
     try:
-        print(sock.recv(8))
-        # length = int(sock.recv(8).decode())
-        # data = pickle.loads(sock.recv(1000))
-        data = sock.recv(1000)
-        print(data)
+        # print(sock.recv(8))
+        # print("RECIEVING DATA--------------")
+        # print(sock.recv(8))
+        # print("RECIEVING DATA2--------------")
+        # print(sock.recv(8))
+        # print("RECIEVING DATA3--------------")
+        # # length = int())
+        data = sock.recv(1024)
+        # data = sock.recv(1000)
+        print("DATA" + str(data))
     except:
         sock.close()
         raise SocketError("Connection is broken; data could not be received!")
