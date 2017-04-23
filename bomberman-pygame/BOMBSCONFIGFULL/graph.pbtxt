@@ -17877,10 +17877,14 @@ node {
         tensor_shape {
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         string_val: "_temp_f0454cc6ef4b42c5ae320f987b6af5f8/part"
 =======
         string_val: "_temp_66b986e7cd244b88918ee0e385820f7f/part"
 >>>>>>> 32f2efd47068688f9ad7cbda87179551516b0518
+=======
+        string_val: "_temp_cd8085a4cef44620975d04e4bd2ae0ec/part"
+>>>>>>> parent of 98f8929... modified title screen
       }
     }
   }
