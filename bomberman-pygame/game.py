@@ -20,7 +20,7 @@ class Game:
 	resetTiles = []
 
 	stage = 1
-	level = 1
+	level = 2
 
 	firstRun = True
 	exitGame = False
@@ -459,14 +459,15 @@ class Game:
 		# # small_mat = np.concatenate((small_mat,np.array([5])))
 		# print(small_mat)
 		# prepSave.saveFiles(small_mat,5)
-		added = [player.currentBomb,5]
-		tempGrid, info = prepSave.convertFiles(myMat,0)
-		prepSave.saveFiles(tempGrid,added,0)
-		prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
-		if(info[0]==1):
-			prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,1)
-		if(info[1]==1):
-			prepSave.saveFiles(prepSave.convertFiles(myMat,3)[0],added,1)
+		if not self.auto:
+			added = [player.currentBomb,player.power,5]
+			tempGrid, info = prepSave.convertFiles(myMat,0)
+			prepSave.saveFiles(tempGrid,added,0)
+			prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
+			if(info[0]==1):
+				prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,1)
+			if(info[1]==1):
+				prepSave.saveFiles(prepSave.convertFiles(myMat,3)[0],added,1)
 		if b != None:
 			tile = self.field.getTile(player.position)
 			tile.bomb = b

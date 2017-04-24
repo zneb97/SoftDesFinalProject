@@ -170,7 +170,7 @@ class Character(pygame.sprite.Sprite):
 
 	def saveChoice(self,choice,myMat):
 		# featureConvert.printGrid(myMat)
-		added = [self.currentBomb,choice]
+		added = [self.currentBomb,self.power,choice]
 		tempGrid, info = prepSave.convertFiles(myMat,0)
 		prepSave.saveFiles(tempGrid,added,0)
 		prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)

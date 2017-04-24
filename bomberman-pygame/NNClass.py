@@ -20,9 +20,9 @@ class myClassifier:
              filename=trainName,
              target_dtype=np.int,
              features_dtype=np.int)
-         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=82)]
+         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=83)]
          self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
-                                                     hidden_units=[10, 20, 10],
+                                                     hidden_units=[30, 30],
                                                      n_classes=6,
                                                      model_dir=self.saveStateName)
     def get_test_inputs(self):
