@@ -18,13 +18,10 @@ class Game:
 	enemies = []
 	bombs = []
 	resetTiles = []
-<<<<<<< HEAD
-	stage = 2
-	level = 6
-=======
+
 	stage = 1
 	level = 1
->>>>>>> 5178e764f347e1d2fd5d97ec9680147af4ee0a35
+
 	firstRun = True
 	exitGame = False
 
