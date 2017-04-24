@@ -11,5 +11,5 @@ Currently the bot's primary directive is to survive and increase its score throu
 
 ## Video
 <center>
-  <iframe width="420" height="315" src="https://www.youtube.com/embed/plL6Ilq88aU" frameborder="0" allowfullscreen></iframe>
+  <iframe width="420*1.5" height="315*1.5" src="https://www.youtube.com/embed/plL6Ilq88aU" frameborder="0" allowfullscreen></iframe>
 </center>
