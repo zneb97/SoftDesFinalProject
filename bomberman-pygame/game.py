@@ -20,7 +20,7 @@ class Game:
 	resetTiles = []
 
 	stage = 1
-	level = 2
+	level = 1
 
 	firstRun = True
 	exitGame = False
@@ -336,23 +336,23 @@ class Game:
 					action_list = []
 
 					converted, info = prepSave.convertFiles(myMat,0)
-					action_number1 = classx.predict([converted + [self.user.currentBomb]])
+					action_number1 = classx.predict([converted + [self.user.currentBomb,self.user.power]])
 					action_list.append(action_number1)
 					if(info[0] < 10):
 						converted, info = prepSave.convertFiles(myMat,2)
-						action_number2 = classz.predict([converted + [self.user.currentBomb]])
+						action_number2 = classz.predict([converted + [self.user.currentBomb,self.user.power]])
 						action_list.append(action_number2)
 					else:
 						action_list.append([0,0,0,0,0,0])
 					if(info[1] < 10):
 						converted, info = prepSave.convertFiles(myMat,3)
-						action_number3 = classw.predict([converted + [self.user.currentBomb]])
+						action_number3 = classw.predict([converted + [self.user.currentBomb,self.user.power]])
 						action_list.append(action_number3)
 					else:
 						action_list.append([0,0,0,0,0,0])
 					if(info[0] >= 10 and info[1] >= 10):
 						converted, info = prepSave.convertFiles(myMat,1)
-						action_number4 = classy.predict([converted + [self.user.currentBomb]])
+						action_number4 = classy.predict([converted + [self.user.currentBomb,self.user.power]])
 						action_list.append(action_number4)
 					else:
 						info[2] = 10
@@ -464,10 +464,10 @@ class Game:
 			tempGrid, info = prepSave.convertFiles(myMat,0)
 			prepSave.saveFiles(tempGrid,added,0)
 			prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
-			if(info[0]==1):
-				prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,1)
-			if(info[1]==1):
-				prepSave.saveFiles(prepSave.convertFiles(myMat,3)[0],added,1)
+			if(info[0]!=10):
+				prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,2)
+			if(info[1]!=10):
+				prepSave.saveFiles(prepSave.convertFiles(myMat,3)[0],added,3)
 		if b != None:
 			tile = self.field.getTile(player.position)
 			tile.bomb = b
