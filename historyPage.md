@@ -7,7 +7,7 @@ filename: historyPage
 
 ## Inspiration
 
-<iframe width="420" height="315" src="https://www.youtube.com/watch?v=qv6UVOQ0F44" frameborder="0" allowfullscreen></iframe>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/qv6UVOQ0F44" frameborder="0" allowfullscreen></iframe>
 
 With the entire team having a love of video games as well as an invested interest in learning about machine learning, the natural course of action seemed clear to us: build a bot!
 
