@@ -13,10 +13,6 @@ With the entire team having a love of video games as well as an invested interes
 
 Most of the machine learning video game playing bot seemed to focus on classic arcade games. Wanting to do something a little different, we went with one of our favorite browser games: Agar.io.
 
-## First Steps
-
-
-
 ## Pivot
 
 After spending a while working through problems we decided to take a step back and look at the bigger picture. We compared the core features of Agar.io, the game we wanted to bot to Super Mario World, one of the best bots we had seen online. Upon doing so we found several crucial differences:
