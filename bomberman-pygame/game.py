@@ -20,7 +20,7 @@ class Game:
 	resetTiles = []
 
 	stage = 1
-	level = 1
+	level = 2
 
 	firstRun = True
 	exitGame = False
