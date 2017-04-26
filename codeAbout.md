@@ -21,4 +21,4 @@ to clear levels.
 Based on the titles around it, the Net always keeps track of what decisions in can make, whose probabilities are influenced by three categories: bricks, bombs, and enemies. The weight, or how much influence each of these categories has on the final decision varies based on the scenario. For example. when a bomb is nearby, movements to protect the Bomberman become more important than destroying bricks.
 
 
-![Code Module](https://raw.github.com/zneb97/SoftDesFinalProject/gh-pages/resources/CodeArche.png)
+![Code Module](https://github.com/zneb97/SoftDesFinalProject/blob/gh-pages/resources/CodeArche.png)
