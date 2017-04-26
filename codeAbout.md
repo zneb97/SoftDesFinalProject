@@ -11,7 +11,7 @@ Our code is broken up into two main components, the main game loop and the machi
 ![How it Works](/resources/Team AFK.png)
 Using the pygame's board object which uses a more basic numbering system for each kind of tile, we created our own grid object with better values to distinguish all possible tiles and what may be located on the title.
 
-![Grid Strategy](/resources/Input%20Graphic.jpg)
+![Grid Strategy](/resources/Input Graphic.jpg)
 In addition to this, we pad the newly created grid with one (the number that represents the wall) while shifting it relative to the player's movement, allowing us to always keep the player (designated by the number 8 in our grid), in the center of the matrix. This greatly cuts down on the computation needed. This allows the neural network to access the grid information surrounding the player relatively quickly.
 
 ## Neural Network
