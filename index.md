@@ -9,7 +9,7 @@ Our Bomberman Bot is a neural net taught program that plays the classic arcade g
 We took this project on as we all love video games and all took an interest in machine learning. Being most of our team members' first venture into machine learning, we wanted to tackle a project we all knew we'd be invested in.
 
 <center>
-  <iframe width="420" height="315" src="https://www.youtube.com/embed/plL6Ilq88aU" frameborder="0" allowfullscreen></iframe>
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/jZx58VJvCrI" frameborder="0" allowfullscreen></iframe>
 </center>
 
 ## Authors<br>
