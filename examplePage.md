@@ -6,7 +6,7 @@ filename: examplePage
 # The Bot in Use
 
 ## Progress
-Currently the bot's primary directive is to survive and increase its score through destroying bricks. While it always has the potential to place a bomb, this becomes much more likely the more bricks there are around it. Once placed, it will actively avoid its own bombs. It currently has no recognition of nor directive to kill enemies.
+The bot is now able to search for basic powerups, utilize them in basic activities, and dispatch enemies with varying degrees of success. Although survival and increasing score by brick breaking is still its primary directive it now is able to better handle the beginning level. As seen below it actively will eliminate monsters and is aware of powerups.
 
 
 ## Video
