@@ -20,11 +20,3 @@ This grid is then used to locate various objects in realtion to one another on t
 Located in featureConvert.py
 
 It creates the previously explained grid class for the current game. It then pads this matrix with zeros. The placement of zeros around the grid is relative to the player's position, making sure the player is always in the center of the matrix. This is to cut down the run time of finding the player character in the matrix because it will always be at the same coordinate.
-
-## movement()
-
-In character.py
-
-## runGame(self)
-
-In game.py
