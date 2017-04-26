@@ -7,19 +7,11 @@ filename: historyPage
 
 ## Inspiration
 
-<center>
-  <iframe width="420" height="315" src="https://www.youtube.com/embed/qv6UVOQ0F44" frameborder="0" allowfullscreen></iframe>
-</center>
+<iframe width="420" height="315" src="https://www.youtube.com/watch?v=qv6UVOQ0F44" frameborder="0" allowfullscreen></iframe>
 
 With the entire team having a love of video games as well as an invested interest in learning about machine learning, the natural course of action seemed clear to us: build a bot!
 
 Most of the machine learning video game playing bot seemed to focus on classic arcade games. Wanting to do something a little different, we went with one of our favorite browser games: Agar.io.
-
-## First Steps
-
-![Bomberman](resources/agar_img.png "Bomberman")
-
-Initially we tried to image process the screen to get the information we needed but this proved too difficult, as it took too long for such a fast paced game and we felt it was too far off and distracting from our goal of machine learning.
 
 ## Pivot
 
@@ -36,6 +28,10 @@ Agar.io's primary objective of survive is difficult to gauge as both survival an
 
 4. Data Collection
 Easily the most important reason as to why Agar.io was so difficult to work with. Unlike Super Mario, which has well documented memory locations and countless open source remakes, Agar.io's data on players, enemies, and other factors is on the server side and inaccessible. Being newer, already free to play, and multiplayer, there were no up-to-date remakes where the information we needed was readily accessible.
+
+![Bomberman](resources/agar_img.png "Bomberman")
+
+Initially we tried to image process the screen to get the information we needed but this proved too difficult, as it took too long for such a fast paced game and we felt it was too far off and distracting from our goal of machine learning.
 
 So we changed to Bomberman
 
