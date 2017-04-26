@@ -11,5 +11,5 @@ The bot is now able to search for basic powerups, utilize them in basic activiti
 
 ## Video
 <center>
-  <iframe width="1260" height="945" src="https://www.youtube.com/embed/jZx58VJvCrI" frameborder="0" allowfullscreen></iframe>
+  <iframe width="630" height="475" src="https://www.youtube.com/embed/jZx58VJvCrI" frameborder="0" allowfullscreen></iframe>
 </center>
