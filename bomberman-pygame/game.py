@@ -285,12 +285,8 @@ class Game:
 		#Begin game
 		self.gameIsActive = True
 		self.auto = False
-		# classx = NNClass.myClassifier('realFakeWalls.csv', "./WALLSCONFIG")
-		# classx.trainModel(0)
-		# classy = NNClass.myClassifier('realFakeBricks.csv', "./BRICKSCONFIG")
-		# classy.trainModel(0)
-		# classz = NNClass.myClassifier('realFakeBombs.csv', "./BOMBSCONFIG")
-		# classz.trainModel(0)
+
+		#Save human playing data to csv file for model training
 		classw = NNClass.myClassifier('fakeEnemysFull.csv', "./ENEMYSCONFIGFULL")
 		classw.trainModel(0)
 		classx = NNClass.myClassifier('fakeWallsFull.csv', "./WALLSCONFIGFULL")
@@ -299,6 +295,7 @@ class Game:
 		classy.trainModel(0)
 		classz = NNClass.myClassifier('fakeBombsFull.csv', "./BOMBSCONFIGFULL")
 		classz.trainModel(0)
+
 		while self.gameIsActive:
 			clock.tick(self.c.FPS)
 			self.checkPlayerEnemyCollision()
@@ -322,19 +319,15 @@ class Game:
 				self.clearExplosion()
 			for event in pygame.event.get():
 				if self.auto:
-					# point = self.user.movement(pygame.K_BACKSPACE, grid) # next point
-					# self.movementHelper(self.user, point)
 
-
+					# generate full grid for feature extraction
 					x = self.user.position[0] / self.c.TILE_SIZE
 					y = self.user.position[1] / self.c.TILE_SIZE
 					myMat = featureConvert.convertGrid(np.matrix(self.user.map.matrix).transpose(), (x,y) ,21,17)
-					# small_mat = featureConvert.condense_matrix(myMat)
-					# action_number = predictResponse.predict(small_mat)
-					# # print(action_number)
 					action_tot = []
-					action_list = []
+					action_list = [] # array of all the actions
 
+					# append player action to the end of converted grid feature
 					converted, info = prepSave.convertFiles(myMat,0)
 					action_number1 = classx.predict([converted + [self.user.currentBomb,self.user.power]])
 					action_list.append(action_number1)
@@ -369,32 +362,16 @@ class Game:
 								tot += action_list[j][i]*info[j]
 						action_tot.append(tot)
 					print(info)
-					# 	for j in range(len(action_list)):
-					# 		tot += action_list[j][i]
-						# print("BOMB---------------------")
-					# for i in range(len(action_number1)):
-					# 	tot = 0
-					# 	for j in range(len(action_list)):
-					# 		tot += action_list[j][i]
-					#
-					# 	action_tot.append(tot/len(action_list))
 
 					action_tot[1] += 1 - sum(action_tot)
 					print(action_tot)
 					action_number = np.random.choice(np.arange(0, 6), p=action_tot)
 					print(action_number)
-					# if random.randint(1,2) == 1 and action_number != 5:
-					# 	action_number = random.randint(1,4)
-					# featureConvert.printGrid(myMat)
 					if action_number in [1,2,3,4]:
 						pred_move = self.move_dict[action_number]
-						# if self.mode == self.c.MULTI:
-						# 	self.sendingData = ["update","movement",pred_move,self.id]
 						point = self.user.movement(pred_move,grid,2)
 						self.movementHelper(self.user,point)
 					elif action_number == 5:
-						# if self.mode == self.c.MULTI:
-						# 	self.sendingData = ["update","bomb",pygame.K_SPACE,self.id]
 						self.deployBomb(self.user)
 				if event.type == pygame.QUIT:
 					self.forceQuit()
@@ -403,13 +380,13 @@ class Game:
 					k = event.key
 					#Switch to computer controlled human
 					if k == pygame.K_RSHIFT:
+						# alter between normal and AI mode
 						self.auto = not self.auto
 					elif k == pygame.K_SPACE and not self.auto:
 						if self.mode == self.c.MULTI:
 							self.sendingData = ["update","bomb",k,self.id]
 						self.deployBomb(self.user)
 					elif k == pygame.K_ESCAPE and not self.auto:
-
 						# Restart the game when you are running on manual mode
 						# by pressing esc"
 						print("game restarts in 1 second")
@@ -418,8 +395,7 @@ class Game:
 					elif (k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
 						if self.mode == self.c.MULTI:
 							self.sendingData = ["update","movement",k,self.id]
-						# player's move method
-						# print(k)
+						# player's move method when in normal mode
 						point = self.user.movement(k,grid,0) # next point
 						self.movementHelper(self.user, point)
 
@@ -437,9 +413,6 @@ class Game:
 					if self.mode == self.c.MULTI:
 						self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
 
-					# Auto player movement - validity of move
-
-
 				self.updateDisplayInfo()
 				pygame.display.update()
 
@@ -455,11 +428,8 @@ class Game:
 		x = player.position[0] / self.c.TILE_SIZE
 		y = player.position[1] / self.c.TILE_SIZE
 		myMat = featureConvert.convertGrid(np.matrix(player.map.matrix).transpose(), (x,y) ,21,17)
-		# small_mat = featureConvert.condense_matrix(myMat)
-		# # small_mat = np.concatenate((small_mat,np.array([5])))
-		# print(small_mat)
-		# prepSave.saveFiles(small_mat,5)
 		if not self.auto:
+			# deploy bomb when in normal mode
 			added = [player.currentBomb,player.power,5]
 			tempGrid, info = prepSave.convertFiles(myMat,0)
 			prepSave.saveFiles(tempGrid,added,0)
