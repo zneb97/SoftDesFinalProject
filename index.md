@@ -30,7 +30,7 @@ Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFina
 <br>
 Architectural Review Reflection can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/ReflectionSynthesis.md">here.</a>
 <br>
-Final Presentation can be found <a href="https://docs.google.com/presentation/d/1YaGlI_PHdcVWGIpH5ofd0F1Tq2FRwAVLr6wR0Bzh7g0/edit?usp=sharing">here</a>s
+Final Presentation can be found <a href="https://docs.google.com/presentation/d/1YaGlI_PHdcVWGIpH5ofd0F1Tq2FRwAVLr6wR0Bzh7g0/edit?usp=sharing">here</a>
 ## License<br>
 MIT License
 
