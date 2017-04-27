@@ -13,3 +13,5 @@ The bot is now able to search for basic powerups, utilize them in basic activiti
 <center>
   <iframe width="630" height="475" src="https://www.youtube.com/embed/jZx58VJvCrI" frameborder="0" allowfullscreen></iframe>
 </center>
+
+## Visulization of Machine learning
