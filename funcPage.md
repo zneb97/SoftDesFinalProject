@@ -3,7 +3,7 @@ title: Key Functions
 layout: template
 filename: funcPage
 ---
-# Key Functions and Classes
+# Key Functions and Classes for Machine Learning
 
 ## Grid Class
 
