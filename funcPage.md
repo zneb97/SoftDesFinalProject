@@ -1,5 +1,5 @@
 ---
-title: Functions and Classes
+title: Key Functions
 layout: template
 filename: funcPage
 ---
