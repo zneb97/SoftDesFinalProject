@@ -4,13 +4,14 @@ layout: template
 filename: usePage
 ---
 # Getting Started
-
+This code has been verified to work for Python 3 (Python 3.5.2)
 ## Dependencies
-Before starting, ensure you have the follow installed:
-* Pygame
-* Numpy
-* TensorFlow
-<br>Follow this link to install tensorflow on your OS:https://www.tensorflow.org/install/<br/>
+Before starting, ensure you have the following libraries installed;<br>
+Last Updated: April 27th, 2017
+* Pygame (1.9.3)
+* Numpy (1.12.0)
+* TensorFlow (1.0.1)
+<br>Follow this <a href="https://www.tensorflow.org/install/">link</a> to install Tensorflow on your OS
 
 ## Setup
 Download the game by either cloning the repo or downloading the ZIP file.
