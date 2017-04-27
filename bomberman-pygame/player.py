@@ -35,7 +35,7 @@ class Player(character.Character):
 			self.currentBomb += 1
 			self.maxBombs += 1
 		elif power == self.c.POWER_UP:
-			self.power += 1
+			self.power += 0
 
 	def setScore(self,score):
 		self.score += score
