@@ -27,13 +27,13 @@ Located in NNClass.py
 
 This is the class to control the machine learning of the project. It is instantiated with the parameters "trainName" which is the name of the file on which to train, and "saveStateName" which is the name of the NeuralNetwork config file that will be loaded from a previous iteration or created if there is not previous iteration.
 
-##trainModel(steps)
+## trainModel(steps)
 
 Located in NNClass.py
 
 This is an essential function of the myClassifier class that will train the model based on the data instantiated. It will run a number of times equal to the parameter "steps"
 
-##predict(Input)
+## pedict(Input)
 
 Located in NNClass.py
 
