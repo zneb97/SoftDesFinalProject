@@ -86,15 +86,18 @@ class myClassifier:
             print(int(ans), end = " ")
 
 if __name__ == "__main__":
-    classx = myClassifier('fakeWallsFull.csv', "./ENEMYSCONFIGFULL")
-    classx.trainModel(0)
+    # classx = myClassifier('wallsFULL.csv', "./WALLSCONFIGFULL")
+    # classx.trainModel(2000)
     # classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
     # classy.trainModel(2000)
     # classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
     # classz.trainModel(2000)
     # classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
     # classw.trainModel(2000)
+    #
+    # classw = myClassifier('fakeEnemysFull.csv', "./CONFIGFULL")
+    # classw.returnvar()
 
     # classx.testAccuracy('wallsFULL.csv')
-    print(classx.returnvar())
+    # print(classx.returnvar())
     # classx.predict([[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1]])
