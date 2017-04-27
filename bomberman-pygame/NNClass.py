@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+mfrom __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
@@ -25,6 +25,9 @@ class myClassifier:
                                                      hidden_units=[30, 30],
                                                      n_classes=6,
                                                      model_dir=self.saveStateName)
+
+
+
     def get_test_inputs(self):
         x = tf.constant(self.test_set.data)
         y = tf.constant(self.test_set.target)
@@ -56,15 +59,42 @@ class myClassifier:
         # return np.random.choice(np.arange(0, 6), p=prediction[0])
         return prediction[0]
 
-if __name__ == "__main__":
-    classx = myClassifier('wallsFULL.csv', "./WALLSCONFIGFULL")
-    classx.trainModel(2000)
-    classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
-    classy.trainModel(2000)
-    classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
-    classz.trainModel(2000)
-    classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
-    classw.trainModel(2000)
+    def returnvar(self):
+        print(self.classifier.get_variable_names())
+        finalWeights = self.classifier.get_variable_value('dnn/logits/weights')
+        hl2Importance = []
+        for i in range(30):
+            ans = 0
+            for j in range(6):
+                ans += abs(finalWeights[i][j])
+            hl2Importance.append(ans)
+        oneWeights = self.classifier.get_variable_value('dnn/hiddenlayer_1/weights')
+        hl1Importance = []
+        for i in range(30):
+            ans = 0
+            for j in range(30):
+                ans += abs(oneWeights[i][j]) * hl2Importance[j]
+            hl1Importance.append(ans)
 
-    classx.testAccuracy('wallsFULL.csv')
+        zeroWeights = self.classifier.get_variable_value('dnn/hiddenlayer_0/weights')
+        for i in range(83):
+            if(i%9 ==0 and i !=0):
+                print(" ")
+            ans = 0
+            for j in range(30):
+                ans += abs(zeroWeights[i][j]) * hl1Importance[j]
+            print(int(ans), end = " ")
+
+if __name__ == "__main__":
+    classx = myClassifier('fakeWallsFull.csv', "./ENEMYSCONFIGFULL")
+    classx.trainModel(0)
+    # classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
+    # classy.trainModel(2000)
+    # classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
+    # classz.trainModel(2000)
+    # classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
+    # classw.trainModel(2000)
+
+    # classx.testAccuracy('wallsFULL.csv')
+    print(classx.returnvar())
     # classx.predict([[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1]])
