@@ -173,7 +173,8 @@ class Character(pygame.sprite.Sprite):
 		added = [self.currentBomb,self.power,choice]
 		tempGrid, info = prepSave.convertFiles(myMat,0)
 		prepSave.saveFiles(tempGrid,added,0)
-		prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
+		if info[1]>=4:
+			prepSave.saveFiles(prepSave.convertFiles(myMat,1)[0],added,1)
 		if(info[0]!=10):
 			prepSave.saveFiles(prepSave.convertFiles(myMat,2)[0],added,2)
 		if(info[1]!=10):
