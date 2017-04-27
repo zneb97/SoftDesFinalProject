@@ -5,6 +5,6 @@ filename: Bomberman
 --- 
 # Bomberman
 
-## HOw it is played
-T
+## How it is played
+Bomberman is a grid based game that
 
