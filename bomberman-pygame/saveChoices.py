@@ -32,4 +32,3 @@ def rewrite(fileName):
     with open(fileName, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=[])
         writer.writeheader()
-rewrite('enemysFULL.csv')
