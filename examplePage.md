@@ -6,8 +6,7 @@ filename: examplePage
 # The Bot in Use
 
 ## Progress
-The bot is now able to search for basic powerups, utilize them in basic activities, and dispatch enemies with varying degrees of success. Although survival and increasing score by brick breaking is still its primary directive it now is able to better handle the beginning level. As seen below it actively will eliminate monsters and is aware of powerups.
-
+The bot is now able to search for and destroy bricks, run away from bombs, and dispatch enemies with varying degrees of success. Through training on user data, it now is able to better handle the beginning level. As seen below it actively will eliminate monsters and will destroy bricks.
 
 ## Video
 <center>

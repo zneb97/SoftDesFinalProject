@@ -30,10 +30,11 @@ Additionally, we've attached imaginary walls(that represent the area outside the
 
 ![Machine Learning](/resources/1.png) <br>
 
-Based on the titles around it, the Net always keeps track of what decisions in can make, whose probabilities are influenced by three categories:
+Based on the titles around it, the Net always keeps track of what decisions in can make, whose probabilities are influenced by four categories:
 
+* walls
 * bricks
 * bombs
-* powerups and enemies.<br>
+* enemies.<br>
 
 The weight, or how much influence each of these categories has on the final decision varies based on the scenario. For example. when a bomb is nearby, movements to protect the player becomes a higher priority than destroying bricks.
