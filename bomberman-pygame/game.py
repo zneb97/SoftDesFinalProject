@@ -20,7 +20,7 @@ class Game:
 	resetTiles = []
 
 	stage = 1
-	level = 3
+	level = 4
 
 	firstRun = True
 	exitGame = False
@@ -363,7 +363,7 @@ class Game:
 						action_tot.append(tot)
 					print(info)
 
-					action_tot[1] += 1 - sum(action_tot)
+					action_tot[2] += 1 - sum(action_tot)
 					print(action_tot)
 					action_number = np.random.choice(np.arange(0, 6), p=action_tot)
 					print(action_number)
@@ -424,9 +424,12 @@ class Game:
 		recognize if it is standing on a bomb as usually player
 		overwrites bomb
 		"""
-		b = player.deployBomb() # Returns a bomb if available
 		x = player.position[0] / self.c.TILE_SIZE
 		y = player.position[1] / self.c.TILE_SIZE
+		if(x==1 and y==1):
+			return
+		b = player.deployBomb() # Returns a bomb if available
+
 		myMat = featureConvert.convertGrid(np.matrix(player.map.matrix).transpose(), (x,y) ,21,17)
 		if not self.auto:
 			# deploy bomb when in normal mode

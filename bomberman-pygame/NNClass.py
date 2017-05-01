@@ -22,7 +22,7 @@ class myClassifier:
              features_dtype=np.int)
          feature_columns = [tf.contrib.layers.real_valued_column("", dimension=83)]
          self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
-                                                     hidden_units=[30, 30],
+                                                     hidden_units=[50],
                                                      n_classes=6,
                                                      model_dir=self.saveStateName)
 
@@ -86,17 +86,17 @@ class myClassifier:
             print(int(ans), end = " ")
 
 if __name__ == "__main__":
-    # classx = myClassifier('wallsFULL.csv', "./WALLSCONFIGFULL")
-    # classx.trainModel(6000)
-    # classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
-    # classy.trainModel(6000)
-    # classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
-    # classz.trainModel(6000)
-    # classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
-    # classw.trainModel(6000)
-    #
-    classw = myClassifier('fakeEnemysFull.csv', "./BOMBSCONFIGFULL")
-    classw.returnvar()
+    classx = myClassifier('wallsFULL.csv', "./WALLSCONFIGFULL")
+    classx.trainModel(6000)
+    classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
+    classy.trainModel(6000)
+    classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
+    classz.trainModel(6000)
+    classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
+    classw.trainModel(6000)
+    # #
+    # classw = myClassifier('fakeEnemysFull.csv', "./BOMBSCONFIGFULL")
+    # classw.returnvar()
 
     # classx.testAccuracy('wallsFULL.csv')
     # print(classx.returnvar())
