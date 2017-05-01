@@ -16,17 +16,17 @@ class myClassifier:
     This class handles all the Neural Network operations for the bomberman including
     training, prediction and weight visualization'''
     def __init__(self,trainName, saveStateName):
-        '''
-        The init statement initalizes a NN from the parameter configuration file
-        "saveStatename". If it does not exist, it will create a new NN will the given
-        file name.
+         '''
+         The init statement initalizes a NN from the parameter configuration file
+         "saveStatename". If it does not exist, it will create a new NN will the given
+         file name.
 
-        The dimensionality, hidden units, and output matrix musst be changed in the code
-        in accordance with the desired attributes of the Neural network
+         The dimensionality, hidden units, and output matrix musst be changed in the code
+         in accordance with the desired attributes of the Neural network
 
-        The parameter "trainName" is the file that the config will read from
-        The header of this file must have the number of data in  the first column
-        and the number of features in the second.'''
+         The parameter "trainName" is the file that the config will read from
+         The header of this file must have the number of data in  the first column
+         and the number of features in the second.'''
         #  self.trainName = trainName
          self.saveStateName = saveStateName
         #  TRAINING = self.trainName
@@ -51,10 +51,10 @@ class myClassifier:
 
     def get_train_inputs(self):
         '''helper function that will feed data to the classifier'''
-       x = tf.constant(self.training_set.data)
-       y = tf.constant(self.training_set.target)
+        x = tf.constant(self.training_set.data)
+        y = tf.constant(self.training_set.target)
 
-       return x, y
+        return x, y
     def trainModel(self,steps):
         '''This will train the model a given number of iterations.
         The model must first be trained before predictions can be made,

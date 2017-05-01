@@ -45,11 +45,6 @@ class Game:
 		pygame.display.set_caption("Bomberman")
 
 		# init preloader / join server
-		if self.mode == self.c.MULTI:
-			preloader = pygame.image.load(self.c.IMAGE_PATH + "loading.png").convert()
-			self.blit(preloader,(0,0))
-			pygame.display.flip()
-			self.joinGame()
 
 		# repeat for multiple levels
 		while not self.exitGame:
@@ -61,89 +56,6 @@ class Game:
 		if not self.forceQuit:
 			self.highscores.reloadScoreData()
 			self.highscores.displayScore()
-
-	def joinGame(self):
-		"""
-		Identify game to connect to
-		"""
-		self.client = TCPClient()
-
-		# choose server connection
-		if self.c.LOCALHOST:
-			self.client.connect("localhost",6317)
-		else:
-			# server_name = sys.argv[1]
-			# server_address = (server_name, 6317)
-			# print >>sys.stderr, 'starting up on %s port %s' % server_address
-			self.client.connect('gsteelman-Latitude-E5470', 6317)
-
-		self.id = random.randint(0,1000000)		# unique player id
-		self.client.send_data(["update","user joined",str(self.id)])
-
-		while True:
-			self.tcpData = self.client.wait_for_data()
-			self.client.send_data(["update",None])
-			print(self.tcpData)
-			if len(self.tcpData) > 0 and self.tcpData[-1] == "[SERVER]|START":
-				break
-			self.initMultiUsers()
-
-	def getMultiStartPosition(self,id):
-		if id == "1":
-			return (40,40)
-		elif id == "2":
-			return (760,40)
-		elif id == "3":
-			return (40,600)
-		elif id == "4":
-			return (760,600)
-
-	def initMultiSelf(self,data):
-		d = data[-1].split("|")
-		self.user = player.Player("Player " + ary[0] ,"p_"+ary[0]+"_" , ary[2], self.getMultiStartPosition(ary[0]))
-		self.players.append(self.user)
-
-	def initMultiUsers(self):
-
-		for element in self.tcpData:
-			ary = element.split("|")
-			if int(ary[0]) > int(self.lastTcpCall):
-				# manipulate
-				if ary[1] == 'JOIN':
-					p = player.Player("Player "+ary[0] ,"p_"+ary[0]+"_" , ary[2], self.getMultiStartPosition(ary[0]))
-					self.pHash[ary[2]] = p
-					self.players.append(p)
-					self.lastTcpCall = ary[0]
-
-	def tcpUpdate(self):
-		data = self.client.check_for_data()
-		if data:
-			self.tcpData = data
-	#		print '-------------'
-	#		print self.tcpData
-			if self.sendingData == []:
-				self.sendingData = ["update",None]
-			self.client.send_data(self.sendingData)
-			self.sendingData = []
-
-	# RFCT
-	# ary[3] = key 			ary[2] = user
-	def manipulateTcpData(self):
-		grid = featureExtract.grid(self)
-		for d in self.tcpData:
-			ary = d.split("|")
-			try:
-				print(ary[0] + " " + str(self.lastTcpCall))
-				if int(ary[0]) > int(self.lastTcpCall):
-					if str(ary[2]) != str(self.id):
-						if ary[1] == "MOVE":
-							point = self.pHash[ary[2]].movement(int(ary[3]),grid,2)
-							self.movementHelper(self.pHash[ary[2]],point)
-						elif ary[1] == "BOMB":
-							self.deployBomb(self.pHash[ary[2]])
-					self.lastTcpCall = ary[0]
-			except ValueError:
-				print('skip')
 
 	def resetGame(self):
 		"""
@@ -383,8 +295,6 @@ class Game:
 						# alter between normal and AI mode
 						self.auto = not self.auto
 					elif k == pygame.K_SPACE and not self.auto:
-						if self.mode == self.c.MULTI:
-							self.sendingData = ["update","bomb",k,self.id]
 						self.deployBomb(self.user)
 					elif k == pygame.K_ESCAPE and not self.auto:
 						# Restart the game when you are running on manual mode
@@ -393,8 +303,6 @@ class Game:
 						time.sleep(1)
 						self.restart()
 					elif (k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
-						if self.mode == self.c.MULTI:
-							self.sendingData = ["update","movement",k,self.id]
 						# player's move method when in normal mode
 						point = self.user.movement(k,grid,0) # next point
 						self.movementHelper(self.user, point)
@@ -410,9 +318,6 @@ class Game:
 					for e in self.enemies:
 						self.movementHelper(e,e.nextMove(grid))
 					#Character motion set to enemy cycles
-					if self.mode == self.c.MULTI:
-						self.sendingData = ["update","movement",pygame.K_BACKSPACE,self.id]
-
 				self.updateDisplayInfo()
 				pygame.display.update()
 
