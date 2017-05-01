@@ -5,7 +5,6 @@ import featureConvert
 
 class grid:
     """
-<<<<<<< HEAD
     Identifies player, enemy, object positons from board
 
     Matrix Tile Code

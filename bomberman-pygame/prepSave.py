@@ -7,7 +7,8 @@ fileNames = ['wallsFULL.csv','bricksFULL.csv','bombsFULL.csv','enemysFULL.csv']
 fileDict = {'wallsFULL.csv' : 1,'bricksFULL.csv' : 2,'bombsFULL.csv' : 9,'enemysFULL.csv':7}
 
 def convertFiles(myMat, x):
-    '''Take the array of places and convert them to a list of features'''
+    '''Take the array of places and convert them to a list of features
+    The type of features will be determined by the parameter X'''
     listPlaces = []
     position = (20,16)
     starty=12
@@ -63,6 +64,7 @@ def convertFiles(myMat, x):
     return tempList,info
 
 def saveFiles(tempList, info, i):
-    '''save the feature list into csv for model training'''
+    '''save the feature list into csv for model training
+    The file to save to will be determined by parameter i'''
     tempList = tempList + info
     saveChoices.addRow(fileNames[i],tempList)
