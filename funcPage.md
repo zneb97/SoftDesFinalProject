@@ -3,7 +3,7 @@ title: Key Functions
 layout: template
 filename: funcPage
 ---
-# Key Functions and Classes
+# Key Functions and Classes for Machine Learning
 
 ## Grid Class
 
@@ -33,7 +33,7 @@ Located in NNClass.py
 
 This is an essential function of the myClassifier class that will train the model based on the data instantiated. It will run a number of times equal to the parameter "steps"
 
-## pedict(Input)
+## predict(Input)
 
 Located in NNClass.py
 
