@@ -15,3 +15,5 @@ The bot is now able to search for basic powerups, utilize them in basic activiti
 </center>
 
 ## Visulization of Machine learning
+Below shows a visualization of the weight of the surroundings for the player. These weights are specific for the walls Neural Net. As expected the nodes closer to the player have a higher weight and are therefore more influential than the nodes farther away.
+![wallsWeights](resources/wallWeights.svg "Wall Neural Net")
