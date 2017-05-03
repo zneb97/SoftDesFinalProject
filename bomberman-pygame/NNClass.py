@@ -13,24 +13,27 @@ def my_input_fn(input):
 
 class myClassifier:
     '''
-    This class handles all the Neural Network operations for the bomberman including
-    training, prediction and weight visualization'''
+    This class handles all the Neural Network operations for the bomberman
+    including :
+    1) training
+    2) prediction
+    3) weight visualization'''
 
     def __init__(self, trainName, saveStateName):
         '''
-        The init statement initalizes a NN from the parameter configuration file
-        "saveStatename". If it does not exist, it will create a new NN will the given
-        file name.
+        The init statement initalizes a NN from the parameter config file
+        "saveStatename". If it does not exist,
+        it will create a new NN will the given file name.
 
-        The dimensionality, hidden units, and output matrix musst be changed in the code
-        in accordance with the desired attributes of the Neural network
+        The dimensionality, hidden units, and output matrix must be changed
+        according to the desired attributes of the Neural Network
 
         The parameter "trainName" is the file that the config will read from
-        The header of this file must have the number of data in  the first column
-        and the number of features in the second.'''
-       #  self.trainName = trainName
+        The header must have the number of data in the first column
+        and the number of features in the second.
+        '''
+
         self.saveStateName = saveStateName
-       #  TRAINING = self.trainName
         self.training_set = tf.contrib.learn.datasets.base.load_csv_with_header(
             filename=trainName,
             target_dtype=np.int,
@@ -60,11 +63,13 @@ class myClassifier:
     def trainModel(self, steps):
         '''This will train the model a given number of iterations.
         The model must first be trained before predictions can be made,
-        so it is possible to train it 0 times in order to load a modelwithout changes'''
+        so it is possible to train it 0 times
+        in order to load a modelwithout changes'''
         self.classifier.fit(input_fn=self.get_train_inputs, steps=steps)
 
     def testAccuracy(self, testName):
-        '''This function will take in a csv file to test the accuracy of the model'''
+        '''This function will take in a csv file
+        to test the accuracy of the model'''
         self.test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
             filename=testName,
             target_dtype=np.int,
@@ -74,13 +79,10 @@ class myClassifier:
         print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 
     def predict(self, myInput):
-        '''This function will return probability values output by the model of a given input'''
+        '''This function will return probability values,
+        output by the model of a given input'''
         prediction = list(self.classifier.predict_proba(
             input_fn=lambda: my_input_fn(myInput)))
-        # print(
-        #       "New Samples, Class Predictions:    {}\n"
-        #       .format(prediction))
-        # return np.random.choice(np.arange(0, 6), p=prediction[0])
         return prediction[0]
 
     def returnvar(self):
@@ -125,6 +127,8 @@ class myClassifier:
 
 
 if __name__ == "__main__":
+    """
+    UNCOMMENT THIS BLOCK TO TRAIN THE NEURALA NETWORK
     # classx = myClassifier('wallsFULL.csv', "./WALLSCONFIGFULL")
     # classx.trainModel(6000)
     # classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
@@ -133,10 +137,4 @@ if __name__ == "__main__":
     # classz.trainModel(6000)
     # classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
     # classw.trainModel(6000)
-    # #
-    classw = myClassifier('fakeEnemysFull.csv', "./ENEMYSCONFIGFULL")
-    classw.returnvar()
-
-    # classx.testAccuracy('wallsFULL.csv')
-    # print(classx.returnvar())
-    # classx.predict([[1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,0,0,1,0,1]])
+    """
