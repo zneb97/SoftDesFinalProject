@@ -83,13 +83,14 @@ class Game:
         """
         Begins game mode with correct stats for board
         """
-        if self.mode == self.c.SINGLE:
-            self.printText("Level %d-%d" % (self.stage, self.level), (40, 15))
-            self.field = board.Board(self.stage, self.level)
-            self.timer = 3 * 60 + 1
+        self.printText("Level %d-%d" % (self.stage, self.level), (40, 15))
+        self.field = board.Board(self.stage, self.level)
+        self.timer = 3 * 60 + 1
         self.drawBoard()
         self.drawInterface()
         self.updateTimer()
+
+        # Dictionary of Key Bindings
         self.move_dict = {0: pygame.K_BACKSPACE,
                           1: pygame.K_UP,
                           2: pygame.K_DOWN,
@@ -97,17 +98,15 @@ class Game:
                           4: pygame.K_RIGHT,
                           5: pygame.K_SPACE}
 
-        # Players do not have to be reinitialized in single player after the
-        # first time
+        # Playerse only intialized in the first run
         if self.firstRun:
             self.firstRun = False
             self.initPlayers()
         else:
             self.resetPlayerPosition(self.user, False)
 
-        # No enemies in multiplayer
-        if self.mode == self.c.SINGLE:
-            self.initEnemies(self.level * 2 + 1)
+        # Initialize Enemies
+        self.initEnemies(self.level * 2 + 1)
 
         # Music players
         mp = music.Music()
@@ -119,7 +118,6 @@ class Game:
     def drawBoard(self):
         """
         Build board
-
         Note: each level has a predefined layout
         """
         for row in range(1, len(self.field.board) - 1):
@@ -162,7 +160,7 @@ class Game:
 
     def initPlayers(self):
         """
-        Place players
+        Places players
         """
         if self.mode == self.c.SINGLE:
             self.user = player.Player("Player 1", "p_1_", 0, (40, 40))
@@ -184,7 +182,7 @@ class Game:
                 x = random.randint(6, self.field.width - 2) * 40
                 y = random.randint(6, self.field.height - 2) * 40
 
-                if self.field.getTile((x, y)).canPass() == True:
+                if self.field.getTile((x, y)).canPass():
                     break
 
             e = enemy.Enemy("Enemy", "e_%d_" % (
@@ -235,7 +233,6 @@ class Game:
             # Feature extraction for machine learning
             grid = featureExtract.grid(self)
 
-
             # self.c.FPS is set to 30, 30 ticks = 1 second
             cyclicCounter += 1
             if cyclicCounter == self.c.FPS:
@@ -258,7 +255,9 @@ class Game:
                     x = self.user.position[0] / self.c.TILE_SIZE
                     y = self.user.position[1] / self.c.TILE_SIZE
                     myMat = featureConvert.convertGrid(
-                        np.matrix(self.user.map.matrix).transpose(), (x, y), 21, 17)
+                        np.matrix(self.user.map.matrix).transpose(),
+                        (x, y),
+                        21, 17)
                     action_tot = []
                     action_list = []  # array of all the actions
 
@@ -277,7 +276,8 @@ class Game:
                     if(info[0] < 10):
                         converted, info = prepSave.convertFiles(myMat, 2)
                         action_number2 = classz.predict(
-                            [converted + [self.user.currentBomb, self.user.power]])
+                            [converted + [self.user.currentBomb,
+                                          self.user.power]])
                         action_list.append(action_number2)
                     else:
                         action_list.append([0, 0, 0, 0, 0, 0])
@@ -287,7 +287,8 @@ class Game:
                     if(info[1] < 10):
                         converted, info = prepSave.convertFiles(myMat, 3)
                         action_number3 = classw.predict(
-                            [converted + [self.user.currentBomb, self.user.power]])
+                            [converted + [self.user.currentBomb,
+                                          self.user.power]])
                         action_list.append(action_number3)
                     else:
                         action_list.append([0, 0, 0, 0, 0, 0])
@@ -297,7 +298,8 @@ class Game:
                     if(info[0] >= 10 and info[1] >= 10):
                         converted, info = prepSave.convertFiles(myMat, 1)
                         action_number4 = classy.predict(
-                            [converted + [self.user.currentBomb, self.user.power]])
+                            [converted + [self.user.currentBomb,
+                                          self.user.power]])
                         action_list.append(action_number4)
                     else:
                         info[2] = 10
@@ -363,7 +365,8 @@ class Game:
                         print("game restarts in 1 second")
                         time.sleep(1)
                         self.restart()
-                    elif (k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
+                    elif (k == pygame.K_UP or k == pygame.K_DOWN or
+                          k == pygame.K_LEFT or k == pygame.K_RIGHT) and not self.auto:
                         # player's move method when in normal mode
                         point = self.user.movement(k, grid, 0)  # next point
                         self.movementHelper(self.user, point)
@@ -373,7 +376,7 @@ class Game:
                         self.user.gainPower(self.c.BOMB_UP)
                         self.user.gainPower(self.c.POWER_UP)
 
-                elif event.type == pygame.USEREVENT:  # RFCT - change definition
+                elif event.type == pygame.USEREVENT:
                     self.updateBombs()
                 elif event.type == pygame.USEREVENT + 1:  # RFCT
                     for e in self.enemies:
@@ -412,14 +415,13 @@ class Game:
             if(info[1] != 10):
                 prepSave.saveFiles(
                     prepSave.convertFiles(myMat, 3)[0], added, 3)
-        if b != None:
+        if b is not None:
             tile = self.field.getTile(player.position)
             tile.bomb = b
             self.bombs.append(b)
 
     def blit(self, obj, pos):
         self.screen.blit(obj, pos)
-    #	pygame.display.flip()
 
     def movementHelper(self, char, point):
         """
@@ -441,7 +443,7 @@ class Game:
             self.blit(char.image, char.position)
 
             t = self.field.getTile(char.old)
-            if t.bomb != None:
+            if t.bomb is not None:
                 self.blit(t.getBackground(), char.old)
             self.blit(t.getImage(), char.old)
 
@@ -474,7 +476,7 @@ class Game:
         """
         Allow for bombs to activate other bombs
         """
-        if bomb == None:
+        if bomb is None:
             return
         else:
             bomb.triggered = True
@@ -505,9 +507,9 @@ class Game:
             # hit a block or indestructible object
             if not t.canBombPass():
                 # trigger new bomb explosion
-                if t.bomb != None:
+                if t.bomb is not None:
                     self.activateBomb(t.bomb)
-                elif t.destroyable == True:
+                elif t.destroyable is not True:
                     # if brick or powerup or player
                     t.destroy()
                     self.blit(t.getImage(), nPoint)
@@ -523,8 +525,8 @@ class Game:
                 self.resetTiles.append(nPoint)
 
             # check bomb's power, this terminates the recursive loop
-            if int(abs(x) / 40) == bomb.range or int(abs(y) / 40) == bomb.range:
-                #	print "(x,y) => (" + str(x) + "," + str(y) + ")"
+            if int(abs(x) / 40) == bomb.range or int(abs(y)/40) == bomb.range:
+                #  print "(x,y) => (" + str(x) + "," + str(y) + ")"
                 break
 
     def clearExplosion(self):
@@ -612,7 +614,6 @@ class Game:
 
     def printText(self, text, point):
         font = pygame.font.Font("lucida.ttf", 20)
-    #	font = pygame.font.SysFont("resources/fonts/Lucida Console",26)
         label = font.render(str(text) + '  ', True, (255, 255, 255), (0, 0, 0))
         textRect = label.get_rect()
         textRect.x = point[0]
