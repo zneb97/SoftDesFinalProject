@@ -1,26 +1,34 @@
+"""
+Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+This entire code was written by the original author, Rickyc (Github user)
+No edits were done by the members of Team AFK
+"""
+
+
 import sys, pygame, config
 
 class Highscore:
 	def __init__(self):
 		self.c = config.Config()
 		self.reloadScoreData()
-	
+
 	def reloadScoreData(self):
 		file = open(self.c.HIGHSCORES_PATH,"r").readlines()
-		
+
 		self.scores = []
 		row = 0
 		for line in file:
 			self.scores.append(int(line))
-	
+
 		# sort scores
 		self.scores.sort()
 		self.scores.reverse()
-	
+
 	def addScore(self,score):
 		file = open(self.c.HIGHSCORES_PATH,"a")
 		file.write(str(score)+"\n")
-	
+
 	def displayScore(self):
 		pygame.init()
 		self.screen = pygame.display.set_mode((self.c.WIDTH,self.c.HEIGHT))
@@ -32,7 +40,7 @@ class Highscore:
 			self.printText("%d) %d" % (indx,score),(40,75+25*indx))
 			indx += 1
 		pygame.display.flip()
-		
+
 		exit = False
 		while not exit:
 			for event in pygame.event.get():
@@ -56,10 +64,10 @@ class Highscore:
 		#font = pygame.font.Font(None,24)
 		label = font.render(str(text)+'  ', True, (255,255, 255), (0, 0, 0))
 		textRect = label.get_rect()
-		textRect.x = point[0] 
+		textRect.x = point[0]
 		textRect.y = point[1]
 		self.screen.blit(label, textRect)
-				
+
 	def printScores(self):
 		indx = 1
 		for score in self.scores:

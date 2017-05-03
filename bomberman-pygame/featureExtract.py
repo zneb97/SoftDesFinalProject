@@ -1,4 +1,8 @@
 """
+Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+By : TEAM AFK
+
 Extracts features (player, enemy, bombs) from the main game loop
 and stores the data as a two-demensional list
 """

@@ -1,3 +1,9 @@
+"""
+Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+By : TEAM AFK
+"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function

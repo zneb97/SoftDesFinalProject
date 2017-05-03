@@ -1,4 +1,8 @@
 """
+Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+By : TEAM AFK
+
 Takes in all player and objects places to create a grid.
 This grid is appended by zeros and shifts automatically
 to always locatled the player in the center to reduce computation complexity.

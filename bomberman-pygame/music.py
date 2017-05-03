@@ -1,3 +1,11 @@
+"""
+Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+This entire code was written by the original author, Rickyc (Github user)
+No edits were done by the members of Team AFK
+"""
+
+
 import pygame, random, config
 
 class Music:
@@ -14,7 +22,7 @@ class Music:
 
 		pygame.mixer.music.load(self.c.AUDIO_PATH + music)
 		pygame.mixer.music.play(-1)
-	
+
 	def playSound(self, type):
 		if type == "bomb":
 			sound = "Blast_02.wav"

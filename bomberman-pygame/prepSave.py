@@ -1,3 +1,10 @@
+"""
+Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+By : TEAM AFK
+"""
+
+
 import saveChoices
 
 # list of file names for our grid features
