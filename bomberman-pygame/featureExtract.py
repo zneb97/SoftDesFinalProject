@@ -1,7 +1,10 @@
-from numpy import matrix
+"""
+Extracts features (player, enemy, bombs) from the main game loop
+and stores the data as a two-demensional list
+"""
+
 
 import config as c
-import featureConvert
 
 
 class grid:
@@ -19,6 +22,7 @@ class grid:
     8 = PLAYERS
     9 = BOMBS
     """
+
     def __init__(self, game):
         """
         Thie function initlizes the attributes that represent the grid
@@ -29,7 +33,6 @@ class grid:
         self.players = game.players
         self.bombs = game.bombs
         self.enemies = game.enemies
-
 
     @property
     def matrix(self):
@@ -50,7 +53,6 @@ class grid:
 
     def add_bombs(self, target_matrix):
         """
-
         Adds bombs(represented as 9) to the target_matrix
         """
         # bomb.position (x,y) / config.TILE_SIZE
@@ -77,12 +79,3 @@ class grid:
             x = int(enemy.position[0] / c.Config.TILE_SIZE)
             y = int(enemy.position[1] / c.Config.TILE_SIZE)
             target_matrix[y][x] = 7
-
-    def printMatrix(self):
-        """
-        This function calls the convert grid function,
-        converts the list into a numpy matrix"
-        """
-        x = self.players[0].position[0] / c.Config.TILE_SIZE
-        y = self.players[0].position[1] / c.Config.TILE_SIZE
-        featureConvert.convertGrid(matrix(self.matrix).transpose(), (x,y) ,21,17)
