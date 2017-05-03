@@ -204,6 +204,7 @@ class Game:
         clock = pygame.time.Clock()
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         pygame.time.set_timer(pygame.USEREVENT + 1, 500)
+        pygame.time.set_timer(pygame.USEREVENT-1, 200)
         cyclicCounter = 0
 
         # Begin game
@@ -211,16 +212,16 @@ class Game:
         self.auto = False
 
         # Save human playing data to csv file for model training
-        '''ML Code, this portion intializes some pre-existant Neural Networks
-        so that they can interpret incoming data.
+        # ML Code, this portion intializes some pre-existant Neural Networks
+        # so that they can interpret incoming data.
+        #
+        # There are 4 neural networks initialized
+        # classw ---> Enemy based NN
+        # classx ---> Walls based NN
+        # classy ---> Brick based NN
+        # classz ---> Bomb based NN
+        # See project website for more details on each
 
-        There are 4 neural networks initialized
-        classw ---> Enemy based NN
-        classx ---> Walls based NN
-        classy ---> Brick based NN
-        classz ---> Bomb based NN
-        See project website for more details on each
-        '''
         classw = NNClass.myClassifier(
             'fakeEnemysFull.csv', "./ENEMYSCONFIGFULL")
         classw.trainModel(0)
@@ -233,136 +234,138 @@ class Game:
         classz.trainModel(0)
 
         while self.gameIsActive:
-            clock.tick(self.c.FPS)
-            self.checkPlayerEnemyCollision()
-            self.checkWinConditions()
-
-            # Feature extraction for machine learning
-            grid = featureExtract.grid(self)
-
-            # self.c.FPS is set to 30, 30 ticks = 1 second
-            cyclicCounter += 1
-            if cyclicCounter == self.c.FPS:
-                cyclicCounter = 0
-                self.updateTimer()
-
-            if cyclicCounter % 5 == 1:
-                self.clearExplosion()
             for event in pygame.event.get():
-                if self.auto:
-                    '''
-                    If the user is in auto Mode, the ML control is triggered
-                    It is recommended to review the other parts of the code
-                    especially NNClass.py before this in order to understand
-                    the process
-                    '''
-                    # generate full grid for feature extraction
-                    '''It first grabs the user position and created a matrix
-                    around that'''
-                    x = self.user.position[0] / self.c.TILE_SIZE
-                    y = self.user.position[1] / self.c.TILE_SIZE
-                    myMat = featureConvert.convertGrid(
-                        np.matrix(self.user.map.matrix).transpose(),
-                        (x, y),
-                        21, 17)
-                    action_tot = []
-                    action_list = []  # array of all the actions
+                clock.tick(self.c.FPS)
+                self.checkPlayerEnemyCollision()
+                self.checkWinConditions()
 
-                    # append player action to the end of converted grid feature
-                    '''It then prepares the surrounding grid to be converted
-                    into the input for the Walls NN while at the same time
-                    grabbing info from around the player to decide whether to
-                    use the other Neural Networks'''
-                    converted, info = prepSave.convertFiles(myMat, 0)
-                    action_number1 = classx.predict(
-                        [converted + [self.user.currentBomb, self.user.power]])
-                    action_list.append(action_number1)
-                    '''If info[0] (aka the distance to the nearest bomb) is less
-                    than 10 manhattan blocks. It will input the matrix into
-                    the Bombs NN and include the output in its decision'''
-                    if(info[0] < 10):
-                        converted, info = prepSave.convertFiles(myMat, 2)
-                        action_number2 = classz.predict(
-                            [converted + [self.user.currentBomb,
-                                          self.user.power]])
-                        action_list.append(action_number2)
-                    else:
-                        action_list.append([0, 0, 0, 0, 0, 0])
-                    '''If info[1] (aka the distance to the nearest enemy) is less
-                    than 10 manhattan blocks. It will input the matrix into
-                    the Enemys NN and include the output in its decision'''
-                    if(info[1] < 10):
-                        converted, info = prepSave.convertFiles(myMat, 3)
-                        action_number3 = classw.predict(
-                            [converted + [self.user.currentBomb,
-                                          self.user.power]])
-                        action_list.append(action_number3)
-                    else:
-                        action_list.append([0, 0, 0, 0, 0, 0])
-                    '''If info[0] and info[1] are greater than or equal to
-                     10 manhattan blocks. It will input the matrix into
-                    the Bricks NN and include the output in its decision'''
-                    if(info[0] >= 10 and info[1] >= 10):
-                        converted, info = prepSave.convertFiles(myMat, 1)
-                        action_number4 = classy.predict(
-                            [converted + [self.user.currentBomb,
-                                          self.user.power]])
-                        action_list.append(action_number4)
-                    else:
-                        info[2] = 10
-                        action_list.append([0, 0, 0, 0, 0, 0])
-                    '''After prepending a 2 to info. Info will now include 4
-                    values representing the manhattan distance to the nearest
-                    Wall (will always be 2 to equalize weighting)
-                    Bomb
-                    Enemy
-                    Brick
-                    With a max of 10
-                    '''
-                    info = [2] + info
-                    '''It will now weight each value more depending on the
-                    distance to the object (lower distance == higher weight)
-                    This way, the program will weight the neural networks in
-                    accordance with the distance to their respective objects.
-                    The program will then sum the output of each matrix
-                    regularized for each weight in order to create a final
-                    probability for the likelyhood of each move'''
-                    for i in range(len(info)):
-                        info[i] = 10 - info[i]
-                    sumInfo = sum(info)
-                    for i in range(len(info)):
-                        info[i] = info[i] / sumInfo
-                    for i in range(len(action_number1)):
-                        tot = 0
-                        for j in range(len(action_list)):
-                            tot += action_list[j][i] * info[j]
-                        action_tot.append(tot)
-                    print(info)
-                    '''After resolving any rounding errors, the values will all
-                    sum to 1 and a random walue will be picked among them in
-                    accordance with each of their probabilities'''
-                    action_tot[2] += 1 - sum(action_tot)
-                    print(action_tot)
-                    action_number = np.random.choice(
-                        np.arange(0, 6), p=action_tot)
-                    print(action_number)
-                    '''The action is then performed'''
-                    if action_number in [1, 2, 3, 4]:
-                        pred_move = self.move_dict[action_number]
-                        point = self.user.movement(pred_move, grid, 2)
-                        self.movementHelper(self.user, point)
-                    elif action_number == 5:
-                        self.deployBomb(self.user)
+                # Feature extraction for machine learning
+
+
+                # self.c.FPS is set to 30, 30 ticks = 1 second
+                cyclicCounter += 1
+                if cyclicCounter == self.c.FPS:
+                    cyclicCounter = 0
+                    self.updateTimer()
+
+                if cyclicCounter % 2 == 1:
+                    self.clearExplosion()
+                grid = featureExtract.grid(self)
                 if event.type == pygame.QUIT:
                     self.forceQuit()
+                elif event.type == pygame.USEREVENT -1:
+                    if self.auto:
+
+                        # If the user is in auto Mode, the ML control is triggered
+                        # It is recommended to review the other parts of the code
+                        # especially NNClass.py before this in order to understand
+                        # the process
+
+                        # generate full grid for feature extraction
+                        # It first grabs the user position and created a matrix
+                        # around that
+                        x = self.user.position[0] / self.c.TILE_SIZE
+                        y = self.user.position[1] / self.c.TILE_SIZE
+                        myMat = featureConvert.convertGrid(
+                            np.matrix(self.user.map.matrix).transpose(),
+                            (x, y),
+                            21, 17)
+                        action_tot = []
+                        action_list = []  # array of all the actions
+
+                        # append player action to the end of converted grid feature
+                        # It then prepares the surrounding grid to be converted
+                        # into the input for the Walls NN while at the same time
+                        # grabbing info from around the player to decide whether to
+                        # use the other Neural Networks
+                        converted, info = prepSave.convertFiles(myMat, 0)
+                        action_number1 = classx.predict(
+                            [converted + [self.user.currentBomb, self.user.power]])
+                        action_list.append(action_number1)
+                        # If info[0] (aka the distance to the nearest bomb) is less
+                        # than 10 manhattan blocks. It will input the matrix into
+                        # the Bombs NN and include the output in its decision
+                        if(info[0] < 10):
+                            converted, info = prepSave.convertFiles(myMat, 2)
+                            action_number2 = classz.predict(
+                                [converted + [self.user.currentBomb,
+                                              self.user.power]])
+                            action_list.append(action_number2)
+                        else:
+                            action_list.append([0, 0, 0, 0, 0, 0])
+                        # If info[1] (aka the distance to the nearest enemy) is less
+                        # than 10 manhattan blocks. It will input the matrix into
+                        # the Enemys NN and include the output in its decision
+                        if(info[1] < 10):
+                            converted, info = prepSave.convertFiles(myMat, 3)
+                            action_number3 = classw.predict(
+                                [converted + [self.user.currentBomb,
+                                              self.user.power]])
+                            action_list.append(action_number3)
+                        else:
+                            action_list.append([0, 0, 0, 0, 0, 0])
+                        # If info[0] and info[1] are greater than or equal to
+                        #  10 manhattan blocks. It will input the matrix into
+                        # the Bricks NN and include the output in its decision
+                        if(info[0] >= 10 and info[1] >= 10):
+                            converted, info = prepSave.convertFiles(myMat, 1)
+                            action_number4 = classy.predict(
+                                [converted + [self.user.currentBomb,
+                                              self.user.power]])
+                            action_list.append(action_number4)
+                        else:
+                            info[2] = 10
+                            action_list.append([0, 0, 0, 0, 0, 0])
+                        # After prepending a 2 to info. Info will now include 4
+                        # values representing the manhattan distance to the nearest
+                        # Wall (will always be 2 to equalize weighting)
+                        # Bomb
+                        # Enemy
+                        # Brick
+                        # With a max of 10
+
+                        info = [2] + info
+                        # It will now weight each value more depending on the
+                        # distance to the object (lower distance == higher weight)
+                        # This way, the program will weight the neural networks in
+                        # accordance with the distance to their respective objects.
+                        # The program will then sum the output of each matrix
+                        # regularized for each weight in order to create a final
+                        # probability for the likelyhood of each move
+                        for i in range(len(info)):
+                            info[i] = 10 - info[i]
+                        sumInfo = sum(info)
+                        for i in range(len(info)):
+                            info[i] = info[i] / sumInfo
+                        for i in range(len(action_number1)):
+                            tot = 0
+                            for j in range(len(action_list)):
+                                tot += action_list[j][i] * info[j]
+                            action_tot.append(tot)
+                        print(info)
+                        # After resolving any rounding errors, the values will all
+                        # sum to 1 and a random walue will be picked among them in
+                        # accordance with each of their probabilities
+                        action_tot[2] += 1 - sum(action_tot)
+                        print(action_tot)
+                        action_number = np.random.choice(
+                            np.arange(0, 6), p=action_tot)
+                        print(action_number)
+                        # The action is then performed
+                        if action_number in [1, 2, 3, 4]:
+                            pred_move = self.move_dict[action_number]
+                            point = self.user.movement(pred_move, grid, 2)
+                            self.movementHelper(self.user, point)
+                        elif action_number == 5:
+                            self.deployBomb(self.user)
                 elif event.type == pygame.KEYDOWN:
                     # On button press
                     k = event.key
                     # Switch to computer controlled human
                     if k == pygame.K_RSHIFT:
                         # alter between normal and AI mode
-                        '''This will switch the game from human controlled
-                        to AI controlled'''
+                        # This will switch the game from human controlled
+                        # to AI controlled
                         self.auto = not self.auto
                     elif k == pygame.K_SPACE and not self.auto:
                         self.deployBomb(self.user)
@@ -389,6 +392,7 @@ class Game:
                     for e in self.enemies:
                         self.movementHelper(e, e.nextMove(grid))
                     # Character motion set to enemy cycles
+
                 self.updateDisplayInfo()
                 pygame.display.update()
 
@@ -516,7 +520,7 @@ class Game:
                 # trigger new bomb explosion
                 if t.bomb is not None:
                     self.activateBomb(t.bomb)
-                elif t.destroyable is not True:
+                elif t.destroyable is True:
                     # if brick or powerup or player
                     t.destroy()
                     self.blit(t.getImage(), nPoint)

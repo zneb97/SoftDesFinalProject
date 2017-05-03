@@ -36,18 +36,14 @@ def convertFiles(myMat, x):
                     info[0] = dist
                 elif(info[0] > dist):
                     info[0] = dist
-
-            # store enemy information
-            elif(myMat.item((j, i)) == 7):
+            elif(myMat.item((j,i)) == 7):
                 dist = abs(20 - j) + abs(16 - i)
                 if(info[1] == 10):
                     info[1] = dist
                 elif(info[1] > dist):
                     info[1] = dist
-
-            # store wall information
-            elif(myMat.item((j, i)) == 2):
-                dist = abs(20 - j) + abs(16 - i)
+            elif(myMat.item((j,i)) == 2):
+                dist = abs(20-j)+abs(16-i)
                 if(info[2] == 10):
                     info[2] = dist
                 elif(info[2] > dist):

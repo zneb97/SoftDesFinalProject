@@ -64,8 +64,8 @@ class Character(pygame.sprite.Sprite):
                 of the tiles. Used to make decisions based on surroundings
 
         humanAuto - 0 = human controller bomberman
-                                1 = computer controlled bomberman
-                                2 = computer controlled enemy
+                                1 = Hard coded computer controlled bomberman
+                                2 = Other
         """
         # Character is located at 20, 16 in shifting matrix
         c = config.Config()
@@ -94,8 +94,7 @@ class Character(pygame.sprite.Sprite):
 
         # Hardcoded AI
         # Elminates choices from an array of valid moves for the computer to
-        # chose from.Add "or humanAuto = 2" to if statement to slightly improve
-        # enemy AI
+        # chose from
         if humanAuto == 1:
             # Check validity of each movement move
             # Left
@@ -128,6 +127,7 @@ class Character(pygame.sprite.Sprite):
         # in learning process
         if key == pygame.K_UP:
             self.getImage('up')
+			#If human in control, save action and grid state for use in training data
             if humanAuto == 0:
                 self.saveChoice(1, myMat)
             return [0, -1 * c.TILE_SIZE]
