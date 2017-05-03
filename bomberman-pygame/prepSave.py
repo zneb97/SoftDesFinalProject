@@ -17,12 +17,12 @@ def convertFiles(myMat, x):
     endx=25 #myMat.shape[0]
     info = [10,10,10]
 
-    # convert grid feature to a single line of features
+    ''' convert grid feature to a single line of features'''
     for i in range(starty,endy):
         for j in range(startx,endx):
             listPlaces.append(myMat.item((j,i)))
 
-            # store bomb information
+            '''store bomb information'''
             if myMat.item((j,i)) == 9:
                 dist = abs(20-j)+abs(16-i)
                 if(info[0] == 10):
@@ -30,7 +30,7 @@ def convertFiles(myMat, x):
                 elif(info[0]>dist):
                     info[0] = dist
 
-            # store enemy information
+            ''' store enemy information'''
             elif(myMat.item((j,i)) == 7):
                 dist = abs(20-j)+abs(16-i)
                 if(info[1] == 10):
@@ -38,7 +38,7 @@ def convertFiles(myMat, x):
                 elif(info[1]>dist):
                     info[1] = dist
 
-            # store wall information
+            ''' store wall information'''
             elif(myMat.item((j,i)) == 2):
                 dist = abs(20-j)+abs(16-i)
                 if(info[2] == 10):
@@ -49,7 +49,8 @@ def convertFiles(myMat, x):
     if(len(listPlaces) == 0):
         return
 
-    # builds a list for each instance and add a 1 or 0 depending of the presence of the object
+    ''' builds a list for each instance and add a 1 or 0 depending of the
+    presence of the object'''
     tempList = []
     for j in range(len(listPlaces)):
         if(listPlaces[j] == fileDict[fileNames[x]]):
