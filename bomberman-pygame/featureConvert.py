@@ -1,21 +1,37 @@
+"""
+Takes in all player and objects places to create a grid.
+This grid is appended by zeros and shifts automatically
+to always locatled the player in the center to reduce computation complexity.
+
+Matrix Tile Code
+
+0 = VALID SPACE
+1 = WALL
+2 = BRICK
+3 = SECRET BRICK
+4 = SECRET BRICK
+7 = ENIMIES
+8 = PLAYERS
+9 = BOMBS
+
+"""
 
 import numpy as np
-
-"""
-Takes in all player and objects places to create a grid. This grid is padded
-by 0s and shifts to keep player in the center to reduce computation
-
--1 = Not real space
-0 = Valid space
-1 = Wall
-2 = BRICK
-3 = Secret BRICK
-4 = Monster
-
-"""
+from numpy import matrix
 
 
 def convertGrid(grid, pPos, viewX, viewY):
+    """
+    Paremeters :
+    grid -> numpy matrix
+    pPos -> Tuple of player Position (x, y)
+    viewX : Number of columns of the original grid
+    viewY : Number of rows of the original grid
+
+    Output :
+    An extended matrix appended with zeros so that the player is always
+    located at the center
+    """
     resultGridX = 2 * viewX - 1
     resultGridY = 2 * viewY - 1
     buckets = [[1] * resultGridY] * resultGridX
@@ -34,28 +50,23 @@ def convertGrid(grid, pPos, viewX, viewY):
     return mymat
 
 
-def condense_matrix(mymat):
-    # Hardcoded matrix condense algorithm, can improve in the future
-    return np.concatenate((mymat[18][14:19], mymat[19][14:19], mymat[20][14:19], mymat[21][14:19], mymat[22][14:19]), axis=0)
-
-
 def printGrid(mymat):
     """
-    Print out padded grid
+    Prints the 5x5 matrix with the player located at the center.
+    Serves as a testing code to see if the feature extraction is working.
     """
-    # Print the entire matrix
-    # for i in range(0, mymat.shape[1]):
-    # 	for j in range(0, mymat.shape[0]):
-    # 		print(mymat.item((j,i)), end='')
-    # 	print("    ")
-    mat = np.concatenate(([mymat[18][14:19]], [mymat[19][14:19]], [
-                         mymat[20][14:19]], [mymat[21][14:19]], [mymat[22][14:19]]), axis=0)
+    mat = np.concatenate(([mymat[18][14:19]],
+                          [mymat[19][14:19]],
+                          [mymat[20][14:19]],
+                          [mymat[21][14:19]],
+                          [mymat[22][14:19]]),
+                         axis=0)
     print(mat.T)
     print(" ")
 
 
 if __name__ == '__main__':
-    viewX = 21
-    viewY = 17
+    viewX = 21  # Number of columns
+    viewY = 17  # Number of rows
     mygrid = [[1] * viewY] * viewX
     convertGrid(matrix(mygrid), (0, 9), viewX, viewY)
