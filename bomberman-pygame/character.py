@@ -177,6 +177,12 @@ class Character(pygame.sprite.Sprite):
 
 	def saveChoice(self,choice,myMat):
 		# featureConvert.printGrid(myMat)
+		'''This code will save the current board and choice to a csv file
+		if the player is controlled by a person.
+		It will always save to WallsFull.csv
+		It will save to enemysFULL.csv and bombsFULL.csv if the corresponding
+		object is within 10 blocks
+		It will save to bricksFULL.csv if an enemy is not within 3 blocks'''
 		added = [self.currentBomb,self.power,choice]
 		tempGrid, info = prepSave.convertFiles(myMat,0)
 		prepSave.saveFiles(tempGrid,added,0)

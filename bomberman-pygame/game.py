@@ -367,6 +367,8 @@ class Game:
                     # Switch to computer controlled human
                     if k == pygame.K_RSHIFT:
                         # alter between normal and AI mode
+                        '''This will switch the game from human controlled
+                        to AI controlled'''
                         self.auto = not self.auto
                     elif k == pygame.K_SPACE and not self.auto:
                         self.deployBomb(self.user)
