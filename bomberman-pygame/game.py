@@ -52,8 +52,7 @@ class Game:
             (self.c.WIDTH, self.c.HEIGHT), pygame.DOUBLEBUF)
         pygame.display.set_caption("Bomberman")
 
-
-        # repeat for multiple levels
+        # Repeat for multiple levels
         while not self.exitGame:
             self.resetGame()
             self.clearBackground()
@@ -82,17 +81,12 @@ class Game:
 
     def initGame(self):
         """
-        Begin game mode with correct stats for board
+        Begins game mode with correct stats for board
         """
         if self.mode == self.c.SINGLE:
             self.printText("Level %d-%d" % (self.stage, self.level), (40, 15))
             self.field = board.Board(self.stage, self.level)
             self.timer = 3 * 60 + 1
-        elif self.mode == self.c.MULTI:
-            self.printText("Multiplayer", (40, 15))
-            self.field = board.Board(0, 0)
-            self.timer = 5 * 60 + 1
-
         self.drawBoard()
         self.drawInterface()
         self.updateTimer()
