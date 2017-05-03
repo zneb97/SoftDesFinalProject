@@ -223,14 +223,16 @@ class Game:
         # See project website for more details on each
 
         classw = NNClass.myClassifier(
-            'fakeEnemysFull.csv', "./ENEMYSCONFIGFULL")
+            'training_data/fakeEnemysFull.csv', "./ENEMYSCONFIGFULL")
         classw.trainModel(0)
-        classx = NNClass.myClassifier('fakeWallsFull.csv', "./WALLSCONFIGFULL")
+        classx = NNClass.myClassifier('training_data/fakeWallsFull.csv',
+                                      "./WALLSCONFIGFULL")
         classx.trainModel(0)
         classy = NNClass.myClassifier(
-            'fakeBricksFull.csv', "./BRICKSCONFIGFULL")
+            'training_data/fakeBricksFull.csv', "./BRICKSCONFIGFULL")
         classy.trainModel(0)
-        classz = NNClass.myClassifier('fakeBombsFull.csv', "./BOMBSCONFIGFULL")
+        classz = NNClass.myClassifier('training_data/fakeBombsFull.csv',
+                                      "./BOMBSCONFIGFULL")
         classz.trainModel(0)
 
         while self.gameIsActive:
@@ -624,7 +626,7 @@ class Game:
         self.initGame()
 
     def printText(self, text, point):
-        font = pygame.font.Font("lucida.ttf", 20)
+        font = pygame.font.Font("resources/lucida.ttf", 20)
         label = font.render(str(text) + '  ', True, (255, 255, 255), (0, 0, 0))
         textRect = label.get_rect()
         textRect.x = point[0]

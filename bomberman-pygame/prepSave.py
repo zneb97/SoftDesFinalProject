@@ -8,10 +8,12 @@ By : TEAM AFK
 import saveChoices
 
 # list of file names for our grid features
-fileNames = ['wallsFULL.csv', 'bricksFULL.csv',
-             'bombsFULL.csv', 'enemysFULL.csv']
-fileDict = {'wallsFULL.csv': 1, 'bricksFULL.csv': 2,
-            'bombsFULL.csv': 9, 'enemysFULL.csv': 7}
+fileNames = ['training_data/wallsFULL.csv', 'training_data/bricksFULL.csv',
+             'training_data/bombsFULL.csv', 'training_data/enemysFULL.csv']
+fileDict = {'training_data/wallsFULL.csv': 1,
+            'training_data/bricksFULL.csv': 2,
+            'training_data/bombsFULL.csv': 9,
+            'training_data/enemysFULL.csv': 7}
 
 
 def convertFiles(myMat, x):

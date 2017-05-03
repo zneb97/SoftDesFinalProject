@@ -134,13 +134,21 @@ class myClassifier:
 
 if __name__ == "__main__":
     """
-    UNCOMMENT THIS BLOCK TO TRAIN THE NEURALA NETWORK
-    # classx = myClassifier('wallsFULL.csv', "./WALLSCONFIGFULL")
+    # UNCOMMENT THIS BLOCK TO TRAIN THE NEURALA NETWORK
+
+    # classx = myClassifier('training_data/wallsFULL.csv',
+    "./WALLSCONFIGFULL")
     # classx.trainModel(6000)
-    # classy = myClassifier('bombsFULL.csv', "./BOMBSCONFIGFULL")
+
+    # classy = myClassifier('training_data/bombsFULL.csv',
+    "./BOMBSCONFIGFULL")
     # classy.trainModel(6000)
-    # classz = myClassifier('bricksFULL.csv', "./BRICKSCONFIGFULL")
+
+    # classz = myClassifier('training_data/bricksFULL.csv',
+    "./BRICKSCONFIGFULL")
     # classz.trainModel(6000)
-    # classw = myClassifier('enemysFULL.csv', "./ENEMYSCONFIGFULL")
+
+    # classw = myClassifier('training_data/enemysFULL.csv',
+    "./ENEMYSCONFIGFULL")
     # classw.trainModel(6000)
     """

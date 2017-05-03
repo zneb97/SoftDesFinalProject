@@ -11,7 +11,7 @@ A final project Franklin W. Olin College of Engineering's Software Design Spring
 <a href="https://github.com/Ryofashadewalk">Alex Core</a><br>
 <a href="https://github.com/zneb97">Benjamin Ziemann</a><br>
 <a href="https://github.com/CleanestMink126">Nick Steelman</a><br>
-<a href="https://github.com/SeunginLyu">Seungin Lyu</a><br> 
+<a href="https://github.com/SeunginLyu">Seungin Lyu</a><br>
 <a href="https://github.com/yjiang0929">Yichen Jiang</a><br>
 
 
@@ -21,9 +21,10 @@ Base game code written by Github user <a href="https://github.com/rickyc/bomberm
 ## Getting Started<br>
 **Dependencies**<br>
 Before starting, ensure you have the following installed:<br>
-* Pygame <br>
-* Numpy <br>
-* TensorFlow
+* Python 3
+* Pygame (1.9.3) <br>
+* Numpy (1.12.0) <br>
+* TensorFlow (1.0.1)
 <br>
 
 **Download**<br>
@@ -38,10 +39,10 @@ $ python3 main.py
 to run the game.
 
 ## Misc.<br>
-Project proposal can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/ProjectProposal.md">here.</a><br>
-Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/ArchitecturalReview.md">here.</a>
+Project proposal can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/docs/ProjectProposal.md">here.</a><br>
+Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/docs/ArchitecturalReview.md">here.</a>
 <br>
-Architectural Review Reflection can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/ReflectionSynthesis.md">here.</a>
+Architectural Review Reflection can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/docs/ReflectionSynthesis.md">here.</a>
 
 ## License<br>
 MIT License
