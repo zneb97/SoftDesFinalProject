@@ -2,7 +2,7 @@
 Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
 This entire code was written by the original author, Rickyc (Github user)
-Some Edits were made by the members of Team AFK to incorporte Marchine Learning
+Some Edits were made by the members of Team AFK to incorporate Machine Learning
 """
 
 # general dependencies
