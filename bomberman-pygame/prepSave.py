@@ -29,28 +29,14 @@ def convertFiles(myMat, x):
                     info[0] = dist
                 elif(info[0] > dist):
                     info[0] = dist
-<<<<<<< HEAD
             elif(myMat.item((j,i)) == 7):
-                dist = abs(20-j)+abs(16-i)
-=======
-
-            # store enemy information
-            elif(myMat.item((j, i)) == 7):
                 dist = abs(20 - j) + abs(16 - i)
->>>>>>> 2e73ec2d3d3a2c86b632b5736a0566b759e7bec3
                 if(info[1] == 10):
                     info[1] = dist
                 elif(info[1] > dist):
                     info[1] = dist
-<<<<<<< HEAD
             elif(myMat.item((j,i)) == 2):
                 dist = abs(20-j)+abs(16-i)
-=======
-
-            # store wall information
-            elif(myMat.item((j, i)) == 2):
-                dist = abs(20 - j) + abs(16 - i)
->>>>>>> 2e73ec2d3d3a2c86b632b5736a0566b759e7bec3
                 if(info[2] == 10):
                     info[2] = dist
                 elif(info[2] > dist):
