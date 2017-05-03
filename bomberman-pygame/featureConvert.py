@@ -17,7 +17,6 @@ Matrix Tile Code
 """
 
 import numpy as np
-from numpy import matrix
 
 
 def convertGrid(grid, pPos, viewX, viewY):
@@ -63,10 +62,3 @@ def printGrid(mymat):
                          axis=0)
     print(mat.T)
     print(" ")
-
-
-if __name__ == '__main__':
-    viewX = 21  # Number of columns
-    viewY = 17  # Number of rows
-    mygrid = [[1] * viewY] * viewX
-    convertGrid(matrix(mygrid), (0, 9), viewX, viewY)

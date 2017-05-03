@@ -1,31 +1,28 @@
-import sys
+# general dependencies
 import pygame
-import config
 import random
 import time
+
+# game module imports
+import config
 import player
 import enemy
 import board
-import bomb
 import highscore
 import music
-import featureExtract
-import featureConvert
-import prepSave
-import numpy as np
-from pygame.locals import *
-import os
-import sys
-sys.path.append(os.path.split(sys.path[0])[0])
-from Net import *
-import NNClass
 
-# num2Key = {1:pygame.K_UP, 2:pygame.K_DOWN,3: pygame.K_LEFT,4: pygame.K_RIGHT}
+# machine learning module imports
+import numpy as np
+import featureExtract  # extracts features
+import featureConvert  # converts the extracted features
+import prepSave  # saves the converted features into .CSV files
+import NNClass  # Trains & Predicts Movements with DeepNeuralNetwork
 
 
 class Game:
     """
-    Store, update, and maintain all data important to running game
+    Store, update, and maintain all data and features
+    relavant to running the game
     """
     # Stored board data
     players = []
@@ -33,21 +30,17 @@ class Game:
     bombs = []
     resetTiles = []
 
+    # the initial stage and level
     stage = 1
-    level = 4
+    level = 1
 
+    # game status flags
     firstRun = True
     exitGame = False
 
-    # Multiplayer data
-    tcpData = []
-    sendingData = []
-    lastTcpCall = 0
-    pHash = {}
-
     def __init__(self, mode):
         """
-        Initialize new game
+        Initialize new instance of the game
         """
         self.c = config.Config()
         self.highscores = highscore.Highscore()
@@ -59,7 +52,6 @@ class Game:
             (self.c.WIDTH, self.c.HEIGHT), pygame.DOUBLEBUF)
         pygame.display.set_caption("Bomberman")
 
-        # init preloader / join server
 
         # repeat for multiple levels
         while not self.exitGame:
@@ -75,7 +67,6 @@ class Game:
     def resetGame(self):
         """
         Clear board data
-
         Called on death or level clear
         """
         self.field = None
@@ -124,7 +115,7 @@ class Game:
         if self.mode == self.c.SINGLE:
             self.initEnemies(self.level * 2 + 1)
 
-        # Music player
+        # Music players
         mp = music.Music()
         mp.playMusic(self.mode)
 

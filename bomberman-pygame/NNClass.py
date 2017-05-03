@@ -2,10 +2,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import urllib
-
 import numpy as np
-import tensorflow as tf
+import tensorflow as tf  # Machine Learning Library
 
 
 def my_input_fn(input):
