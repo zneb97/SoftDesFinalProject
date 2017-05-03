@@ -30,11 +30,14 @@ Additionally, we've attached imaginary walls(that represent the area outside the
 
 ![Machine Learning](/resources/1.png) <br>
 
-Based on the titles around it, the Net always keeps track of what decisions in can make, whose probabilities are influenced by four categories:
+There are 4 Neural Nets that influence the actions of the player. Each one serves a specific purpose to give the AI some logic:
 
-* walls
-* bricks
-* bombs
-* enemies.<br>
+* Walls-This net is designed to tell the AI which moves are valid(e.g. if a wall is to
+  the left, left is an invalid move). Additionally, it will provide some logic telling
+  the AI to go down longer paths rather than dead ends
+* Bricks-This net will tell the AI to seek out and destroy bricks. Its main purpose is to tell when to place bombs depending on proximity to bricks
+* Bombs-The job of this net is to tell the AI when to run away from bombs.
+* Enemies-This net is the most experimental, it directs how the AI will act around enemies. It will try to direct the AI to go up to enemies, place bombs, and run away without running into them
+<br>
 
 The weight, or how much influence each of these categories has on the final decision varies based on the scenario. For example. when a bomb is nearby, movements to protect the player becomes a higher priority than destroying bricks.
