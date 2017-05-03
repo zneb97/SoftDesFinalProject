@@ -1,7 +1,14 @@
-import pygame, config, pyautogui, random
-import config as c
+import random
+
 import numpy as np
-import featureExtract, featureConvert, prepSave
+import pyautogui
+import pygame
+
+import config as c
+import featureConvert
+import featureExtract
+import prepSave
+
 
 # RFCT NEEDED
 

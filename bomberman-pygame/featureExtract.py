@@ -1,5 +1,6 @@
-import config as c
 from numpy import matrix
+
+import config as c
 import featureConvert
 
 
