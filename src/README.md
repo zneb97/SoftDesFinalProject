@@ -2,4 +2,4 @@
 
 Quick Guide for reviewing our code can be found <a href="https://docs.google.com/document/d/1rGOyaANnHi7TEOy9AfXIoOj2IeKgKpLuTaPRfRzjKxQ/edit?usp=sharing">here.</a>
 <br>
-Please Refer to the documentation for more details.(documentaion.html)
+Please Refer to the documentation for more details.(src/docs/build/index.html)
