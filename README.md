@@ -33,7 +33,7 @@ To download just download as a zip file or clone the repository.
 ## Usage<br>
 Once downloaded, in the terminal use the commands
 ```shell
-$ SoftDesFinalProject/bomberman-pygame
+$ SoftDesFinalProject/src
 $ python3 main.py
 ```
 to run the game. Pressing the "Left Shift" key will activate the auto mode.
