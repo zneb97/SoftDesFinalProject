@@ -39,10 +39,10 @@ $ python3 main.py
 to run the game. Pressing the "Left Shift" key will activate the auto mode.
 
 ## Misc.<br>
-Project proposal can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/docs/ProjectProposal.md">here.</a><br>
-Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/docs/ArchitecturalReview.md">here.</a>
+Project proposal can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/project_docs/ProjectProposal.md">here.</a><br>
+Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/project_docs/ArchitecturalReview.md">here.</a>
 <br>
-Architectural Review Reflection can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/docs/ReflectionSynthesis.md">here.</a>
+Architectural Review Reflection can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/project_docs/ReflectionSynthesis.md">here.</a>
 Final Presentation can be found <a href="https://docs.google.com/presentation/d/1YaGlI_PHdcVWGIpH5ofd0F1Tq2FRwAVLr6wR0Bzh7g0/edit?usp=sharing">here.</a>
 ## License<br>
 MIT License
