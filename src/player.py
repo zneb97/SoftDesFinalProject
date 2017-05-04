@@ -9,7 +9,7 @@ import pygame, character, config, bomb
 
 # RFCT NEEDED
 class Player(character.Character):
-	lives = 3
+	lives = 10
 	score = 0
 	currentBomb = 1
 	maxBombs = 1
