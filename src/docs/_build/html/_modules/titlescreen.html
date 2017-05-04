@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>titlescreen &mdash; Bomberman Bot 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Bomberman Bot 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Bomberman Bot
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../character.html">character module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../game.html">game module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featureConvert.html">featureConvert module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featureExtract.html">featureExtract module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../NNClass.html">NNClass module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bomberman Bot</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>titlescreen</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for titlescreen</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Project : Bomberman Bot with Machine Learning</span>
+<span class="sd">Olin College Software Design Final Orject,  Spring 2017</span>
+<span class="sd">This entire code was written by the original author, Rickyc (Github user)</span>
+<span class="sd">No edits were done by the members of Team AFK</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">pygame</span><span class="o">,</span> <span class="nn">config</span><span class="o">,</span> <span class="nn">game</span><span class="o">,</span> <span class="nn">highscore</span>
+
+<div class="viewcode-block" id="Titlescreen"><a class="viewcode-back" href="../titlescreen.html#titlescreen.Titlescreen">[docs]</a><span class="k">class</span> <span class="nc">Titlescreen</span><span class="p">():</span>
+
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+		<span class="n">exitMain</span> <span class="o">=</span> <span class="kc">False</span>
+
+		<span class="k">while</span> <span class="ow">not</span> <span class="n">exitMain</span><span class="p">:</span>
+			<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">1028</span><span class="p">,</span><span class="mi">768</span><span class="p">))</span>
+			<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;Bomberman&quot;</span><span class="p">)</span>
+
+			<span class="n">imagePath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">IMAGE_PATH</span> <span class="o">+</span> <span class="s2">&quot;titlescreen.png&quot;</span>
+			<span class="n">img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">imagePath</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+			<span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">music</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">AUDIO_PATH</span> <span class="o">+</span> <span class="s2">&quot;title.mid&quot;</span><span class="p">)</span>
+			<span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">music</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+
+			<span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+			<span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+			<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+			<span class="n">userInteracted</span> <span class="o">=</span> <span class="kc">False</span>
+
+			<span class="k">while</span> <span class="ow">not</span> <span class="n">userInteracted</span><span class="p">:</span>
+				<span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">FPS</span><span class="p">)</span>
+				<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+					<span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+						<span class="n">userInteracted</span> <span class="o">=</span> <span class="kc">True</span>
+						<span class="n">exitMain</span> <span class="o">=</span> <span class="kc">True</span>
+						<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+					<span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">:</span>
+						<span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span>
+							<span class="n">userInteracted</span> <span class="o">=</span> <span class="kc">True</span>
+							<span class="n">exitMain</span> <span class="o">=</span> <span class="kc">True</span>
+							<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+					<span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">MOUSEBUTTONDOWN</span><span class="p">:</span>
+						<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">withinBoundary</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">540</span><span class="p">):</span>
+							<span class="n">userInteracted</span> <span class="o">=</span> <span class="kc">True</span>
+							<span class="bp">self</span><span class="o">.</span><span class="n">singlePlayer</span><span class="p">()</span> <span class="c1"># Single Player game clicked</span>
+						<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">withinBoundary</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">600</span><span class="p">):</span>
+							<span class="n">userInteracted</span> <span class="o">=</span> <span class="kc">True</span>
+							<span class="bp">self</span><span class="o">.</span><span class="n">highScores</span><span class="p">()</span> <span class="c1"># High Score clicked</span>
+						<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">withinBoundary</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">605</span><span class="p">,</span> <span class="mi">645</span><span class="p">):</span>
+							<span class="n">userInteracted</span> <span class="o">=</span> <span class="kc">True</span>
+							<span class="n">exitMain</span> <span class="o">=</span> <span class="kc">True</span>
+							<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span> <span class="c1"># Exit clicked</span>
+
+<div class="viewcode-block" id="Titlescreen.withinBoundary"><a class="viewcode-back" href="../titlescreen.html#titlescreen.Titlescreen.withinBoundary">[docs]</a>	<span class="k">def</span> <span class="nf">withinBoundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">get_pos</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">x1</span> <span class="ow">and</span> <span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">get_pos</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x2</span> <span class="ow">and</span> <span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">get_pos</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">y1</span> <span class="ow">and</span> <span class="n">pygame</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">get_pos</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">y2</span><span class="p">:</span>
+			<span class="k">return</span> <span class="kc">True</span>
+		<span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Titlescreen.singlePlayer"><a class="viewcode-back" href="../titlescreen.html#titlescreen.Titlescreen.singlePlayer">[docs]</a>	<span class="k">def</span> <span class="nf">singlePlayer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">g</span> <span class="o">=</span> <span class="n">game</span><span class="o">.</span><span class="n">Game</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Titlescreen.multiplayer"><a class="viewcode-back" href="../titlescreen.html#titlescreen.Titlescreen.multiplayer">[docs]</a>	<span class="k">def</span> <span class="nf">multiplayer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">g</span> <span class="o">=</span> <span class="n">game</span><span class="o">.</span><span class="n">Game</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">MULTI</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Titlescreen.instructions"><a class="viewcode-back" href="../titlescreen.html#titlescreen.Titlescreen.instructions">[docs]</a>	<span class="k">def</span> <span class="nf">instructions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Instructions clicked!&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Titlescreen.highScores"><a class="viewcode-back" href="../titlescreen.html#titlescreen.Titlescreen.highScores">[docs]</a>	<span class="k">def</span> <span class="nf">highScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">h</span> <span class="o">=</span> <span class="n">highscore</span><span class="o">.</span><span class="n">Highscore</span><span class="p">()</span>
+		<span class="n">h</span><span class="o">.</span><span class="n">displayScore</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Titlescreen.clearBackground"><a class="viewcode-back" href="../titlescreen.html#titlescreen.Titlescreen.clearBackground">[docs]</a>	<span class="k">def</span> <span class="nf">clearBackground</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">bg</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">get_size</span><span class="p">())</span>
+		<span class="n">bg</span> <span class="o">=</span> <span class="n">bg</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+		<span class="n">bg</span><span class="o">.</span><span class="n">fill</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">bg</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></div></div>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Titlescreen</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright TEAM AFK.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

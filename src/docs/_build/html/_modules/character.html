@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>character &mdash; Bomberman Bot 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Bomberman Bot 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Bomberman Bot
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../character.html">character module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../game.html">game module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featureConvert.html">featureConvert module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featureExtract.html">featureExtract module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../NNClass.html">NNClass module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bomberman Bot</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>character</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for character</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Project : Bomberman Bot with Machine Learning</span>
+<span class="sd">Olin College Software Design Final Orject,  Spring 2017</span>
+<span class="sd">This entire code was written by the original author, Rickyc (Github user)</span>
+<span class="sd">Some Edits were made by the members of Team AFK to incorporate Machine Learning</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># General Dependencies</span>
+<span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">import</span> <span class="nn">config</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Machine Learninig Related</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">featureConvert</span>
+<span class="kn">import</span> <span class="nn">prepSave</span>
+
+
+<div class="viewcode-block" id="Character"><a class="viewcode-back" href="../character.html#character.Character">[docs]</a><span class="k">class</span> <span class="nc">Character</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
+    <span class="n">lives</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">speed</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">imageName</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Intialize a character object, can be either human or monster</span>
+
+<span class="sd">        name - to refer to the character</span>
+<span class="sd">        imageName - to refer to the sprite representing character on screen</span>
+<span class="sd">        point - location on board</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imageName</span> <span class="o">=</span> <span class="n">imageName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sPosition</span> <span class="o">=</span> <span class="n">point</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Character.reset"><a class="viewcode-back" href="../character.html#character.Character.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls to update postions graphically and in code</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sPosition</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Character.getImage"><a class="viewcode-back" href="../character.html#character.Character.getImage">[docs]</a>    <span class="k">def</span> <span class="nf">getImage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get correct spright image for character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">imagePath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">IMAGE_PATH</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">imageName</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">imagePath</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Character.update"><a class="viewcode-back" href="../character.html#character.Character.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=D&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Character.movement"><a class="viewcode-back" href="../character.html#character.Character.movement">[docs]</a>    <span class="k">def</span> <span class="nf">movement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">humanAuto</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the sprite and issues command to movementHelper</span>
+
+<span class="sd">        Note that this is used by both humans and enemies to move</span>
+
+<span class="sd">        key - the keyboard command used to move the character</span>
+<span class="sd">        grid - a grid of the board with numbers representing occupency</span>
+<span class="sd">                of the tiles. Used to make decisions based on surroundings</span>
+
+<span class="sd">        humanAuto - 0 = human controller bomberman</span>
+<span class="sd">                                1 = Hard coded computer controlled bomberman</span>
+<span class="sd">                                2 = Other</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Character is located at 20, 16 in shifting matrix</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">grid</span>
+
+        <span class="c1"># List of moves and validity. Note backspace is a placeholder for do</span>
+        <span class="c1"># nothing</span>
+        <span class="n">moves</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_UP</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_DOWN</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span><span class="p">,</span>
+                 <span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_BACKSPACE</span><span class="p">]</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">humanAuto</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">moves</span><span class="p">[</span><span class="n">key</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Create shifting grid</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">TILE_SIZE</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">TILE_SIZE</span>
+        <span class="n">myMat</span> <span class="o">=</span> <span class="n">featureConvert</span><span class="o">.</span><span class="n">convertGrid</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+
+        <span class="c1"># Shifting grid keeps player at [20,16]</span>
+        <span class="c1"># Variables to save tiles in compass directionsa around it</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">down</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+
+        <span class="c1"># Hardcoded AI</span>
+        <span class="c1"># Elminates choices from an array of valid moves for the computer to</span>
+        <span class="c1"># chose from</span>
+        <span class="k">if</span> <span class="n">humanAuto</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Check validity of each movement move</span>
+            <span class="c1"># Left</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span>
+               <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)):</span>
+                <span class="n">valid</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># Right</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span>
+               <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)):</span>
+                <span class="n">valid</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># Up</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">up</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">up</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span>
+               <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">up</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">up</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)):</span>
+                <span class="n">valid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># Down</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">down</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">down</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span>
+               <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">down</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">down</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)):</span>
+                <span class="n">valid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="c1"># Create list of valid moves to chose from</span>
+            <span class="n">validMoves</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">moves</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">valid</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">validMoves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">moves</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">validMoves</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">validMoves</span><span class="p">)))]</span>
+
+        <span class="c1"># Finalize choice</span>
+        <span class="c1"># Update sprite, return tile to move to to be used by movementHelper</span>
+        <span class="c1"># If human, compass surrounding tiles&#39; states are saved to be used</span>
+        <span class="c1"># in learning process</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_UP</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">)</span>
+			<span class="c1">#If human in control, save action and grid state for use in training data</span>
+            <span class="k">if</span> <span class="n">humanAuto</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">saveChoice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">myMat</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">TILE_SIZE</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_DOWN</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">humanAuto</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">saveChoice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">myMat</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">TILE_SIZE</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">humanAuto</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">saveChoice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">myMat</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">TILE_SIZE</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">humanAuto</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">saveChoice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">myMat</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">TILE_SIZE</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">humanAuto</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">saveChoice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">myMat</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Character.move"><a class="viewcode-back" href="../character.html#character.Character.move">[docs]</a>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update previous and current position of character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">point</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Character.saveChoice"><a class="viewcode-back" href="../character.html#character.Character.saveChoice">[docs]</a>    <span class="k">def</span> <span class="nf">saveChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">choice</span><span class="p">,</span> <span class="n">myMat</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;This code will save the current board and choice to a csv file</span>
+<span class="sd">        if the player is controlled by a person.</span>
+<span class="sd">        It will always save to WallsFull.csv</span>
+<span class="sd">        It will save to enemysFULL.csv and bombsFULL.csv if the corresponding</span>
+<span class="sd">        object is within 10 blocks</span>
+<span class="sd">        It will save to bricksFULL.csv if an enemy is not within 3 blocks&#39;&#39;&#39;</span>
+        <span class="n">added</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">currentBomb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power</span><span class="p">,</span> <span class="n">choice</span><span class="p">]</span>
+        <span class="n">tempGrid</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">prepSave</span><span class="o">.</span><span class="n">convertFiles</span><span class="p">(</span><span class="n">myMat</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">prepSave</span><span class="o">.</span><span class="n">saveFiles</span><span class="p">(</span><span class="n">tempGrid</span><span class="p">,</span> <span class="n">added</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">prepSave</span><span class="o">.</span><span class="n">saveFiles</span><span class="p">(</span><span class="n">prepSave</span><span class="o">.</span><span class="n">convertFiles</span><span class="p">(</span><span class="n">myMat</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">added</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">):</span>
+            <span class="n">prepSave</span><span class="o">.</span><span class="n">saveFiles</span><span class="p">(</span><span class="n">prepSave</span><span class="o">.</span><span class="n">convertFiles</span><span class="p">(</span><span class="n">myMat</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">added</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">):</span>
+            <span class="n">prepSave</span><span class="o">.</span><span class="n">saveFiles</span><span class="p">(</span><span class="n">prepSave</span><span class="o">.</span><span class="n">convertFiles</span><span class="p">(</span><span class="n">myMat</span><span class="p">,</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">added</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright TEAM AFK.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

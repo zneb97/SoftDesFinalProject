@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>game module &mdash; Bomberman Bot 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Bomberman Bot 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="featureConvert module" href="featureConvert.html"/>
+        <link rel="prev" title="character module" href="character.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Bomberman Bot
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="character.html">character module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">game module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featureConvert.html">featureConvert module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featureExtract.html">featureExtract module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NNClass.html">NNClass module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bomberman Bot</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>game module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/game.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-game">
+<span id="game-module"></span><h1>game module<a class="headerlink" href="#module-game" title="Permalink to this headline">¶</a></h1>
+<p>Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+This entire code was written by the original author, Rickyc (Github user)
+Some Edits were made by the members of Team AFK to incorporate Machine Learning</p>
+<dl class="class">
+<dt id="game.Game">
+<em class="property">class </em><code class="descclassname">game.</code><code class="descname">Game</code><span class="sig-paren">(</span><em>mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Store, update, and maintain all data and features
+relavant to running the game</p>
+<dl class="method">
+<dt id="game.Game.activateBomb">
+<code class="descname">activateBomb</code><span class="sig-paren">(</span><em>bomb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.activateBomb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.activateBomb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove bomb, kill surroundings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.blit">
+<code class="descname">blit</code><span class="sig-paren">(</span><em>obj</em>, <em>pos</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.blit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.blit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.bombHelper">
+<code class="descname">bombHelper</code><span class="sig-paren">(</span><em>bomb</em>, <em>direction</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.bombHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.bombHelper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.bombs">
+<code class="descname">bombs</code><em class="property"> = []</em><a class="headerlink" href="#game.Game.bombs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.checkPlayerEnemyBombCollision">
+<code class="descname">checkPlayerEnemyBombCollision</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.checkPlayerEnemyBombCollision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.checkPlayerEnemyBombCollision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check bomb&#8217;s effects against player and enemy positions and clear
+if need be</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.checkPlayerEnemyCollision">
+<code class="descname">checkPlayerEnemyCollision</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.checkPlayerEnemyCollision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.checkPlayerEnemyCollision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if enemy has killed player</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.checkWinConditions">
+<code class="descname">checkWinConditions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.checkWinConditions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.checkWinConditions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.clearBackground">
+<code class="descname">clearBackground</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.clearBackground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.clearBackground" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.clearExplosion">
+<code class="descname">clearExplosion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.clearExplosion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.clearExplosion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update board accordingly to bomb&#8217;s effect</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.deployBomb">
+<code class="descname">deployBomb</code><span class="sig-paren">(</span><em>player</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.deployBomb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.deployBomb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placing of bombs based</p>
+<p>Additional code written so machine learning can
+recognize if it is standing on a bomb as usually player
+overwrites bomb</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.drawBoard">
+<code class="descname">drawBoard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.drawBoard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.drawBoard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build board
+Note: each level has a predefined layout</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.drawInterface">
+<code class="descname">drawInterface</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.drawInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.drawInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build border stats graphics</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.enemies">
+<code class="descname">enemies</code><em class="property"> = []</em><a class="headerlink" href="#game.Game.enemies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.exitGame">
+<code class="descname">exitGame</code><em class="property"> = False</em><a class="headerlink" href="#game.Game.exitGame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.fQuit">
+<code class="descname">fQuit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.fQuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.fQuit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.firstRun">
+<code class="descname">firstRun</code><em class="property"> = True</em><a class="headerlink" href="#game.Game.firstRun" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.gameover">
+<code class="descname">gameover</code><span class="sig-paren">(</span><em>player</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.gameover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.gameover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.initEnemies">
+<code class="descname">initEnemies</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.initEnemies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.initEnemies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate enemies in semi-random positions around board
+Will not spawn near player</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.initGame">
+<code class="descname">initGame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.initGame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.initGame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begins game mode with correct stats for board</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.initPlayers">
+<code class="descname">initPlayers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.initPlayers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.initPlayers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places players</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.level">
+<code class="descname">level</code><em class="property"> = 1</em><a class="headerlink" href="#game.Game.level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.movementHelper">
+<code class="descname">movementHelper</code><span class="sig-paren">(</span><em>char</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.movementHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.movementHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves player in code</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.players">
+<code class="descname">players</code><em class="property"> = []</em><a class="headerlink" href="#game.Game.players" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.printText">
+<code class="descname">printText</code><span class="sig-paren">(</span><em>text</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.printText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.printText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.resetGame">
+<code class="descname">resetGame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.resetGame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.resetGame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear board data
+Called on death or level clear</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.resetPlayerPosition">
+<code class="descname">resetPlayerPosition</code><span class="sig-paren">(</span><em>player</em>, <em>death</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.resetPlayerPosition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.resetPlayerPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put player back in top left on death or level clear</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.resetTiles">
+<code class="descname">resetTiles</code><em class="property"> = []</em><a class="headerlink" href="#game.Game.resetTiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.restart">
+<code class="descname">restart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.restart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.restart" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function forces the game to go back to its initial state</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.runGame">
+<code class="descname">runGame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.runGame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.runGame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycling and updating of all the game states and variables</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="game.Game.stage">
+<code class="descname">stage</code><em class="property"> = 1</em><a class="headerlink" href="#game.Game.stage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.triggerBombChain">
+<code class="descname">triggerBombChain</code><span class="sig-paren">(</span><em>bomb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.triggerBombChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.triggerBombChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow for bombs to activate other bombs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.updateBombs">
+<code class="descname">updateBombs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.updateBombs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.updateBombs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Countdown bombs, explode if needed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.updateDisplayInfo">
+<code class="descname">updateDisplayInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.updateDisplayInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.updateDisplayInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display charater stats</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="game.Game.updateTimer">
+<code class="descname">updateTimer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.updateTimer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.updateTimer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="game.Game.victory">
+<code class="descname">victory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.victory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.victory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="featureConvert.html" class="btn btn-neutral float-right" title="featureConvert module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="character.html" class="btn btn-neutral" title="character module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright TEAM AFK.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

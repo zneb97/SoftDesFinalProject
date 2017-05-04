@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NNClass module &mdash; Bomberman Bot 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Bomberman Bot 1.0.0 documentation" href="index.html"/>
+        <link rel="prev" title="saveChoices module" href="saveChoices.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Bomberman Bot
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="character.html">character module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">game module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featureConvert.html">featureConvert module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featureExtract.html">featureExtract module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NNClass module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bomberman Bot</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>NNClass module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/NNClass.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-NNClass">
+<span id="nnclass-module"></span><h1>NNClass module<a class="headerlink" href="#module-NNClass" title="Permalink to this headline">¶</a></h1>
+<p>Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+By : TEAM AFK</p>
+<dl class="class">
+<dt id="NNClass.myClassifier">
+<em class="property">class </em><code class="descclassname">NNClass.</code><code class="descname">myClassifier</code><span class="sig-paren">(</span><em>trainName</em>, <em>saveStateName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#myClassifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.myClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class handles all the Neural Network operations for the bomberman
+including :
+1) training
+2) prediction
+3) weight visualization</p>
+<dl class="method">
+<dt id="NNClass.myClassifier.get_test_inputs">
+<code class="descname">get_test_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#myClassifier.get_test_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.myClassifier.get_test_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper function that will feed data to the classifier</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NNClass.myClassifier.get_train_inputs">
+<code class="descname">get_train_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#myClassifier.get_train_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.myClassifier.get_train_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper function that will feed data to the classifier</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NNClass.myClassifier.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>myInput</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#myClassifier.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.myClassifier.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will return probability values,
+output by the model of a given input</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NNClass.myClassifier.returnvar">
+<code class="descname">returnvar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#myClassifier.returnvar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.myClassifier.returnvar" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will return the expected overall weight of each node
+on the neural network as a whole. This is hightly specialized for the
+current machine learning configuration and will therefore not work if
+any parameters change</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NNClass.myClassifier.testAccuracy">
+<code class="descname">testAccuracy</code><span class="sig-paren">(</span><em>testName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#myClassifier.testAccuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.myClassifier.testAccuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will take in a csv file
+to test the accuracy of the model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NNClass.myClassifier.trainModel">
+<code class="descname">trainModel</code><span class="sig-paren">(</span><em>steps</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#myClassifier.trainModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.myClassifier.trainModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will train the model a given number of iterations.
+The model must first be trained before predictions can be made,
+so it is possible to train it 0 times
+in order to load a modelwithout changes</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="NNClass.my_input_fn">
+<code class="descclassname">NNClass.</code><code class="descname">my_input_fn</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NNClass.html#my_input_fn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NNClass.my_input_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="saveChoices.html" class="btn btn-neutral" title="saveChoices module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright TEAM AFK.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

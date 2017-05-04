@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>character module &mdash; Bomberman Bot 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Bomberman Bot 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="game module" href="game.html"/>
+        <link rel="prev" title="Welcome to Team AFK’s Bomberman Bot documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Bomberman Bot
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">character module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">game module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featureConvert.html">featureConvert module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featureExtract.html">featureExtract module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NNClass.html">NNClass module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bomberman Bot</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>character module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/character.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-character">
+<span id="character-module"></span><h1>character module<a class="headerlink" href="#module-character" title="Permalink to this headline">¶</a></h1>
+<p>Project : Bomberman Bot with Machine Learning
+Olin College Software Design Final Orject,  Spring 2017
+This entire code was written by the original author, Rickyc (Github user)
+Some Edits were made by the members of Team AFK to incorporate Machine Learning</p>
+<dl class="class">
+<dt id="character.Character">
+<em class="property">class </em><code class="descclassname">character.</code><code class="descname">Character</code><span class="sig-paren">(</span><em>name</em>, <em>imageName</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pygame.sprite.Sprite</span></code></p>
+<dl class="method">
+<dt id="character.Character.getImage">
+<code class="descname">getImage</code><span class="sig-paren">(</span><em>direction</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.getImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.getImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get correct spright image for character</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="character.Character.lives">
+<code class="descname">lives</code><em class="property"> = 1</em><a class="headerlink" href="#character.Character.lives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="character.Character.move">
+<code class="descname">move</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update previous and current position of character</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="character.Character.movement">
+<code class="descname">movement</code><span class="sig-paren">(</span><em>key</em>, <em>grid</em>, <em>humanAuto=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.movement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.movement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the sprite and issues command to movementHelper</p>
+<p>Note that this is used by both humans and enemies to move</p>
+<p>key - the keyboard command used to move the character
+grid - a grid of the board with numbers representing occupency</p>
+<blockquote>
+<div>of the tiles. Used to make decisions based on surroundings</div></blockquote>
+<dl class="docutils">
+<dt>humanAuto - 0 = human controller bomberman</dt>
+<dd>1 = Hard coded computer controlled bomberman
+2 = Other</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="character.Character.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><em>bool</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls to update postions graphically and in code</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="character.Character.saveChoice">
+<code class="descname">saveChoice</code><span class="sig-paren">(</span><em>choice</em>, <em>myMat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.saveChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.saveChoice" title="Permalink to this definition">¶</a></dt>
+<dd><p>This code will save the current board and choice to a csv file
+if the player is controlled by a person.
+It will always save to WallsFull.csv
+It will save to enemysFULL.csv and bombsFULL.csv if the corresponding
+object is within 10 blocks
+It will save to bricksFULL.csv if an enemy is not within 3 blocks</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="character.Character.speed">
+<code class="descname">speed</code><em class="property"> = 1</em><a class="headerlink" href="#character.Character.speed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="character.Character.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="game.html" class="btn btn-neutral float-right" title="game module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to Team AFK’s Bomberman Bot documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright TEAM AFK.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
