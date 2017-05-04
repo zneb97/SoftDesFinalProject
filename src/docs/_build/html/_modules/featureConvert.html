@@ -95,8 +95,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../game.html">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -163,25 +163,16 @@
             
   <h1>Source code for featureConvert</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains functions that convert a grid list into a 2-D numpy array.</span>
+<span class="sd">The grid list contains all instances of the current game.</span>
+<span class="sd">The player location is always fixed on the center of the matrix by</span>
+<span class="sd">appendeding zeros that shift automatically in accordance with the player</span>
+<span class="sd">movment. This was a technical choice made to reduce the time complexity.</span>
+
+
 <span class="sd">Project : Bomberman Bot with Machine Learning</span>
 <span class="sd">Olin College Software Design Final Orject,  Spring 2017</span>
 <span class="sd">By : TEAM AFK</span>
-
-<span class="sd">Takes in all player and objects places to create a grid.</span>
-<span class="sd">This grid is appended by zeros and shifts automatically</span>
-<span class="sd">to always locatled the player in the center to reduce computation complexity.</span>
-
-<span class="sd">Matrix Tile Code</span>
-
-<span class="sd">0 = VALID SPACE</span>
-<span class="sd">1 = WALL</span>
-<span class="sd">2 = BRICK</span>
-<span class="sd">3 = SECRET BRICK</span>
-<span class="sd">4 = SECRET BRICK</span>
-<span class="sd">7 = ENIMIES</span>
-<span class="sd">8 = PLAYERS</span>
-<span class="sd">9 = BOMBS</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -189,15 +180,8 @@
 
 <div class="viewcode-block" id="convertGrid"><a class="viewcode-back" href="../featureConvert.html#featureConvert.convertGrid">[docs]</a><span class="k">def</span> <span class="nf">convertGrid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">pPos</span><span class="p">,</span> <span class="n">viewX</span><span class="p">,</span> <span class="n">viewY</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Paremeters :</span>
-<span class="sd">    grid -&gt; numpy matrix</span>
-<span class="sd">    pPos -&gt; Tuple of player Position (x, y)</span>
-<span class="sd">    viewX : Number of columns of the original grid</span>
-<span class="sd">    viewY : Number of rows of the original grid</span>
-
-<span class="sd">    Output :</span>
-<span class="sd">    An extended matrix appended with zeros so that the player is always</span>
-<span class="sd">    located at the center</span>
+<span class="sd">    Converts a 2d grid list into a numpy array, appended with zeros</span>
+<span class="sd">    so that the player is always located at its center.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">resultGridX</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">viewX</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">resultGridY</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">viewY</span> <span class="o">-</span> <span class="mi">1</span>

@@ -95,8 +95,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../game.html">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -163,12 +163,12 @@
             
   <h1>Source code for featureExtract</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module Extracts features (player, enemy, bombs) from the main game loop</span>
+<span class="sd">and stores the data as a two-demensional list</span>
+
 <span class="sd">Project : Bomberman Bot with Machine Learning</span>
 <span class="sd">Olin College Software Design Final Orject,  Spring 2017</span>
 <span class="sd">By : TEAM AFK</span>
-
-<span class="sd">Extracts features (player, enemy, bombs) from the main game loop</span>
-<span class="sd">and stores the data as a two-demensional list</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -177,23 +177,14 @@
 
 <div class="viewcode-block" id="grid"><a class="viewcode-back" href="../featureExtract.html#featureExtract.grid">[docs]</a><span class="k">class</span> <span class="nc">grid</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Identifies player, enemy, object positons from board</span>
-
-<span class="sd">    Matrix Tile Code</span>
-
-<span class="sd">    0 = VALID SPACE</span>
-<span class="sd">    1 = WALL</span>
-<span class="sd">    2 = BRICK</span>
-<span class="sd">    3 = SECRET BRICK</span>
-<span class="sd">    4 = SECRET BRICK</span>
-<span class="sd">    7 = ENIMIES</span>
-<span class="sd">    8 = PLAYERS</span>
-<span class="sd">    9 = BOMBS</span>
+<span class="sd">    Tile Code:</span>
+<span class="sd">    0 = VALID SPACE, 1 = WALL, 2 = BRICK, 3 = SECRET BRICK, 4 = SECRET BRICK</span>
+<span class="sd">    7 = ENIMIES, 8 = PLAYERS, 9 = BOMBS</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Thie function initlizes the attributes that represent the grid</span>
+<span class="sd">        Initlizes the attributes that represent the grid status</span>
 <span class="sd">        from the current game instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">game</span>
@@ -205,8 +196,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This property function returns the grid,</span>
-<span class="sd">        with all players, enimies, and bombs added</span>
+<span class="sd">        A 2-d list(matrix) of players, enemies, and bombs on the grid</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mat</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">board</span><span class="p">:</span>

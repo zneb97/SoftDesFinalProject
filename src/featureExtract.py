@@ -1,10 +1,10 @@
 """
+This module Extracts features (player, enemy, bombs) from the main game loop
+and stores the data as a two-demensional list
+
 Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
 By : TEAM AFK
-
-Extracts features (player, enemy, bombs) from the main game loop
-and stores the data as a two-demensional list
 """
 
 
@@ -13,23 +13,14 @@ import config as c
 
 class grid:
     """
-    Identifies player, enemy, object positons from board
-
-    Matrix Tile Code
-
-    0 = VALID SPACE
-    1 = WALL
-    2 = BRICK
-    3 = SECRET BRICK
-    4 = SECRET BRICK
-    7 = ENIMIES
-    8 = PLAYERS
-    9 = BOMBS
+    Tile Code:
+    0 = VALID SPACE, 1 = WALL, 2 = BRICK, 3 = SECRET BRICK, 4 = SECRET BRICK
+    7 = ENIMIES, 8 = PLAYERS, 9 = BOMBS
     """
 
     def __init__(self, game):
         """
-        Thie function initlizes the attributes that represent the grid
+        Initlizes the attributes that represent the grid status
         from the current game instance
         """
         self.g = game
@@ -41,8 +32,7 @@ class grid:
     @property
     def matrix(self):
         """
-        This property function returns the grid,
-        with all players, enimies, and bombs added
+        A 2-d list(matrix) of players, enemies, and bombs on the grid
         """
         mat = []
         for row in self.field.board:

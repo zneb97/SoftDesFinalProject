@@ -96,8 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="game.html">game module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -164,32 +164,19 @@
             
   <div class="section" id="module-featureConvert">
 <span id="featureconvert-module"></span><h1>featureConvert module<a class="headerlink" href="#module-featureConvert" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions that convert a grid list into a 2-D numpy array.
+The grid list contains all instances of the current game.
+The player location is always fixed on the center of the matrix by
+appendeding zeros that shift automatically in accordance with the player
+movment. This was a technical choice made to reduce the time complexity.</p>
 <p>Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
 By : TEAM AFK</p>
-<p>Takes in all player and objects places to create a grid.
-This grid is appended by zeros and shifts automatically
-to always locatled the player in the center to reduce computation complexity.</p>
-<p>Matrix Tile Code</p>
-<p>0 = VALID SPACE
-1 = WALL
-2 = BRICK
-3 = SECRET BRICK
-4 = SECRET BRICK
-7 = ENIMIES
-8 = PLAYERS
-9 = BOMBS</p>
 <dl class="function">
 <dt id="featureConvert.convertGrid">
 <code class="descclassname">featureConvert.</code><code class="descname">convertGrid</code><span class="sig-paren">(</span><em>grid</em>, <em>pPos</em>, <em>viewX</em>, <em>viewY</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/featureConvert.html#convertGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#featureConvert.convertGrid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Paremeters :
-grid -&gt; numpy matrix
-pPos -&gt; Tuple of player Position (x, y)
-viewX : Number of columns of the original grid
-viewY : Number of rows of the original grid</p>
-<p>Output :
-An extended matrix appended with zeros so that the player is always
-located at the center</p>
+<dd><p>Converts a 2d grid list into a numpy array, appended with zeros
+so that the player is always located at its center.</p>
 </dd></dl>
 
 <dl class="function">

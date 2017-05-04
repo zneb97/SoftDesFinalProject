@@ -1,4 +1,8 @@
 """
+This module trains DNNs(Deep Neural Networks) on Tensorflow, using player's
+own game play data as the training data. It also predicts the movements
+of the player from observing the current status of the game using the DNN.
+
 Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
 By : TEAM AFK
@@ -21,19 +25,13 @@ class myClassifier:
     '''
     This class handles all the Neural Network operations for the bomberman
     including :
-    1) training
-    2) prediction
-    3) weight visualization'''
+    1) training 2) prediction 3) weight visualization'''
 
     def __init__(self, trainName, saveStateName):
         '''
-        The init statement initalizes a NN from the parameter config file
-        "saveStatename". If it does not exist,
-        it will create a new NN will the given file name.
-
-        The dimensionality, hidden units, and output matrix must be changed
+        Initalizes a Neural Network from the parameter config file
+        "saveStatename". The dimensionality, hidden units, and output matrix must be changed
         according to the desired attributes of the Neural Network
-
         The parameter "trainName" is the file that the config will read from
         The header must have the number of data in the first column
         and the number of features in the second.
@@ -53,29 +51,31 @@ class myClassifier:
                                                          model_dir=self.saveStateName)
 
     def get_test_inputs(self):
-        '''helper function that will feed data to the classifier'''
+        '''helper function that feeds data to the classifier'''
         x = tf.constant(self.test_set.data)
         y = tf.constant(self.test_set.target)
 
         return x, y
 
     def get_train_inputs(self):
-        '''helper function that will feed data to the classifier'''
+        '''helper function that feeds data to the classifier'''
         x = tf.constant(self.training_set.data)
         y = tf.constant(self.training_set.target)
 
         return x, y
 
     def trainModel(self, steps):
-        '''This will train the model a given number of iterations.
+        '''
+        Trains the model for a given number of iterations.
         The model must first be trained before predictions can be made,
         so it is possible to train it 0 times
         in order to load a modelwithout changes'''
         self.classifier.fit(input_fn=self.get_train_inputs, steps=steps)
 
     def testAccuracy(self, testName):
-        '''This function will take in a csv file
-        to test the accuracy of the model'''
+        '''
+        Takes a csv file as input to test the accuracy of the model
+        '''
         self.test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
             filename=testName,
             target_dtype=np.int,
@@ -85,17 +85,20 @@ class myClassifier:
         print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 
     def predict(self, myInput):
-        '''This function will return probability values,
-        output by the model of a given input'''
+        '''
+        Return probability values that represent the prediction
+        '''
         prediction = list(self.classifier.predict_proba(
             input_fn=lambda: my_input_fn(myInput)))
         return prediction[0]
 
     def returnvar(self):
-        '''This function will return the expected overall weight of each node
+        '''
+        Returns the expected overall weight of each node
         on the neural network as a whole. This is hightly specialized for the
         current machine learning configuration and will therefore not work if
-        any parameters change'''
+        any parameters change
+        '''
         print(self.classifier.get_variable_names())
         finalWeights = self.classifier.get_variable_value('dnn/logits/weights')
         hl3Importance = []
@@ -133,22 +136,21 @@ class myClassifier:
 
 
 if __name__ == "__main__":
-    """
-    # UNCOMMENT THIS BLOCK TO TRAIN THE NEURALA NETWORK
 
-    # classx = myClassifier('training_data/wallsFULL.csv',
+    ### COMMENT OUT THIS BLOCK IF YOU DON'T WANT TO TRAIN ###
+
+    classx = myClassifier('training_data/wallsFULL.csv',
     "./WALLSCONFIGFULL")
-    # classx.trainModel(6000)
+    classx.trainModel(6000)
 
-    # classy = myClassifier('training_data/bombsFULL.csv',
+    classy = myClassifier('training_data/bombsFULL.csv',
     "./BOMBSCONFIGFULL")
-    # classy.trainModel(6000)
+    classy.trainModel(6000)
 
-    # classz = myClassifier('training_data/bricksFULL.csv',
+    classz = myClassifier('training_data/bricksFULL.csv',
     "./BRICKSCONFIGFULL")
-    # classz.trainModel(6000)
+    classz.trainModel(6000)
 
-    # classw = myClassifier('training_data/enemysFULL.csv',
+    classw = myClassifier('training_data/enemysFULL.csv',
     "./ENEMYSCONFIGFULL")
-    # classw.trainModel(6000)
-    """
+    classw.trainModel(6000)

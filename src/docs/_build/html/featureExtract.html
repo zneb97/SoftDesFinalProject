@@ -36,7 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Bomberman Bot 1.0.0 documentation" href="index.html"/>
-        <link rel="next" title="prepSave module" href="prepSave.html"/>
+        <link rel="next" title="saveChoices module" href="saveChoices.html"/>
         <link rel="prev" title="featureConvert module" href="featureConvert.html"/> 
 
   
@@ -96,8 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="game.html">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -164,25 +164,18 @@
             
   <div class="section" id="module-featureExtract">
 <span id="featureextract-module"></span><h1>featureExtract module<a class="headerlink" href="#module-featureExtract" title="Permalink to this headline">¶</a></h1>
+<p>This module Extracts features (player, enemy, bombs) from the main game loop
+and stores the data as a two-demensional list</p>
 <p>Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
 By : TEAM AFK</p>
-<p>Extracts features (player, enemy, bombs) from the main game loop
-and stores the data as a two-demensional list</p>
 <dl class="class">
 <dt id="featureExtract.grid">
 <em class="property">class </em><code class="descclassname">featureExtract.</code><code class="descname">grid</code><span class="sig-paren">(</span><em>game</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/featureExtract.html#grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#featureExtract.grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Identifies player, enemy, object positons from board</p>
-<p>Matrix Tile Code</p>
-<p>0 = VALID SPACE
-1 = WALL
-2 = BRICK
-3 = SECRET BRICK
-4 = SECRET BRICK
-7 = ENIMIES
-8 = PLAYERS
-9 = BOMBS</p>
+<p>Tile Code:
+0 = VALID SPACE, 1 = WALL, 2 = BRICK, 3 = SECRET BRICK, 4 = SECRET BRICK
+7 = ENIMIES, 8 = PLAYERS, 9 = BOMBS</p>
 <dl class="method">
 <dt id="featureExtract.grid.add_bombs">
 <code class="descname">add_bombs</code><span class="sig-paren">(</span><em>target_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/featureExtract.html#grid.add_bombs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#featureExtract.grid.add_bombs" title="Permalink to this definition">¶</a></dt>
@@ -204,8 +197,7 @@ and stores the data as a two-demensional list</p>
 <dl class="attribute">
 <dt id="featureExtract.grid.matrix">
 <code class="descname">matrix</code><a class="headerlink" href="#featureExtract.grid.matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>This property function returns the grid,
-with all players, enimies, and bombs added</p>
+<dd><p>A 2-d list(matrix) of players, enemies, and bombs on the grid</p>
 </dd></dl>
 
 </dd></dl>
@@ -222,7 +214,7 @@ with all players, enimies, and bombs added</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="prepSave.html" class="btn btn-neutral float-right" title="prepSave module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="saveChoices.html" class="btn btn-neutral float-right" title="saveChoices module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="featureConvert.html" class="btn btn-neutral" title="featureConvert module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

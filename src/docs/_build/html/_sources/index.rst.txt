@@ -16,6 +16,6 @@ included in this documentation
    game
    featureConvert
    featureExtract
-   prepSave
    saveChoices
+   prepSave
    NNClass

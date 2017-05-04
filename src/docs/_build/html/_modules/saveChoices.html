@@ -95,8 +95,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../game.html">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -163,6 +163,8 @@
             
   <h1>Source code for saveChoices</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module reads and writes CSV files to save/load the training data.</span>
+
 <span class="sd">Project : Bomberman Bot with Machine Learning</span>
 <span class="sd">Olin College Software Design Final Orject,  Spring 2017</span>
 <span class="sd">By : TEAM AFK</span>
@@ -172,7 +174,9 @@
 
 
 <div class="viewcode-block" id="writeHead"><a class="viewcode-back" href="../saveChoices.html#saveChoices.writeHead">[docs]</a><span class="k">def</span> <span class="nf">writeHead</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;insert the header into csv file&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Inserts the header into csv file.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
         <span class="n">numrows</span> <span class="o">=</span> <span class="mi">0</span>
@@ -188,7 +192,9 @@
 
 
 <div class="viewcode-block" id="addRow"><a class="viewcode-back" href="../saveChoices.html#saveChoices.addRow">[docs]</a><span class="k">def</span> <span class="nf">addRow</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">listInfo</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;add a new row to the csv&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Adds a new row to the csv.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span>
                             <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_MINIMAL</span><span class="p">)</span>
@@ -196,6 +202,9 @@
 
 
 <div class="viewcode-block" id="readCSV"><a class="viewcode-back" href="../saveChoices.html#saveChoices.readCSV">[docs]</a><span class="k">def</span> <span class="nf">readCSV</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads the CSV file with the given filename</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;names.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
         <span class="n">spamreader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">spamreader</span><span class="p">:</span>
@@ -203,6 +212,9 @@
 
 
 <div class="viewcode-block" id="rewrite"><a class="viewcode-back" href="../saveChoices.html#saveChoices.rewrite">[docs]</a><span class="k">def</span> <span class="nf">rewrite</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overwrites the CSV file with the given filename</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[])</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span></div>

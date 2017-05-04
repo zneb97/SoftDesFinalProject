@@ -95,8 +95,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../game.html">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -163,10 +163,12 @@
             
   <h1>Source code for game</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module runs both the bomberman game and the machine learning modules.</span>
+
 <span class="sd">Project : Bomberman Bot with Machine Learning</span>
 <span class="sd">Olin College Software Design Final Orject,  Spring 2017</span>
-<span class="sd">This entire code was written by the original author, Rickyc (Github user)</span>
-<span class="sd">Some Edits were made by the members of Team AFK to incorporate Machine Learning</span>
+<span class="sd">This module is originally written by Rickyc (Github user)</span>
+<span class="sd">Team AFK added machine learning Features to the original module.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># general dependencies</span>
@@ -192,8 +194,8 @@
 
 <div class="viewcode-block" id="Game"><a class="viewcode-back" href="../game.html#game.Game">[docs]</a><span class="k">class</span> <span class="nc">Game</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Store, update, and maintain all data and features</span>
-<span class="sd">    relavant to running the game</span>
+<span class="sd">    Stores, updates, and maintains all data and features</span>
+<span class="sd">    relavant to running the bomberman game.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Stored board data</span>
     <span class="n">players</span> <span class="o">=</span> <span class="p">[]</span>
@@ -211,7 +213,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize new instance of the game</span>
+<span class="sd">        Initializes a new instance of the game</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">highscores</span> <span class="o">=</span> <span class="n">highscore</span><span class="o">.</span><span class="n">Highscore</span><span class="p">()</span>
@@ -236,8 +238,7 @@
 
 <div class="viewcode-block" id="Game.resetGame"><a class="viewcode-back" href="../game.html#game.Game.resetGame">[docs]</a>    <span class="k">def</span> <span class="nf">resetGame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Clear board data</span>
-<span class="sd">        Called on death or level clear</span>
+<span class="sd">        Clears the board data, Called on death or level clear</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enemies</span> <span class="o">=</span> <span class="p">[]</span>
@@ -245,6 +246,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">resetTiles</span> <span class="o">=</span> <span class="p">[]</span></div>
 
 <div class="viewcode-block" id="Game.clearBackground"><a class="viewcode-back" href="../game.html#game.Game.clearBackground">[docs]</a>    <span class="k">def</span> <span class="nf">clearBackground</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears the background image.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bg</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">get_size</span><span class="p">())</span>
         <span class="n">bg</span> <span class="o">=</span> <span class="n">bg</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
         <span class="n">bg</span><span class="o">.</span><span class="n">fill</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
@@ -252,7 +256,7 @@
 
 <div class="viewcode-block" id="Game.initGame"><a class="viewcode-back" href="../game.html#game.Game.initGame">[docs]</a>    <span class="k">def</span> <span class="nf">initGame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Begins game mode with correct stats for board</span>
+<span class="sd">        Initializes the game with necessary attributes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">printText</span><span class="p">(</span><span class="s2">&quot;Level </span><span class="si">%d</span><span class="s2">-</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">),</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">Board</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
@@ -285,11 +289,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">runGame</span><span class="p">()</span></div>
 
-    <span class="c1"># draws the board onto the screen</span>
 <div class="viewcode-block" id="Game.drawBoard"><a class="viewcode-back" href="../game.html#game.Game.drawBoard">[docs]</a>    <span class="k">def</span> <span class="nf">drawBoard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Build board</span>
-<span class="sd">        Note: each level has a predefined layout</span>
+<span class="sd">        Draws the board onto the screen</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">board</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
@@ -300,7 +302,7 @@
 
 <div class="viewcode-block" id="Game.updateDisplayInfo"><a class="viewcode-back" href="../game.html#game.Game.updateDisplayInfo">[docs]</a>    <span class="k">def</span> <span class="nf">updateDisplayInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Display charater stats</span>
+<span class="sd">        Displays the charater stats (score, lives, mxBombs, power)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">printText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">score</span><span class="p">,</span> <span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">653</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">printText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">lives</span><span class="p">,</span> <span class="p">(</span><span class="mi">775</span><span class="p">,</span> <span class="mi">653</span><span class="p">))</span>
@@ -309,7 +311,7 @@
 
 <div class="viewcode-block" id="Game.drawInterface"><a class="viewcode-back" href="../game.html#game.Game.drawInterface">[docs]</a>    <span class="k">def</span> <span class="nf">drawInterface</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Build border stats graphics</span>
+<span class="sd">        Draws the Interface Graphics.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">player</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">IMAGE_PATH</span> <span class="o">+</span> <span class="s2">&quot;screen/player.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
@@ -331,7 +333,7 @@
 
 <div class="viewcode-block" id="Game.initPlayers"><a class="viewcode-back" href="../game.html#game.Game.initPlayers">[docs]</a>    <span class="k">def</span> <span class="nf">initPlayers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Places players</span>
+<span class="sd">        Displays the  players on the board</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">Player</span><span class="p">(</span><span class="s2">&quot;Player 1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1_&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
@@ -345,8 +347,8 @@
 
 <div class="viewcode-block" id="Game.initEnemies"><a class="viewcode-back" href="../game.html#game.Game.initEnemies">[docs]</a>    <span class="k">def</span> <span class="nf">initEnemies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate enemies in semi-random positions around board</span>
-<span class="sd">        Will not spawn near player</span>
+<span class="sd">        Generates enemies in semi-random positions around the board</span>
+<span class="sd">        (Will not spawn near player)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
             <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -363,7 +365,7 @@
 
 <div class="viewcode-block" id="Game.runGame"><a class="viewcode-back" href="../game.html#game.Game.runGame">[docs]</a>    <span class="k">def</span> <span class="nf">runGame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cycling and updating of all the game states and variables</span>
+<span class="sd">        Cycles and updates all the game states and variables</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
         <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">set_timer</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">USEREVENT</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
@@ -404,28 +406,20 @@
                 <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">FPS</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkPlayerEnemyCollision</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkWinConditions</span><span class="p">()</span>
-
-                <span class="c1"># Feature extraction for machine learning</span>
-
-
-                <span class="c1"># self.c.FPS is set to 30, 30 ticks = 1 second</span>
                 <span class="n">cyclicCounter</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">cyclicCounter</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">FPS</span><span class="p">:</span>
                     <span class="n">cyclicCounter</span> <span class="o">=</span> <span class="mi">0</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">updateTimer</span><span class="p">()</span>
-
                 <span class="k">if</span> <span class="n">cyclicCounter</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">clearExplosion</span><span class="p">()</span>
-                <span class="n">grid</span> <span class="o">=</span> <span class="n">featureExtract</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="n">grid</span> <span class="o">=</span> <span class="n">featureExtract</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># Extracts features for ML</span>
                 <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">forceQuit</span><span class="p">()</span>
-                <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">USEREVENT</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">USEREVENT</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto</span><span class="p">:</span>
-
-                        <span class="c1"># If the user is in auto Mode, the ML control is triggered</span>
-                        <span class="c1"># It is recommended to review the other parts of the code</span>
-                        <span class="c1"># especially NNClass.py before this in order to understand</span>
-                        <span class="c1"># the process</span>
+                        <span class="c1"># In auto Mode, the ML control is triggered</span>
+                        <span class="c1"># It is recommended to review NNClass module</span>
+                        <span class="c1"># in order to understand this process.</span>
 
                         <span class="c1"># generate full grid for feature extraction</span>
                         <span class="c1"># It first grabs the user position and created a matrix</span>

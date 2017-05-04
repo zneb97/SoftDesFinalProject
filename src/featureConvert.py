@@ -1,23 +1,14 @@
 """
+This module contains functions that convert a grid list into a 2-D numpy array.
+The grid list contains all instances of the current game.
+The player location is always fixed on the center of the matrix by
+appendeding zeros that shift automatically in accordance with the player
+movment. This was a technical choice made to reduce the time complexity.
+
+
 Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
 By : TEAM AFK
-
-Takes in all player and objects places to create a grid.
-This grid is appended by zeros and shifts automatically
-to always locatled the player in the center to reduce computation complexity.
-
-Matrix Tile Code
-
-0 = VALID SPACE
-1 = WALL
-2 = BRICK
-3 = SECRET BRICK
-4 = SECRET BRICK
-7 = ENIMIES
-8 = PLAYERS
-9 = BOMBS
-
 """
 
 import numpy as np
@@ -25,15 +16,8 @@ import numpy as np
 
 def convertGrid(grid, pPos, viewX, viewY):
     """
-    Paremeters :
-    grid -> numpy matrix
-    pPos -> Tuple of player Position (x, y)
-    viewX : Number of columns of the original grid
-    viewY : Number of rows of the original grid
-
-    Output :
-    An extended matrix appended with zeros so that the player is always
-    located at the center
+    Converts a 2d grid list into a numpy array, appended with zeros
+    so that the player is always located at its center.
     """
     resultGridX = 2 * viewX - 1
     resultGridY = 2 * viewY - 1

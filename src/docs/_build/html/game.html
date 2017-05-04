@@ -96,8 +96,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -164,16 +164,17 @@
             
   <div class="section" id="module-game">
 <span id="game-module"></span><h1>game module<a class="headerlink" href="#module-game" title="Permalink to this headline">¶</a></h1>
+<p>This module runs both the bomberman game and the machine learning modules.</p>
 <p>Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
-This entire code was written by the original author, Rickyc (Github user)
-Some Edits were made by the members of Team AFK to incorporate Machine Learning</p>
+This module is originally written by Rickyc (Github user)
+Team AFK added machine learning Features to the original module.</p>
 <dl class="class">
 <dt id="game.Game">
 <em class="property">class </em><code class="descclassname">game.</code><code class="descname">Game</code><span class="sig-paren">(</span><em>mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Store, update, and maintain all data and features
-relavant to running the game</p>
+<p>Stores, updates, and maintains all data and features
+relavant to running the bomberman game.</p>
 <dl class="method">
 <dt id="game.Game.activateBomb">
 <code class="descname">activateBomb</code><span class="sig-paren">(</span><em>bomb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.activateBomb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.activateBomb" title="Permalink to this definition">¶</a></dt>
@@ -216,7 +217,8 @@ if need be</p>
 <dl class="method">
 <dt id="game.Game.clearBackground">
 <code class="descname">clearBackground</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.clearBackground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.clearBackground" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Clears the background image.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="game.Game.clearExplosion">
@@ -236,14 +238,13 @@ overwrites bomb</p>
 <dl class="method">
 <dt id="game.Game.drawBoard">
 <code class="descname">drawBoard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.drawBoard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.drawBoard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build board
-Note: each level has a predefined layout</p>
+<dd><p>Draws the board onto the screen</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="game.Game.drawInterface">
 <code class="descname">drawInterface</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.drawInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.drawInterface" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build border stats graphics</p>
+<dd><p>Draws the Interface Graphics.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -274,20 +275,20 @@ Note: each level has a predefined layout</p>
 <dl class="method">
 <dt id="game.Game.initEnemies">
 <code class="descname">initEnemies</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.initEnemies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.initEnemies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate enemies in semi-random positions around board
-Will not spawn near player</p>
+<dd><p>Generates enemies in semi-random positions around the board
+(Will not spawn near player)</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="game.Game.initGame">
 <code class="descname">initGame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.initGame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.initGame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Begins game mode with correct stats for board</p>
+<dd><p>Initializes the game with necessary attributes.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="game.Game.initPlayers">
 <code class="descname">initPlayers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.initPlayers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.initPlayers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Places players</p>
+<dd><p>Displays the  players on the board</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -314,8 +315,7 @@ Will not spawn near player</p>
 <dl class="method">
 <dt id="game.Game.resetGame">
 <code class="descname">resetGame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.resetGame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.resetGame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clear board data
-Called on death or level clear</p>
+<dd><p>Clears the board data, Called on death or level clear</p>
 </dd></dl>
 
 <dl class="method">
@@ -338,7 +338,7 @@ Called on death or level clear</p>
 <dl class="method">
 <dt id="game.Game.runGame">
 <code class="descname">runGame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.runGame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.runGame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cycling and updating of all the game states and variables</p>
+<dd><p>Cycles and updates all the game states and variables</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -361,7 +361,7 @@ Called on death or level clear</p>
 <dl class="method">
 <dt id="game.Game.updateDisplayInfo">
 <code class="descname">updateDisplayInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/game.html#Game.updateDisplayInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#game.Game.updateDisplayInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Display charater stats</p>
+<dd><p>Displays the charater stats (score, lives, mxBombs, power)</p>
 </dd></dl>
 
 <dl class="method">

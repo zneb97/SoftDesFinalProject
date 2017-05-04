@@ -1,8 +1,8 @@
 """
 Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
-This entire code was written by the original author, Rickyc (Github user)
-No edits were done by the members of Team AFK
+This entire code is written by the original author, Rickyc (Github user)
+No edits were made by Team AFK
 """
 
 import pygame, character, config, bomb
@@ -42,7 +42,7 @@ class Player(character.Character):
 			self.currentBomb += 1
 			self.maxBombs += 1
 		elif power == self.c.POWER_UP:
-			self.power += 0
+			self.power += 1
 
 	def setScore(self,score):
 		self.score += score

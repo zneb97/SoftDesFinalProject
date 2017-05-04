@@ -1,4 +1,6 @@
 """
+This module uses saveChoices moudle to store the traning data into CSV Files.
+
 Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
 By : TEAM AFK
@@ -17,8 +19,10 @@ fileDict = {'training_data/wallsFULL.csv': 1,
 
 
 def convertFiles(myMat, x):
-    '''Take the array of places and convert them to a list of features
-    The type of features will be determined by the parameter X'''
+    '''
+    Takes the array of places and convert them to a list of features
+    The type of features will be determined by the parameter X
+    '''
     listPlaces = []
     starty = 12
     endy = 21  # myMat.shape[1]
@@ -30,7 +34,6 @@ def convertFiles(myMat, x):
     for i in range(starty, endy):
         for j in range(startx, endx):
             listPlaces.append(myMat.item((j, i)))
-
             # store bomb information
             if myMat.item((j, i)) == 9:
                 dist = abs(20 - j) + abs(16 - i)
@@ -38,13 +41,13 @@ def convertFiles(myMat, x):
                     info[0] = dist
                 elif(info[0] > dist):
                     info[0] = dist
-            elif(myMat.item((j,i)) == 7):
+            elif(myMat.item((j, i)) == 7):
                 dist = abs(20 - j) + abs(16 - i)
                 if(info[1] == 10):
                     info[1] = dist
                 elif(info[1] > dist):
                     info[1] = dist
-            elif(myMat.item((j,i)) == 2):
+            elif(myMat.item((j, i)) == 2):
                 dist = abs(20-j)+abs(16-i)
                 if(info[2] == 10):
                     info[2] = dist
@@ -71,7 +74,9 @@ def convertFiles(myMat, x):
 
 
 def saveFiles(tempList, info, i):
-    '''save the feature list into csv for model training
-    The file to save to will be determined by parameter i'''
+    '''
+    Saves the feature list into csv for model training
+    The file to save to will be determined by parameter i
+    '''
     tempList = tempList + info
     saveChoices.addRow(fileNames[i], tempList)

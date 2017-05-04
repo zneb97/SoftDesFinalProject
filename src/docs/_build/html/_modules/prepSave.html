@@ -95,8 +95,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../game.html">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -163,6 +163,8 @@
             
   <h1>Source code for prepSave</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module uses saveChoices moudle to store the traning data into CSV Files.</span>
+
 <span class="sd">Project : Bomberman Bot with Machine Learning</span>
 <span class="sd">Olin College Software Design Final Orject,  Spring 2017</span>
 <span class="sd">By : TEAM AFK</span>
@@ -181,8 +183,10 @@
 
 
 <div class="viewcode-block" id="convertFiles"><a class="viewcode-back" href="../prepSave.html#prepSave.convertFiles">[docs]</a><span class="k">def</span> <span class="nf">convertFiles</span><span class="p">(</span><span class="n">myMat</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Take the array of places and convert them to a list of features</span>
-<span class="sd">    The type of features will be determined by the parameter X&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes the array of places and convert them to a list of features</span>
+<span class="sd">    The type of features will be determined by the parameter X</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">listPlaces</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">starty</span> <span class="o">=</span> <span class="mi">12</span>
     <span class="n">endy</span> <span class="o">=</span> <span class="mi">21</span>  <span class="c1"># myMat.shape[1]</span>
@@ -194,7 +198,6 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">starty</span><span class="p">,</span> <span class="n">endy</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">startx</span><span class="p">,</span> <span class="n">endx</span><span class="p">):</span>
             <span class="n">listPlaces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span>
-
             <span class="c1"># store bomb information</span>
             <span class="k">if</span> <span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
                 <span class="n">dist</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">20</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">16</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
@@ -202,13 +205,13 @@
                     <span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
                 <span class="k">elif</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dist</span><span class="p">):</span>
                     <span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
-            <span class="k">elif</span><span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">7</span><span class="p">):</span>
+            <span class="k">elif</span><span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">7</span><span class="p">):</span>
                 <span class="n">dist</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">20</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">16</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
                 <span class="k">if</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">):</span>
                     <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
                 <span class="k">elif</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dist</span><span class="p">):</span>
                     <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
-            <span class="k">elif</span><span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">elif</span><span class="p">(</span><span class="n">myMat</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
                 <span class="n">dist</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">20</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="mi">16</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
                 <span class="k">if</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">):</span>
                     <span class="n">info</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
@@ -235,8 +238,10 @@
 
 
 <div class="viewcode-block" id="saveFiles"><a class="viewcode-back" href="../prepSave.html#prepSave.saveFiles">[docs]</a><span class="k">def</span> <span class="nf">saveFiles</span><span class="p">(</span><span class="n">tempList</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;save the feature list into csv for model training</span>
-<span class="sd">    The file to save to will be determined by parameter i&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Saves the feature list into csv for model training</span>
+<span class="sd">    The file to save to will be determined by parameter i</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">tempList</span> <span class="o">=</span> <span class="n">tempList</span> <span class="o">+</span> <span class="n">info</span>
     <span class="n">saveChoices</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="n">fileNames</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tempList</span><span class="p">)</span></div>
 </pre></div>

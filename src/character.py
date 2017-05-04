@@ -1,8 +1,8 @@
 """
-Project : Bomberman Bot with Machine Learning
-Olin College Software Design Final Orject,  Spring 2017
-This entire code was written by the original author, Rickyc (Github user)
-Some Edits were made by the members of Team AFK to incorporate Machine Learning
+This module contains the Character class.
+This module is originally written by Rickyc (Github user).
+
+Team AFK added machine learning Features to the original module.
 """
 
 # General Dependencies
@@ -17,16 +17,18 @@ import prepSave
 
 
 class Character(pygame.sprite.Sprite):
+    """
+    Character class that inherits pygame.sprite.
+    """
     lives = 1
     speed = 1
 
     def __init__(self, name, imageName, point):
         """
-        Intialize a character object, can be either human or monster
-
-        name - to refer to the character
-        imageName - to refer to the sprite representing character on screen
-        point - location on board
+        Intializes a character object, can be either human or monster
+        name : to refer to the character
+        imageName : to refer to the sprite representing character on screen
+        point : location on board
         """
         pygame.sprite.Sprite.__init__(self)
         self.c = config.Config()
@@ -37,7 +39,7 @@ class Character(pygame.sprite.Sprite):
 
     def reset(self, bool):
         """
-        Calls to update postions graphically and in code
+        Updates the character position both graphically and internally
         """
         self.getImage('down')
         self.position = self.image.get_rect()
@@ -45,28 +47,24 @@ class Character(pygame.sprite.Sprite):
 
     def getImage(self, direction):
         """
-        Get correct spright image for character
+        Gets correct spright image for character
         """
         imagePath = self.c.IMAGE_PATH + self.imageName + direction + ".png"
         self.image = pygame.image.load(imagePath).convert()
 
-    def update(self):
-        print("=D")
-
     def movement(self, key, grid, humanAuto=1):
         """
         Changes the sprite and issues command to movementHelper
+        Note :  that this is used by both humans and enemies to move
+        key : the keyboard command used to move the character
+        grid : a grid of the board with numbers representing occupency
+               of the tiles. Used to make decisions based on surroundings
 
-        Note that this is used by both humans and enemies to move
-
-        key - the keyboard command used to move the character
-        grid - a grid of the board with numbers representing occupency
-                of the tiles. Used to make decisions based on surroundings
-
-        humanAuto - 0 = human controller bomberman
-                                1 = Hard coded computer controlled bomberman
-                                2 = Other
+        humanAuto : 0 = human controller bomberman
+                    1 = Hard coded computer controlled bomberman
+                    2 = Other
         """
+
         # Character is located at 20, 16 in shifting matrix
         c = config.Config()
         self.map = grid
@@ -127,7 +125,7 @@ class Character(pygame.sprite.Sprite):
         # in learning process
         if key == pygame.K_UP:
             self.getImage('up')
-			#If human in control, save action and grid state for use in training data
+            # save training data for manual control
             if humanAuto == 0:
                 self.saveChoice(1, myMat)
             return [0, -1 * c.TILE_SIZE]
@@ -153,18 +151,21 @@ class Character(pygame.sprite.Sprite):
 
     def move(self, point):
         """
-        Update previous and current position of character
+        Updates previous and current position of character
         """
         self.old = self.position
         self.position = self.position.move(point)
 
     def saveChoice(self, choice, myMat):
-        '''This code will save the current board and choice to a csv file
-        if the player is controlled by a person.
-        It will always save to WallsFull.csv
-        It will save to enemysFULL.csv and bombsFULL.csv if the corresponding
-        object is within 10 blocks
-        It will save to bricksFULL.csv if an enemy is not within 3 blocks'''
+        '''
+        Saves the current board and choice to a csv file.
+        (if the player is controlled manually)
+        It always saves the data to WallsFull.csv
+        It saves the data to enemysFULL.csv and bombsFULL.csv
+        (if the corresponding object is within 10 blocks)
+        It saves the data to bricksFULL.csv
+        (if an enemy is not within 3 blocks))
+        '''
         added = [self.currentBomb, self.power, choice]
         tempGrid, info = prepSave.convertFiles(myMat, 0)
         prepSave.saveFiles(tempGrid, added, 0)

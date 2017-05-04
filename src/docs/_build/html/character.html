@@ -96,8 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="game.html">game module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="featureConvert.html">featureConvert module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="featureExtract.html">featureExtract module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="saveChoices.html">saveChoices module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepSave.html">prepSave module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="NNClass.html">NNClass module</a></li>
 </ul>
 
@@ -164,18 +164,18 @@
             
   <div class="section" id="module-character">
 <span id="character-module"></span><h1>character module<a class="headerlink" href="#module-character" title="Permalink to this headline">¶</a></h1>
-<p>Project : Bomberman Bot with Machine Learning
-Olin College Software Design Final Orject,  Spring 2017
-This entire code was written by the original author, Rickyc (Github user)
-Some Edits were made by the members of Team AFK to incorporate Machine Learning</p>
+<p>This module contains the Character class.
+This module is originally written by Rickyc (Github user).</p>
+<p>Team AFK added machine learning Features to the original module.</p>
 <dl class="class">
 <dt id="character.Character">
 <em class="property">class </em><code class="descclassname">character.</code><code class="descname">Character</code><span class="sig-paren">(</span><em>name</em>, <em>imageName</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pygame.sprite.Sprite</span></code></p>
+<p>Character class that inherits pygame.sprite.</p>
 <dl class="method">
 <dt id="character.Character.getImage">
 <code class="descname">getImage</code><span class="sig-paren">(</span><em>direction</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.getImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.getImage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get correct spright image for character</p>
+<dd><p>Gets correct spright image for character</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -186,20 +186,20 @@ Some Edits were made by the members of Team AFK to incorporate Machine Learning<
 <dl class="method">
 <dt id="character.Character.move">
 <code class="descname">move</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.move" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update previous and current position of character</p>
+<dd><p>Updates previous and current position of character</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="character.Character.movement">
 <code class="descname">movement</code><span class="sig-paren">(</span><em>key</em>, <em>grid</em>, <em>humanAuto=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.movement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.movement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Changes the sprite and issues command to movementHelper</p>
-<p>Note that this is used by both humans and enemies to move</p>
-<p>key - the keyboard command used to move the character
-grid - a grid of the board with numbers representing occupency</p>
+<dd><p>Changes the sprite and issues command to movementHelper
+Note :  that this is used by both humans and enemies to move
+key : the keyboard command used to move the character
+grid : a grid of the board with numbers representing occupency</p>
 <blockquote>
 <div>of the tiles. Used to make decisions based on surroundings</div></blockquote>
 <dl class="docutils">
-<dt>humanAuto - 0 = human controller bomberman</dt>
+<dt>humanAuto <span class="classifier-delimiter">:</span> <span class="classifier">0 = human controller bomberman</span></dt>
 <dd>1 = Hard coded computer controlled bomberman
 2 = Other</dd>
 </dl>
@@ -208,28 +208,24 @@ grid - a grid of the board with numbers representing occupency</p>
 <dl class="method">
 <dt id="character.Character.reset">
 <code class="descname">reset</code><span class="sig-paren">(</span><em>bool</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.reset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calls to update postions graphically and in code</p>
+<dd><p>Updates the character position both graphically and internally</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="character.Character.saveChoice">
 <code class="descname">saveChoice</code><span class="sig-paren">(</span><em>choice</em>, <em>myMat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.saveChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.saveChoice" title="Permalink to this definition">¶</a></dt>
-<dd><p>This code will save the current board and choice to a csv file
-if the player is controlled by a person.
-It will always save to WallsFull.csv
-It will save to enemysFULL.csv and bombsFULL.csv if the corresponding
-object is within 10 blocks
-It will save to bricksFULL.csv if an enemy is not within 3 blocks</p>
+<dd><p>Saves the current board and choice to a csv file.
+(if the player is controlled manually)
+It always saves the data to WallsFull.csv
+It saves the data to enemysFULL.csv and bombsFULL.csv
+(if the corresponding object is within 10 blocks)
+It saves the data to bricksFULL.csv
+(if an enemy is not within 3 blocks))</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="character.Character.speed">
 <code class="descname">speed</code><em class="property"> = 1</em><a class="headerlink" href="#character.Character.speed" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="character.Character.update">
-<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#character.Character.update" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

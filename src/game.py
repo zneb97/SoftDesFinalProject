@@ -1,8 +1,10 @@
 """
+This module runs both the bomberman game and the machine learning modules.
+
 Project : Bomberman Bot with Machine Learning
 Olin College Software Design Final Orject,  Spring 2017
-This entire code was written by the original author, Rickyc (Github user)
-Some Edits were made by the members of Team AFK to incorporate Machine Learning
+This module is originally written by Rickyc (Github user)
+Team AFK added machine learning Features to the original module.
 """
 
 # general dependencies
@@ -28,8 +30,8 @@ import NNClass  # Trains & Predicts Movements with DeepNeuralNetwork
 
 class Game:
     """
-    Store, update, and maintain all data and features
-    relavant to running the game
+    Stores, updates, and maintains all data and features
+    relavant to running the bomberman game.
     """
     # Stored board data
     players = []
@@ -47,7 +49,7 @@ class Game:
 
     def __init__(self, mode):
         """
-        Initialize new instance of the game
+        Initializes a new instance of the game
         """
         self.c = config.Config()
         self.highscores = highscore.Highscore()
@@ -72,8 +74,7 @@ class Game:
 
     def resetGame(self):
         """
-        Clear board data
-        Called on death or level clear
+        Clears the board data, Called on death or level clear
         """
         self.field = None
         self.enemies = []
@@ -81,6 +82,9 @@ class Game:
         self.resetTiles = []
 
     def clearBackground(self):
+        """
+        Clears the background image.
+        """
         bg = pygame.Surface(self.screen.get_size())
         bg = bg.convert()
         bg.fill((0, 0, 0))
@@ -88,7 +92,7 @@ class Game:
 
     def initGame(self):
         """
-        Begins game mode with correct stats for board
+        Initializes the game with necessary attributes.
         """
         self.printText("Level %d-%d" % (self.stage, self.level), (40, 15))
         self.field = board.Board(self.stage, self.level)
@@ -121,11 +125,9 @@ class Game:
 
         self.runGame()
 
-    # draws the board onto the screen
     def drawBoard(self):
         """
-        Build board
-        Note: each level has a predefined layout
+        Draws the board onto the screen
         """
         for row in range(1, len(self.field.board) - 1):
             for col in range(1, len(self.field.board[row]) - 1):
@@ -136,7 +138,7 @@ class Game:
 
     def updateDisplayInfo(self):
         """
-        Display charater stats
+        Displays the charater stats (score, lives, mxBombs, power)
         """
         self.printText(self.user.score, (65, 653))
         self.printText(self.user.lives, (775, 653))
@@ -145,7 +147,7 @@ class Game:
 
     def drawInterface(self):
         """
-        Build border stats graphics
+        Draws the Interface Graphics.
         """
         player = pygame.image.load(
             self.c.IMAGE_PATH + "screen/player.png").convert()
@@ -167,7 +169,7 @@ class Game:
 
     def initPlayers(self):
         """
-        Places players
+        Displays the  players on the board
         """
         if self.mode == self.c.SINGLE:
             self.user = player.Player("Player 1", "p_1_", 0, (40, 40))
@@ -181,8 +183,8 @@ class Game:
 
     def initEnemies(self, num):
         """
-        Generate enemies in semi-random positions around board
-        Will not spawn near player
+        Generates enemies in semi-random positions around the board
+        (Will not spawn near player)
         """
         for i in range(0, num):
             while True:
@@ -199,7 +201,7 @@ class Game:
 
     def runGame(self):
         """
-        Cycling and updating of all the game states and variables
+        Cycles and updates all the game states and variables
         """
         clock = pygame.time.Clock()
         pygame.time.set_timer(pygame.USEREVENT, 1000)
@@ -240,28 +242,20 @@ class Game:
                 clock.tick(self.c.FPS)
                 self.checkPlayerEnemyCollision()
                 self.checkWinConditions()
-
-                # Feature extraction for machine learning
-
-
-                # self.c.FPS is set to 30, 30 ticks = 1 second
                 cyclicCounter += 1
                 if cyclicCounter == self.c.FPS:
                     cyclicCounter = 0
                     self.updateTimer()
-
                 if cyclicCounter % 2 == 1:
                     self.clearExplosion()
-                grid = featureExtract.grid(self)
+                grid = featureExtract.grid(self)  # Extracts features for ML
                 if event.type == pygame.QUIT:
                     self.forceQuit()
-                elif event.type == pygame.USEREVENT -1:
+                elif event.type == pygame.USEREVENT - 1:
                     if self.auto:
-
-                        # If the user is in auto Mode, the ML control is triggered
-                        # It is recommended to review the other parts of the code
-                        # especially NNClass.py before this in order to understand
-                        # the process
+                        # In auto Mode, the ML control is triggered
+                        # It is recommended to review NNClass module
+                        # in order to understand this process.
 
                         # generate full grid for feature extraction
                         # It first grabs the user position and created a matrix
