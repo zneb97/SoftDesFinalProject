@@ -43,7 +43,7 @@ Project proposal can be found <a href="https://github.com/zneb97/SoftDesFinalPro
 Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/project_docs/ArchitecturalReview.md">here.</a>
 <br>
 Architectural Review Reflection can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/project_docs/ReflectionSynthesis.md">here.</a>
-Final Presentation can be found <a href="https://docs.google.com/presentation/d/1YaGlI_PHdcVWGIpH5ofd0F1Tq2FRwAVLr6wR0Bzh7g0/edit?usp=sharing">here.</a>
+Final Presentation can be found <a href="https://docs.google.com/presentation/d/1YaGlI_PHdcVWGIpH5ofd0F1Tq2FRwAVLr6wR0Bzh7g0/edit?usp=sharing">here.</a><br>
 Poster can be found here <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/sofdesPoster.pdf">here.</a>
 ## License<br>
 MIT License
