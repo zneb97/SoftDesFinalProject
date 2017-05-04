@@ -36,8 +36,13 @@ Once downloaded, in the terminal use the commands
 $ SoftDesFinalProject/src
 $ python3 main.py
 ```
-to run the game. Pressing the "Left Shift" key will activate the auto mode.
-
+to run the game. <br> Pressing the "Left Shift" key will activate the auto mode. <br>
+Once created enough training data(.csv), in the terminal use the commands
+```shell
+$ SoftDesFinalProject/src
+$ python3 NNClass.py
+```
+to train the Deep Neural Network for the automode! <br>
 ## Misc.<br>
 Project proposal can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/project_docs/ProjectProposal.md">here.</a><br>
 Architectural Review can be found <a href="https://github.com/zneb97/SoftDesFinalProject/blob/master/project_docs/ArchitecturalReview.md">here.</a>
