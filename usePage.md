@@ -20,7 +20,7 @@ Download the game by either cloning the repo or downloading the ZIP file.
 In terminal, use the commands
 
 ```shell
-$ SoftDesFinalProject/bomberman-pygame
+$ SoftDesFinalProject/src
 $ python3 main.py
 ```
 
